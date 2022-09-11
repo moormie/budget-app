@@ -7,3 +7,5 @@ export const parameters = {
     },
   },
 };
+
+import "./styles.css";
