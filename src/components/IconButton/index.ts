@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
-export const StyledIconButton = styled.button`
-  width: 34px;
-  height: 34px;
+interface IconButtonProps {
+  size: "small" | "medium" | "large";
+}
+
+export const StyledIconButton = styled.button<IconButtonProps>`
+  width: ${(props) =>
+    props.size === "small" ? "20px" : props.size === "large" ? "50px" : "34px"};
+  height: ${(props) =>
+    props.size === "small" ? "20px" : props.size === "large" ? "50px" : "34px"};
   display: flex;
   justify-content: center;
   align-items: center;
