@@ -5,3 +5,5 @@ export { Add } from "./AddIcon";
 export { BarChart } from "./BarChartIcon";
 export { Menu } from "./MenuIcon";
 export { Car } from "./CarIcon";
+export { ArrowUp } from "./ArrowUpIcon";
+export { ArrowDown } from "./ArrowDownIcon";
