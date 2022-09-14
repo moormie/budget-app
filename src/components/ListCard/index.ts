@@ -1,27 +1,14 @@
 import styled from "styled-components";
 
-const gray = "#e0e0e0";
-
 const Container = styled.div`
-  height: 64px;
+  height: 72px;
   background-color: white;
-  border-radius: 12px;
+  border-radius: 18px;
   display: flex;
   align-items: center;
   padding: 8px 16px;
   box-sizing: border-box;
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
-    rgba(17, 17, 26, 0.1) 0px 0px 8px;
-`;
-
-const IconContainer = styled.div`
-  width: 48px;
-  height: 48px;
-  background-color: ${gray};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  box-shadow: rgba(17, 17, 17, 0.05) 0px 0px 12px;
 `;
 
 const TitleContainer = styled.div`
@@ -46,7 +33,6 @@ const SubText = styled.div`
 
 const StyledListCard = {
   Container,
-  IconContainer,
   TitleContainer,
   EndContainer,
   SubText,

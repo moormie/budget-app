@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof ListCard> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  icon: <Car />,
+  icon: <Car color="red" />,
   mainLabel: "Vehicle",
   endLabel: "€ 18.0",
   endSublabel: "19 March 2022",
