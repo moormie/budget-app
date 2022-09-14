@@ -3,15 +3,20 @@ import { FC } from "react";
 interface Props {
   width?: string;
   height?: string;
+  color?: string;
 }
 
-export const CaretLeft: FC<Props> = ({ width = "20", height = "20" }) => {
+export const CaretLeft: FC<Props> = ({
+  width = "20",
+  height = "20",
+  color = "currentColor",
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      fill="currentColor"
+      fill={color}
       className="bi bi-caret-left-fill"
       viewBox="0 0 16 16"
     >
