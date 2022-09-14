@@ -4,7 +4,7 @@ import { ArrowDown, ArrowUp } from "../../../assets";
 
 interface FooterProps {
   type: "Income" | "Expenses";
-  amount: string;
+  amount: number;
 }
 
 export const Footer: FC<FooterProps> = ({ type, amount }) => {
@@ -18,7 +18,7 @@ export const Footer: FC<FooterProps> = ({ type, amount }) => {
       <div>
         <StyledMainCard.FooterText>{type}</StyledMainCard.FooterText>
         <StyledMainCard.FooterText>
-          <b>{amount}</b>
+          <b>€ {amount}</b>
         </StyledMainCard.FooterText>
       </div>
     </StyledMainCard.FooterItem>
