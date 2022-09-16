@@ -1,24 +1,17 @@
-import React, { FC, useCallback, useMemo } from "react";
+import React, { FC, useCallback } from "react";
 import styled from "styled-components";
 import { Header } from "../Header/Header";
 import { MainCard } from "../MainCard/MainCard";
 import { ListCard } from "../ListCard/ListCard";
-import {
-  Car,
-  Shopping,
-  Home,
-  Add,
-  Entertainment,
-  Health,
-  Person,
-  Plane,
-} from "../../assets";
 import { BottomNavBar } from "../BottomNavBar/BottomNavBar";
 import { Category } from "../../types/Category";
 import { mockData } from "../../types/mockData";
+import { myTheme } from "../../theme";
+import { ItemIcon } from "./ItemIcon";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
+  background-color: ${myTheme.colors.lightGray};
 `;
 
 const Spacing = styled.div`
@@ -26,26 +19,10 @@ const Spacing = styled.div`
 `;
 
 export const MainPage: FC = () => {
-  const icon = useCallback((category: Category) => {
-    switch (category) {
-      case "Food":
-        return <Shopping />;
-      case "Car":
-        return <Car />;
-      case "Home":
-        return <Home />;
-      case "Entertainment":
-        return <Entertainment />;
-      case "Medical":
-        return <Health />;
-      case "Personal":
-        return <Person />;
-      case "Travel":
-        return <Plane />;
-      default:
-        return <Add />;
-    }
+  const getListItemIcon = useCallback((category: Category) => {
+    return <ItemIcon category={category} />;
   }, []);
+
   return (
     <React.Fragment>
       <MainContainer>
@@ -62,7 +39,7 @@ export const MainPage: FC = () => {
         {mockData.map((data) => (
           <React.Fragment key={data.id}>
             <ListCard
-              icon={icon(data.category as Category)}
+              icon={getListItemIcon(data.category as Category)}
               mainLabel={data.category}
               endLabel={`€ ${data.amount}`}
               endSublabel={data.date}

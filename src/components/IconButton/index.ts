@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 interface IconButtonProps {
   size: "small" | "medium" | "large";
+  colorPrimary?: string;
+  colorSecondary?: string;
 }
 
 export const StyledIconButton = styled.button<IconButtonProps>`
@@ -10,6 +12,10 @@ export const StyledIconButton = styled.button<IconButtonProps>`
   height: ${(props) =>
     props.size === "small" ? "20px" : props.size === "large" ? "50px" : "34px"};
   display: flex;
+  background: linear-gradient(
+    ${(props) => props.colorPrimary},
+    ${(props) => props.colorSecondary}
+  );
   justify-content: center;
   align-items: center;
   padding: 4px;

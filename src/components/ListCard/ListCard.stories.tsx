@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Car } from "../../assets";
+import { ColoredIcon } from "../ColoredIcon/ColoredIcon";
 
 import { ListCard } from "./ListCard";
 
@@ -15,7 +16,11 @@ const Template: ComponentStory<typeof ListCard> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  icon: <Car color="red" />,
+  icon: (
+    <ColoredIcon>
+      <Car />
+    </ColoredIcon>
+  ),
   mainLabel: "Vehicle",
   endLabel: "€ 18.0",
   endSublabel: "19 March 2022",

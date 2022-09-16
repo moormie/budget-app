@@ -7,7 +7,8 @@ export default {
   title: "Components/ColoredIcon",
   component: ColoredIcon,
   argTypes: {
-    color: { control: "color" },
+    colorPrimary: { control: "color" },
+    colorSecondary: { control: "color" },
   },
 } as ComponentMeta<typeof ColoredIcon>;
 

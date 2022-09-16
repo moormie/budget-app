@@ -3,12 +3,16 @@ import styled from "styled-components";
 
 interface Props {
   size?: number;
-  color?: string;
+  colorPrimary?: string;
+  colorSecondary?: string;
   children?: JSX.Element;
 }
 
 const Container = styled.div<Props>`
-  background-color: ${(props) => props?.color ?? props.theme.colors.gray};
+  background: linear-gradient(
+    ${(props) => props.colorPrimary ?? props.theme.colors.gray},
+    ${(props) => props.colorSecondary ?? props.theme.colors.gray}
+  );
   width: ${(props) => props?.size ?? 50}px;
   height: ${(props) => props?.size ?? 50}px;
   border-radius: 50%;
@@ -17,9 +21,18 @@ const Container = styled.div<Props>`
   justify-content: center;
 `;
 
-export const ColoredIcon: FC<Props> = ({ size, color, children }) => {
+export const ColoredIcon: FC<Props> = ({
+  size,
+  colorPrimary,
+  colorSecondary,
+  children,
+}) => {
   return (
-    <Container size={size} color={color}>
+    <Container
+      size={size}
+      colorPrimary={colorPrimary}
+      colorSecondary={colorSecondary}
+    >
       {children}
     </Container>
   );

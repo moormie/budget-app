@@ -1,9 +1,14 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  background-color: ${props => props.theme.colors.lightGray};
-  border-radius: ${props => props.theme.borderRadius};
+  background: linear-gradient(
+    to bottom left,
+    ${(props) => props.theme.colors.yellow},
+    ${(props) => props.theme.colors.dark.orange}
+  );
+  border-radius: 24px;
   padding: 16px;
+  color: ${(props) => props.theme.colors.gray};
 `;
 
 const HeaderText = styled.div`

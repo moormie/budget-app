@@ -11,3 +11,8 @@ const Template: ComponentStory<typeof MainCard> = (args) => (
 );
 
 export const Default = Template.bind({});
+
+Default.args = {
+  totalExpenses: 780.5,
+  totalIncome: 1350.0,
+};

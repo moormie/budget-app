@@ -1,6 +1,5 @@
 import { FC } from "react";
 import StyledListCard from ".";
-import { ColoredIcon } from "../ColoredIcon/ColoredIcon";
 
 interface ListCardProps {
   icon: JSX.Element;
@@ -17,7 +16,7 @@ export const ListCard: FC<ListCardProps> = ({
 }) => {
   return (
     <StyledListCard.Container>
-      <ColoredIcon>{icon}</ColoredIcon>
+      {icon}
       <StyledListCard.TitleContainer>{mainLabel}</StyledListCard.TitleContainer>
       <StyledListCard.EndContainer>
         <div>{endLabel}</div>
