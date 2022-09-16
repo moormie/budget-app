@@ -2,17 +2,16 @@ import styled from "styled-components";
 
 const black = "#000000";
 const white = "#ffffff";
-const lightGray = "#e0e0e0";
 const turquoise = "#00b3b3";
 const darkTurquoise = "#417779";
 const lightTurquoise = "#87bfc1";
 
 const MainWrapper = styled.div`
   width: 240px;
-  border-radius: 10px;
+  border-radius: ${props => props.theme.borderRadius};
   padding: 20px;
   background-color: ${turquoise};
-  boxshadow: -6px 7px 54px -24px rgba(0, 0, 0, 0.5);
+  box-shadow: -6px 7px 54px -24px rgba(0, 0, 0, 0.5);
 `;
 
 const CalendarHeaderWrapper = styled.div`
@@ -56,11 +55,11 @@ const CalendarDayCell = styled.div<CalendarDayCellProps>`
       : props.variant === "today"
       ? white
       : props.variant === "nextMonth"
-      ? lightGray
+      ? props.theme.colors.lightGray
       : black};
   background-color: ${(props) =>
     props.variant === "selected"
-      ? lightGray
+      ? props.theme.colors.lightGray
       : props.variant === "today"
       ? darkTurquoise
       : ""};
@@ -76,7 +75,7 @@ const CalendarDayCell = styled.div<CalendarDayCellProps>`
     background-color: ${lightTurquoise};
     color: ${darkTurquoise}
   }
-}`;
+`
 
 const StyledDatePicker = {
   MainWrapper,

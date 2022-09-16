@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   padding: 16px;
-  border-radius: 18px;
+  border-radius: ${props => props.theme.borderRadius};
   box-sizing: border-box;
   width: 100%;
   background-color: white;

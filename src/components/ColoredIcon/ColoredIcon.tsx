@@ -7,10 +7,8 @@ interface Props {
   children?: JSX.Element;
 }
 
-const gray = "#e0e0e0";
-
 const Container = styled.div<Props>`
-  background-color: ${(props) => props?.color ?? gray};
+  background-color: ${(props) => props?.color ?? props.theme.colors.gray};
   width: ${(props) => props?.size ?? 50}px;
   height: ${(props) => props?.size ?? 50}px;
   border-radius: 50%;

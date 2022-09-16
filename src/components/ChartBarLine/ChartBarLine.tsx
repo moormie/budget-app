@@ -1,13 +1,10 @@
 import { FC } from "react";
 import styled from "styled-components";
 
-const lightGray = "#f2f2f2";
-const gray = "#e0e0e0";
-
 const Container = styled.div`
   width: 10px;
   height: 100%;
-  background-color: ${lightGray};
+  background-color: ${props => props.theme.colors.lightGray};
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -17,7 +14,7 @@ const Container = styled.div`
 const Line = styled.div<{ height: number }>`
   height: ${(props) => props.height}%;
   width: 100%;
-  background-color: ${gray};
+  background-color: ${props => props.theme.colors.gray};
   border-radius: 6px;
 `;
 

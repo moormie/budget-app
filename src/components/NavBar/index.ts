@@ -5,7 +5,7 @@ const lightTurquoise = "#87bfc1";
 
 const Container = styled.div`
   background-color: ${lightTurquoise};
-  border-radius: 16px;
+  border-radius: ${props => props.theme.borderRadius};
   height: 58px;
   display: flex;
   align-items: center;
@@ -32,7 +32,7 @@ const Link = styled.a<{ active?: boolean }>`
   background-color: ${(props) =>
     props.active ? darkTurquoise : lightTurquoise};
   color: ${(props) => (props.active ? lightTurquoise : darkTurquoise)};
-  border-radius: 14px;
+  border-radius: 16px;
   text-align: center;
   text-decoration: none;
   display: flex;

@@ -1,22 +1,19 @@
 import styled from "styled-components";
 
-const lightGray = "#f2f2f2";
-const gray = "#e0e0e0";
-
 const MainContainer = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: ${gray};
+  background-color: ${props => props.theme.colors.gray};
   height: 64px;
-  border-radius: 16px 16px 0 0;
+  border-radius: 18px 18px 0 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
 const ButtonContainer = styled.div`
-  background-color: ${lightGray};
+  background-color: ${props => props.theme.colors.lightGray};
   position: absolute;
   bottom: 32px;
   display: flex;

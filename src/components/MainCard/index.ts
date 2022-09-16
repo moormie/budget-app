@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-const lightGray = "#f2f2f2";
-
 const Container = styled.div`
-  background-color: ${lightGray};
-  border-radius: 18px;
+  background-color: ${props => props.theme.colors.lightGray};
+  border-radius: ${props => props.theme.borderRadius};
   padding: 16px;
 `;
 

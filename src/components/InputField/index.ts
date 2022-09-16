@@ -1,12 +1,9 @@
 import styled from "styled-components";
 
-const lightGray = "#f2f2f2";
-const gray = "#e0e0e0";
-
 const Container = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${gray};
+  background-color: ${props => props.theme.colors.gray};
   border-radius: 8px;
   width: 100%;
 `;
@@ -14,13 +11,13 @@ const Container = styled.div`
 const InputField = styled.input`
   border: none;
   border-radius: 8px;
-  background-color: ${gray};
-  outline: 2px solid ${gray};
+  background-color: ${props => props.theme.colors.gray};
+  outline: 2px solid ${props => props.theme.colors.gray};
   &:hover {
-    background-color: ${lightGray};
+    background-color: ${props => props.theme.colors.lightGray};
   }
   &:focus-visible {
-    background-color: ${lightGray};
+    background-color: ${props => props.theme.colors.lightGray};
   }
   &::-webkit-calendar-picker-indicator {
     display: none;
