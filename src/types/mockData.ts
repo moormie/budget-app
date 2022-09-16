@@ -49,4 +49,16 @@ export const mockData: Expenses[] = [
     amount: 62,
     date: "20-09-2022",
   },
+  {
+    id: "008",
+    category: "Entertainment",
+    amount: 22,
+    date: "20-09-2022",
+  },
+  {
+    id: "009",
+    category: "Personal",
+    amount: 160,
+    date: "20-09-2022",
+  },
 ];
