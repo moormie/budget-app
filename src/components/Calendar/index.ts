@@ -77,7 +77,7 @@ const CalendarDayCell = styled.div<CalendarDayCellProps>`
   }
 `
 
-const StyledDatePicker = {
+const StyledCalendar = {
   MainWrapper,
   CalendarHeaderWrapper,
   WeekDaysWrapper,
@@ -85,4 +85,4 @@ const StyledDatePicker = {
   CalendarContentWrapper,
   CalendarDayCell,
 };
-export default StyledDatePicker;
+export default StyledCalendar;
