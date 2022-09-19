@@ -1,6 +1,8 @@
 export { Calendar } from "./CalendarIcon";
 export { CaretLeft } from "./CaretLeftIcon";
 export { CaretRight } from "./CaretRightIcon";
+export { CaretDown } from "./CaretDownIcon";
+export { CaretUp } from "./CaretUpIcon";
 export { Add } from "./AddIcon";
 export { BarChart } from "./BarChartIcon";
 export { Menu } from "./MenuIcon";
