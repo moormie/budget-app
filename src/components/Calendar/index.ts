@@ -2,16 +2,18 @@ import styled from "styled-components";
 
 const black = "#000000";
 const white = "#ffffff";
-const turquoise = "#00b3b3";
-const darkTurquoise = "#417779";
-const lightTurquoise = "#87bfc1";
 
-const MainWrapper = styled.div`
+const MainWrapper = styled.div<{ open: boolean }>`
   width: 240px;
-  border-radius: ${props => props.theme.borderRadius};
+  border-radius: ${(props) => props.theme.borderRadius};
   padding: 20px;
-  background-color: ${turquoise};
+  background-color: ${(props) => props.theme.colors.green};
   box-shadow: -6px 7px 54px -24px rgba(0, 0, 0, 0.5);
+  opacity: ${(props) => (props.open ? 1 : 0)};
+  visibility: ${(props) => (props.open ? "visible" : "hidden")};
+  position: absolute;
+  transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    transform 213ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 `;
 
 const CalendarHeaderWrapper = styled.div`
@@ -35,7 +37,7 @@ const WeekDayCell = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${darkTurquoise};
+  color: ${(props) => props.theme.colors.dark.green};
   font-weight: bold;
 `;
 
@@ -51,7 +53,7 @@ interface CalendarDayCellProps {
 const CalendarDayCell = styled.div<CalendarDayCellProps>`
   color: ${(props) =>
     props.variant === "selected"
-      ? darkTurquoise
+      ? props.theme.colors.dark.green
       : props.variant === "today"
       ? white
       : props.variant === "nextMonth"
@@ -61,7 +63,7 @@ const CalendarDayCell = styled.div<CalendarDayCellProps>`
     props.variant === "selected"
       ? props.theme.colors.lightGray
       : props.variant === "today"
-      ? darkTurquoise
+      ? props.theme.colors.dark.green
       : ""};
   height: 30px;
   width: 30px;
@@ -72,10 +74,10 @@ const CalendarDayCell = styled.div<CalendarDayCellProps>`
   margin: 2px;
   cursor: pointer;
   &:hover {
-    background-color: ${lightTurquoise};
-    color: ${darkTurquoise}
+    background-color: ${(props) => props.theme.colors.yellowGreen};
+    color: ${(props) => props.theme.colors.dark.green};
   }
-`
+`;
 
 const StyledCalendar = {
   MainWrapper,
