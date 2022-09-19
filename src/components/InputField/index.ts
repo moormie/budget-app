@@ -3,21 +3,24 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${props => props.theme.colors.gray};
-  border-radius: 8px;
-  width: 100%;
+  background-color: ${(props) => props.theme.colors.gray};
+  border-radius: 12px;
+  margin: 4px;
+  box-sizing: border-box;
 `;
 
 const InputField = styled.input`
+  font-family: inherit;
+  font-size: 16px;
   border: none;
-  border-radius: 8px;
-  background-color: ${props => props.theme.colors.gray};
-  outline: 2px solid ${props => props.theme.colors.gray};
+  border-radius: 12px;
+  background-color: ${(props) => props.theme.colors.gray};
+  outline: none;
   &:hover {
-    background-color: ${props => props.theme.colors.lightGray};
+    background-color: ${(props) => props.theme.colors.lightGray};
   }
   &:focus-visible {
-    background-color: ${props => props.theme.colors.lightGray};
+    background-color: ${(props) => props.theme.colors.lightGray};
   }
   &::-webkit-calendar-picker-indicator {
     display: none;
@@ -27,18 +30,15 @@ const InputField = styled.input`
     -webkit-appearance: none;
     margin: 0;
   }
-  padding: 8px;
+  padding: 18px;
   width: 100%;
 `;
 
 const EndAdornment = styled.div`
-  position: absolute;
-  width: 31px;
-  height: 31px;
-  right: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 60px;
 `;
 
 const StyledInputField = {
