@@ -1,9 +1,12 @@
+import moment from "moment";
 import { FC, useMemo } from "react";
 import StyledChart from ".";
+import getColorOfcategory from "../../helpers/getColorOfCategory";
+import { Category } from "../../types/Category";
 import { ChartBarLine } from "../ChartBarLine/ChartBarLine";
 
 interface Data {
-  category: string;
+  category: Category;
   amount: number;
 }
 
@@ -17,24 +20,31 @@ export const Chart: FC<ChartData> = ({ dataList = [] }) => {
     [dataList]
   );
 
+  const max = Math.max(...dataList.map((data) => data.amount));
+
   return (
     <StyledChart.Container>
       <StyledChart.Header>
-        <StyledChart.HeaderText>19 September 2022</StyledChart.HeaderText>
+        <StyledChart.HeaderText>
+          {moment().format("DD MMMM YYYY")}
+        </StyledChart.HeaderText>
         <StyledChart.HeaderTitle>€ {sum}</StyledChart.HeaderTitle>
       </StyledChart.Header>
       <StyledChart.ChartContainer>
         <StyledChart.AmountContainer>
-          {[0, 1, 2, 3, 4, 5].map((e) => (
-            <div key={e}>€{sum - (e * sum) / 5}</div>
+          {[0, 1, 2, 3].map((e) => (
+            <div key={e}>€{Math.round(max - (e * max) / 4)}</div>
           ))}
+          <div key="zero">€ 0</div>
         </StyledChart.AmountContainer>
         <StyledChart.BarItems>
-          {dataList.map((data) => {
+          {dataList.map((data, index) => {
+            const { primary } = getColorOfcategory(data.category);
             return (
               <ChartBarLine
-                key={data.category}
-                height={(data.amount / sum) * 100}
+                key={index}
+                height={(data.amount / max) * 100}
+                color={primary}
               />
             );
           })}

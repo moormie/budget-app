@@ -4,28 +4,29 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 10px;
   height: 100%;
-  background-color: ${props => props.theme.colors.lightGray};
+  background-color: ${(props) => props.theme.colors.lightGray};
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: end;
   padding: 1px;
 `;
-const Line = styled.div<{ height: number }>`
+const Line = styled.div<{ height: number; color?: string }>`
   height: ${(props) => props.height}%;
   width: 100%;
-  background-color: ${props => props.theme.colors.gray};
+  background-color: ${(props) => props?.color ?? props.theme.colors.gray};
   border-radius: 6px;
 `;
 
 interface ChartBarLine {
   height: number;
+  color?: string;
 }
 
-export const ChartBarLine: FC<ChartBarLine> = ({ height }) => {
+export const ChartBarLine: FC<ChartBarLine> = ({ height, color }) => {
   return (
     <Container>
-      <Line height={height} />
+      <Line height={height} color={color} />
     </Container>
   );
 };
