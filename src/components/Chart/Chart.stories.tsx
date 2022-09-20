@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
+import { mockData } from "../../types/mockData";
 import { Chart } from "./Chart";
 
 export default {
@@ -11,15 +11,6 @@ const Template: ComponentStory<typeof Chart> = (args) => <Chart {...args} />;
 
 export const Default = Template.bind({});
 
-const MockData = [
-  { category: "food", amount: 500 },
-  { category: "car", amount: 150 },
-  { category: "entertainment", amount: 50 },
-  { category: "home", amount: 1000 },
-  { category: "travel", amount: 50 },
-  { category: "medical", amount: 0 },
-];
-
 Default.args = {
-  dataList: MockData,
+  dataList: mockData,
 };
