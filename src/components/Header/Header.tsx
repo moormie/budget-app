@@ -1,29 +1,22 @@
 import { FC } from "react";
 import StyledHeader from ".";
-import { Settings } from "../../assets";
-import { ColoredIcon } from "../ColoredIcon/ColoredIcon";
-import { IconButton } from "../IconButton/IconButton";
-import { myTheme } from "../../theme";
-import fox from "../../fox.png";
 
-interface Props {}
+interface Props {
+  title: string;
+  subtitle?: string;
+  startIcon?: JSX.Element;
+  endIcon?: JSX.Element;
+}
 
-export const Header: FC<Props> = () => {
+export const Header: FC<Props> = ({ title, subtitle, startIcon, endIcon }) => {
   return (
     <StyledHeader.Container>
-      <ColoredIcon
-        colorPrimary={myTheme.colors.grape}
-        colorSecondary={myTheme.colors.grape}
-      >
-        <img src={fox} alt="" style={{ width: 36, height: 36 }} />
-      </ColoredIcon>
+      {startIcon}
       <StyledHeader.MiddleContainer>
-        <StyledHeader.Subtitle>Welcome!</StyledHeader.Subtitle>
-        <StyledHeader.Title>User Name</StyledHeader.Title>
+        {subtitle && <StyledHeader.Subtitle>{subtitle}</StyledHeader.Subtitle>}
+        <StyledHeader.Title>{title}</StyledHeader.Title>
       </StyledHeader.MiddleContainer>
-      <IconButton onClick={() => {}}>
-        <Settings />
-      </IconButton>
+      {endIcon}
     </StyledHeader.Container>
   );
 };

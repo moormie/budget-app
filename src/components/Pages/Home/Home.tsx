@@ -1,13 +1,16 @@
-import React, { FC, useCallback } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 import { Header } from "../../Header/Header";
 import { MainCard } from "../../MainCard/MainCard";
 import { ListCard } from "../../ListCard/ListCard";
 import { BottomNavBar } from "../../BottomNavBar/BottomNavBar";
-import { Category } from "../../../types/Category";
 import { mockData } from "../../../types/mockData";
 import { myTheme } from "../../../theme";
-import { ItemIcon } from "./ItemIcon";
+import { ItemIcon } from "../../ItemIcon";
+import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
+import { IconButton } from "../../IconButton/IconButton";
+import { Settings } from "../../../assets";
+import fox from "../../../fox.png";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -19,14 +22,26 @@ const Spacing = styled.div`
 `;
 
 export const Home: FC = () => {
-  const getListItemIcon = useCallback((category: Category) => {
-    return <ItemIcon category={category} />;
-  }, []);
-
   return (
     <React.Fragment>
       <MainContainer>
-        <Header />
+        <Header
+          title="John Doe"
+          subtitle="Welcome"
+          startIcon={
+            <ColoredIcon
+              colorPrimary={myTheme.colors.grape}
+              colorSecondary={myTheme.colors.grape}
+            >
+              <img src={fox} alt="" style={{ width: 36, height: 36 }} />
+            </ColoredIcon>
+          }
+          endIcon={
+            <IconButton onClick={() => {}}>
+              <Settings />
+            </IconButton>
+          }
+        />
         <Spacing />
         <MainCard
           totalIncome={2500}
@@ -39,7 +54,7 @@ export const Home: FC = () => {
         {mockData.map((data) => (
           <React.Fragment key={data.id}>
             <ListCard
-              icon={getListItemIcon(data.category as Category)}
+              icon={<ItemIcon category={data.category} />}
               mainLabel={data.category}
               endLabel={`€ ${data.amount}`}
               endSublabel={data.date}

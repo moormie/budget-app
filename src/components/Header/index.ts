@@ -4,6 +4,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  min-height: 50px;
 `;
 
 const MiddleContainer = styled.div`
