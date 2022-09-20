@@ -1,11 +1,16 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import moment from "moment";
-
 import { Calendar } from "./Calendar";
 
 export default {
   title: "Components/Calendar",
   component: Calendar,
+  argTypes: {
+    value: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } as ComponentMeta<typeof Calendar>;
 
 const Template: ComponentStory<typeof Calendar> = (args) => (
@@ -15,6 +20,5 @@ const Template: ComponentStory<typeof Calendar> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  value: moment(),
-  setValue: (value) => alert(moment(value)),
+  setValue: (value) => alert(value),
 };
