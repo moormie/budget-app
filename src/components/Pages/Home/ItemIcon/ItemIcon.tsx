@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Category } from "../../../types/Category";
-import { myTheme } from "../../../theme";
+import { Category } from "../../../../types/Category";
+import { myTheme } from "../../../../theme";
 import {
   Car,
   Shopping,
@@ -10,8 +10,8 @@ import {
   Health,
   Person,
   Plane,
-} from "../../../assets";
-import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
+} from "../../../../assets";
+import { ColoredIcon } from "../../../ColoredIcon/ColoredIcon";
 
 interface Props {
   category: Category;

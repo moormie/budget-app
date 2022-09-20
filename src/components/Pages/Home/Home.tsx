@@ -1,12 +1,12 @@
 import React, { FC, useCallback } from "react";
 import styled from "styled-components";
-import { Header } from "../Header/Header";
-import { MainCard } from "../MainCard/MainCard";
-import { ListCard } from "../ListCard/ListCard";
-import { BottomNavBar } from "../BottomNavBar/BottomNavBar";
-import { Category } from "../../types/Category";
-import { mockData } from "../../types/mockData";
-import { myTheme } from "../../theme";
+import { Header } from "../../Header/Header";
+import { MainCard } from "../../MainCard/MainCard";
+import { ListCard } from "../../ListCard/ListCard";
+import { BottomNavBar } from "../../BottomNavBar/BottomNavBar";
+import { Category } from "../../../types/Category";
+import { mockData } from "../../../types/mockData";
+import { myTheme } from "../../../theme";
 import { ItemIcon } from "./ItemIcon";
 
 const MainContainer = styled.div`
@@ -18,7 +18,7 @@ const Spacing = styled.div`
   height: 18px;
 `;
 
-export const MainPage: FC = () => {
+export const Home: FC = () => {
   const getListItemIcon = useCallback((category: Category) => {
     return <ItemIcon category={category} />;
   }, []);
