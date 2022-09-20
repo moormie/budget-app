@@ -1,11 +1,8 @@
 import styled from "styled-components";
 
-const darkTurquoise = "#417779";
-const lightTurquoise = "#87bfc1";
-
 const Container = styled.div`
-  background-color: ${lightTurquoise};
-  border-radius: ${props => props.theme.borderRadius};
+  background-color: ${(props) => props.theme.colors.yellowGreen};
+  border-radius: ${(props) => props.theme.borderRadius};
   height: 58px;
   display: flex;
   align-items: center;
@@ -30,8 +27,13 @@ const ListItem = styled.li`
 
 const Link = styled.a<{ active?: boolean }>`
   background-color: ${(props) =>
-    props.active ? darkTurquoise : lightTurquoise};
-  color: ${(props) => (props.active ? lightTurquoise : darkTurquoise)};
+    props.active
+      ? (props) => props.theme.colors.green
+      : (props) => props.theme.colors.yellowGreen};
+  color: ${(props) =>
+    props.active
+      ? (props) => props.theme.colors.yellowGreen
+      : (props) => props.theme.colors.green};
   border-radius: 16px;
   text-align: center;
   text-decoration: none;

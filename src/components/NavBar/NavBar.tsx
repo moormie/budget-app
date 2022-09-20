@@ -1,27 +1,30 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import StyledNavBar from ".";
 
-export const NavBar: FC = () => {
-  const [selected, setSelected] = useState<"first" | "second">("first");
+interface Props {
+  elements: string[];
+  selectedElement: string;
+  onSelectElement: (element: string) => void;
+}
+
+export const NavBar: FC<Props> = ({
+  elements,
+  selectedElement,
+  onSelectElement,
+}) => {
   return (
     <StyledNavBar.Container>
       <StyledNavBar.List>
-        <StyledNavBar.ListItem>
-          <StyledNavBar.Link
-            active={selected === "first"}
-            onClick={() => setSelected("first")}
-          >
-            Test
-          </StyledNavBar.Link>
-        </StyledNavBar.ListItem>
-        <StyledNavBar.ListItem>
-          <StyledNavBar.Link
-            active={selected === "second"}
-            onClick={() => setSelected("second")}
-          >
-            Test
-          </StyledNavBar.Link>
-        </StyledNavBar.ListItem>
+        {elements.map((element) => (
+          <StyledNavBar.ListItem key={element}>
+            <StyledNavBar.Link
+              active={element === selectedElement}
+              onClick={() => onSelectElement(element)}
+            >
+              {element}
+            </StyledNavBar.Link>
+          </StyledNavBar.ListItem>
+        ))}
       </StyledNavBar.List>
     </StyledNavBar.Container>
   );

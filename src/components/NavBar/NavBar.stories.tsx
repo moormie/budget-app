@@ -9,3 +9,9 @@ export default {
 const Template: ComponentStory<typeof NavBar> = (args) => <NavBar {...args} />;
 
 export const Default = Template.bind({});
+
+Default.args = {
+  elements: ["Home", "Profile", "Settings"],
+  selectedElement: "Home",
+  onSelectElement: (element) => alert(element),
+};
