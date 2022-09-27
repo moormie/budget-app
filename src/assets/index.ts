@@ -5,6 +5,7 @@ export { CaretDown } from "./CaretDownIcon";
 export { CaretUp } from "./CaretUpIcon";
 export { Add } from "./AddIcon";
 export { BarChart } from "./BarChartIcon";
+export { PieChart } from "./PieChartIcon";
 export { Menu } from "./MenuIcon";
 export { Car } from "./CarIcon";
 export { ArrowUp } from "./ArrowUpIcon";
