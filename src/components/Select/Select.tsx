@@ -5,14 +5,17 @@ import { IconButton } from "../IconButton/IconButton";
 import { InputField } from "../InputField/InputField";
 import { MenuList } from "../MenuList/MenuList";
 
-interface Props {}
+interface Props {
+  value: string;
+  setValue: (value: string) => void;
+  options: string[];
+}
 
-export const Select: FC = () => {
+export const Select: FC<Props> = ({ value, setValue, options }) => {
   const [open, setOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<string>("");
 
   const onSelect = (item: string) => {
-    setSelectedItem(item);
+    setValue(item);
     setOpen(false);
   };
 
@@ -20,7 +23,7 @@ export const Select: FC = () => {
     <StyledSelect.Container onClick={() => setOpen(!open)}>
       <InputField
         disabled
-        value={selectedItem}
+        value={value}
         endAdornment={
           <IconButton onClick={() => {}}>
             {open ? <CaretUp /> : <CaretDown />}
@@ -30,9 +33,9 @@ export const Select: FC = () => {
       <StyledSelect.SelectContainer>
         <MenuList
           open={open}
-          values={["Test 1", "Test 2", "Test 3"]}
+          values={options}
           onSelect={onSelect}
-          selectedItem={selectedItem}
+          selectedItem={value}
         />
       </StyledSelect.SelectContainer>
     </StyledSelect.Container>
