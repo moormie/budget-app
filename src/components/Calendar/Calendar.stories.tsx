@@ -1,24 +1,22 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import moment from "moment";
+import { Moment } from "moment";
+import { useState } from "react";
 import { Calendar } from "./Calendar";
 
 export default {
   title: "Components/Calendar",
   component: Calendar,
-  argTypes: {
-    value: {
-      table: {
-        disable: true,
-      },
+  parameters: {
+    controls: {
+      exclude: ["value", "setValue"],
     },
   },
 } as ComponentMeta<typeof Calendar>;
 
-const Template: ComponentStory<typeof Calendar> = (args) => (
-  <Calendar {...args} />
-);
+const Template: ComponentStory<typeof Calendar> = (args) => {
+  const [value, setValue] = useState<Moment>(moment());
 
-export const Default = Template.bind({});
-
-Default.args = {
-  setValue: (value) => alert(value),
+  return <Calendar {...args} value={value} setValue={setValue} />;
 };
+export const Default = Template.bind({});
