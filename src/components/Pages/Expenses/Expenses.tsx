@@ -3,13 +3,13 @@ import { Header } from "../../Header/Header";
 import { Chart } from "../../Chart/Chart";
 import { mockData } from "../../../types/mockData";
 import { IconButton } from "../../IconButton/IconButton";
-import { CaretLeft } from "../../../assets";
+import { BarChart, CaretLeft, PieChart } from "../../../assets";
 import styled from "styled-components";
 import { myTheme } from "../../../theme";
-import { Category } from "../../../types/Category";
 import { ListCard } from "../../ListCard/ListCard";
 import { ItemIcon } from "../../ItemIcon";
 import { NavBar } from "../../NavBar/NavBar";
+import { SimpleExpenses } from "../../../types/Expenses";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -20,17 +20,20 @@ const Spacing = styled.div`
   height: 18px;
 `;
 
-interface Data {
-  category: Category;
+interface Income {
+  title: string;
   amount: number;
 }
 
 export const Expenses: FC = () => {
   // TODO - Redux state
-  const [amountByCategories, setAmountByCategories] = useState<Data[]>([]);
+  const [selectedTab, setSelectedTab] = useState<string>("Expenses");
+  const [expensesByCategories, setExpensesByCategories] = useState<SimpleExpenses[]>([]);
+  const [isBarChart, setIsBarChart] = useState(true);
+  const [income, setIncome] = useState<Income[]>([]);
 
   useEffect(() => {
-    const resultList: Data[] = [];
+    const resultList: SimpleExpenses[] = [];
     mockData.forEach((data) => {
       const exist = resultList.find((r) => r.category === data.category);
       if (exist) {
@@ -39,7 +42,7 @@ export const Expenses: FC = () => {
         resultList.push(data);
       }
     });
-    setAmountByCategories(resultList);
+    setExpensesByCategories(resultList);
   }, []);
 
   return (
@@ -51,27 +54,45 @@ export const Expenses: FC = () => {
             <CaretLeft />
           </IconButton>
         }
+        endIcon={
+          isBarChart ? (
+            <IconButton onClick={() => setIsBarChart(!isBarChart)}>
+              <BarChart />
+            </IconButton>
+          ) : (
+            <IconButton onClick={() => setIsBarChart(!isBarChart)}>
+              <PieChart />
+            </IconButton>
+          )
+        }
       />
       <Spacing />
       <NavBar
         elements={["Income", "Expenses"]}
-        selectedElement="Expenses"
-        onSelectElement={() => {}}
+        selectedElement={selectedTab}
+        onSelectElement={setSelectedTab}
       />
-      <Spacing />
-      <Chart dataList={amountByCategories} />
-      <Spacing />
-      {amountByCategories.map((data) => (
-        <React.Fragment key={data.category}>
-          <ListCard
-            icon={<ItemIcon category={data.category} />}
-            mainLabel={data.category}
-            endLabel={`€ ${data.amount.toFixed(2)}`}
-            endSublabel=""
+      {selectedTab === "Expenses" && (
+        <>
+          <Spacing />
+          <Chart
+            type={isBarChart ? "bar" : "pie"}
+            dataList={expensesByCategories}
           />
           <Spacing />
-        </React.Fragment>
-      ))}
+          {expensesByCategories.map((data) => (
+            <React.Fragment key={data.category}>
+              <ListCard
+                icon={<ItemIcon category={data.category} />}
+                mainLabel={data.category}
+                endLabel={`€ ${data.amount.toFixed(2)}`}
+                endSublabel=""
+              />
+              <Spacing />
+            </React.Fragment>
+          ))}
+        </>
+      )}
     </MainContainer>
   );
 };

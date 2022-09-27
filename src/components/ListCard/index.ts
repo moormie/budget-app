@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   height: 72px;
   background-color: white;
-  border-radius: ${props => props.theme.borderRadius};
+  border-radius: ${(props) => props.theme.borderRadius};
 
   display: flex;
   align-items: center;
@@ -14,10 +14,18 @@ const Container = styled.div`
 
 const TitleContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   flex-grow: 1;
   margin: 16px;
+`;
+
+const Title = styled.p`
+  margin: 0;
   font-size: 20px;
+`;
+
+const Subtitle = styled.p`
+  margin: 0;
 `;
 
 const EndContainer = styled.div`
@@ -35,6 +43,8 @@ const SubText = styled.div`
 const StyledListCard = {
   Container,
   TitleContainer,
+  Title,
+  Subtitle,
   EndContainer,
   SubText,
 };

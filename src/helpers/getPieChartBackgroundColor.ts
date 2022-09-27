@@ -1,13 +1,9 @@
-import { Category } from "../types/Category";
+import { SimpleExpenses } from "../types/Expenses";
 import getColorOfcategory from "./getColorOfCategory";
 
-interface Data {
-  category: Category;
-  amount: number;
-}
 
-const getCategoriesAmount = (dataList: Data[]) => {
-  const categoryList: Data[] = [];
+const getCategoriesAmount = (dataList: SimpleExpenses[]) => {
+  const categoryList: SimpleExpenses[] = [];
 
   dataList.forEach((data) => {
     const exist = categoryList.find((r) => r.category === data.category);
@@ -30,7 +26,7 @@ const getCategoriesAmount = (dataList: Data[]) => {
     #778C62 19.49% 27.93%,
     #71533d 27.93%
 */
-export const getPieChartBackgroundColor = (dataList: Data[]) => {
+export const getPieChartBackgroundColor = (dataList: SimpleExpenses[]) => {
   const sum = dataList.map((data) => data.amount).reduce((a, b) => a + b, 0);
   const resultList: string[] = [];
 

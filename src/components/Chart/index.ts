@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 16px;
-  border-radius: ${props => props.theme.borderRadius};
+  border-radius: ${(props) => props.theme.borderRadius};
   box-sizing: border-box;
   width: 100%;
   background-color: white;
@@ -25,8 +29,10 @@ const HeaderTitle = styled.p`
 
 const ChartContainer = styled.div`
   display: flex;
+  justify-content: center;
   margin: 16px 0;
   min-height: 150px;
+  width: 100%;
 `;
 
 const AmountContainer = styled.div`

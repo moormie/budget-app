@@ -1,11 +1,11 @@
 import { FC, useMemo } from "react";
 import styled from "styled-components";
 import { getPieChartBackgroundColor } from "../../helpers/getPieChartBackgroundColor";
-import { Category } from "../../types/Category";
+import { SimpleExpenses } from "../../types/Expenses";
 
 const Container = styled.div<{ color: string }>`
-  height: 250px;
-  width: 250px;
+  height: 150px;
+  width: 150px;
   border-radius: 50%;
   background: ${(props) => "conic-gradient(" + props.color + ")"};
   position: relative;
@@ -14,20 +14,15 @@ const Container = styled.div<{ color: string }>`
 const InnerContainer = styled.div`
   position: absolute;
   background-color: white;
-  height: 200px;
-  width: 200px;
-  top: 25px;
-  left: 25px;
+  height: 110px;
+  width: 110px;
+  top: 20px;
+  left: 20px;
   border-radius: 50%;
 `;
 
-interface Data {
-  category: Category;
-  amount: number;
-}
-
 interface Props {
-  dataList: Data[];
+  dataList: SimpleExpenses[];
 }
 
 export const PieChart: FC<Props> = ({ dataList }) => {

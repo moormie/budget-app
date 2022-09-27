@@ -56,6 +56,7 @@ export const Home: FC = () => {
             <ListCard
               icon={<ItemIcon category={data.category} />}
               mainLabel={data.category}
+              sublabel={data.note}
               endLabel={`€ ${data.amount}`}
               endSublabel={data.date}
             />
