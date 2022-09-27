@@ -17,3 +17,4 @@ export { Home } from "./HomeIcon";
 export { Health } from "./HealthIcon";
 export { Person } from "./PersonIcon";
 export { Plane } from "./PlaneIcon";
+export { Cash } from "./CashIcon";
