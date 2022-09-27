@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { Header } from "../../Header/Header";
 import { Chart } from "../../Chart/Chart";
-import { mockData } from "../../../types/mockData";
+import { expensesMockData } from "../../../types/mockData";
 import { IconButton } from "../../IconButton/IconButton";
 import { BarChart, CaretLeft, PieChart } from "../../../assets";
 import styled from "styled-components";
@@ -28,13 +28,15 @@ interface Income {
 export const Expenses: FC = () => {
   // TODO - Redux state
   const [selectedTab, setSelectedTab] = useState<string>("Expenses");
-  const [expensesByCategories, setExpensesByCategories] = useState<SimpleExpenses[]>([]);
+  const [expensesByCategories, setExpensesByCategories] = useState<
+    SimpleExpenses[]
+  >([]);
   const [isBarChart, setIsBarChart] = useState(true);
   const [income, setIncome] = useState<Income[]>([]);
 
   useEffect(() => {
     const resultList: SimpleExpenses[] = [];
-    mockData.forEach((data) => {
+    expensesMockData.forEach((data) => {
       const exist = resultList.find((r) => r.category === data.category);
       if (exist) {
         exist.amount = exist.amount + data.amount;

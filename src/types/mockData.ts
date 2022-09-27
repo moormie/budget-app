@@ -1,6 +1,7 @@
 import { Expenses } from "./Expenses";
+import { Income } from "./Income";
 
-export const mockData: Expenses[] = [
+export const expensesMockData: Expenses[] = [
   {
     id: "001",
     category: "Food",
@@ -60,5 +61,21 @@ export const mockData: Expenses[] = [
     category: "Personal",
     amount: 160,
     date: "20-09-2022",
+  },
+];
+
+export const incomesMockData: Income[] = [
+  {
+    id: "001",
+    name: "Salary",
+    amount: 3000,
+    date: "01-09-2022",
+  },
+  {
+    id: "002",
+    name: "Gift",
+    amount: 250,
+    date: "20-09-2022",
+    note: "Some note...",
   },
 ];

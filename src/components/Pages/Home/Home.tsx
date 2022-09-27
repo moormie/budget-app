@@ -4,7 +4,7 @@ import { Header } from "../../Header/Header";
 import { MainCard } from "../../MainCard/MainCard";
 import { ListCard } from "../../ListCard/ListCard";
 import { BottomNavBar } from "../../BottomNavBar/BottomNavBar";
-import { mockData } from "../../../types/mockData";
+import { expensesMockData, incomesMockData } from "../../../types/mockData";
 import { myTheme } from "../../../theme";
 import { ItemIcon } from "../../ItemIcon";
 import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
@@ -44,14 +44,16 @@ export const Home: FC = () => {
         />
         <Spacing />
         <MainCard
-          totalIncome={2500}
-          totalExpenses={mockData
+          totalIncome={incomesMockData
+            .map((data) => data.amount)
+            .reduce((a, b) => a + b, 0)}
+          totalExpenses={expensesMockData
             .map((data) => data.amount)
             .reduce((a, b) => a + b, 0)}
         />
         <Spacing />
         <h3>Transactions</h3>
-        {mockData.map((data) => (
+        {expensesMockData.map((data) => (
           <React.Fragment key={data.id}>
             <ListCard
               icon={<ItemIcon category={data.category} />}

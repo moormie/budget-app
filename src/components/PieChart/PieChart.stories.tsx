@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { mockData } from "../../types/mockData";
+import { expensesMockData } from "../../types/mockData";
 import { PieChart } from "./PieChart";
 
 export default {
@@ -14,5 +14,5 @@ const Template: ComponentStory<typeof PieChart> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  dataList: mockData,
+  dataList: expensesMockData,
 };
