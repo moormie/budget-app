@@ -11,7 +11,6 @@ import { ItemIcon } from "../../ItemIcon";
 import { NavBar } from "../../NavBar/NavBar";
 import { SimpleExpenses } from "../../../types/Expenses";
 import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
-import { Income } from "../../../types/Income";
 import { AmountHeader } from "../../AmountHeader/AmountHeader";
 import { Container } from "../../Container/Container";
 
