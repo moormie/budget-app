@@ -1,15 +1,19 @@
 import React, { FC, useEffect, useState } from "react";
 import { Header } from "../../Header/Header";
 import { Chart } from "../../Chart/Chart";
-import { expensesMockData } from "../../../types/mockData";
+import { expensesMockData, incomesMockData } from "../../../types/mockData";
 import { IconButton } from "../../IconButton/IconButton";
-import { BarChart, CaretLeft, PieChart } from "../../../assets";
+import { BarChart, CaretLeft, Cash, PieChart } from "../../../assets";
 import styled from "styled-components";
 import { myTheme } from "../../../theme";
 import { ListCard } from "../../ListCard/ListCard";
 import { ItemIcon } from "../../ItemIcon";
 import { NavBar } from "../../NavBar/NavBar";
 import { SimpleExpenses } from "../../../types/Expenses";
+import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
+import { Income } from "../../../types/Income";
+import { AmountHeader } from "../../AmountHeader/AmountHeader";
+import { Container } from "../../Container/Container";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -20,11 +24,6 @@ const Spacing = styled.div`
   height: 18px;
 `;
 
-interface Income {
-  title: string;
-  amount: number;
-}
-
 export const Expenses: FC = () => {
   // TODO - Redux state
   const [selectedTab, setSelectedTab] = useState<string>("Expenses");
@@ -32,7 +31,6 @@ export const Expenses: FC = () => {
     SimpleExpenses[]
   >([]);
   const [isBarChart, setIsBarChart] = useState(true);
-  const [income, setIncome] = useState<Income[]>([]);
 
   useEffect(() => {
     const resultList: SimpleExpenses[] = [];
@@ -74,9 +72,9 @@ export const Expenses: FC = () => {
         selectedElement={selectedTab}
         onSelectElement={setSelectedTab}
       />
+      <Spacing />
       {selectedTab === "Expenses" && (
         <>
-          <Spacing />
           <Chart
             type={isBarChart ? "bar" : "pie"}
             dataList={expensesByCategories}
@@ -89,6 +87,34 @@ export const Expenses: FC = () => {
                 mainLabel={data.category}
                 endLabel={`€ ${data.amount.toFixed(2)}`}
                 endSublabel=""
+              />
+              <Spacing />
+            </React.Fragment>
+          ))}
+        </>
+      )}
+      {selectedTab === "Income" && (
+        <>
+          <Container>
+            <AmountHeader
+              amount={incomesMockData
+                .map((data) => data.amount)
+                .reduce((a, b) => a + b, 0)
+                .toFixed(2)}
+            />
+          </Container>
+          <Spacing />
+          {incomesMockData.map((data) => (
+            <React.Fragment key={data.id}>
+              <ListCard
+                icon={
+                  <ColoredIcon>
+                    <Cash />
+                  </ColoredIcon>
+                }
+                mainLabel={data.name}
+                endLabel={`€ ${data.amount.toFixed(2)}`}
+                endSublabel={data.date}
               />
               <Spacing />
             </React.Fragment>

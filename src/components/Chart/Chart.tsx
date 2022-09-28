@@ -1,9 +1,10 @@
-import moment from "moment";
 import { FC, useMemo } from "react";
 import StyledChart from ".";
 import getColorOfcategory from "../../helpers/getColorOfCategory";
 import { SimpleExpenses } from "../../types/Expenses";
+import { AmountHeader } from "../AmountHeader/AmountHeader";
 import { ChartBarLine } from "../ChartBarLine/ChartBarLine";
+import { Container } from "../Container/Container";
 import { PieChart } from "../PieChart/PieChart";
 
 interface Props {
@@ -20,13 +21,8 @@ export const Chart: FC<Props> = ({ dataList = [], type }) => {
   const max = Math.max(...dataList.map((data) => data.amount));
 
   return (
-    <StyledChart.Container>
-      <StyledChart.Header>
-        <StyledChart.HeaderText>
-          {moment().format("DD MMMM YYYY")}
-        </StyledChart.HeaderText>
-        <StyledChart.HeaderTitle>€ {sum}</StyledChart.HeaderTitle>
-      </StyledChart.Header>
+    <Container>
+      <AmountHeader amount={sum.toFixed(2)} />
       <StyledChart.ChartContainer>
         {type === "bar" && (
           <>
@@ -50,8 +46,8 @@ export const Chart: FC<Props> = ({ dataList = [], type }) => {
             </StyledChart.BarItems>
           </>
         )}
-        {type === "pie" && <PieChart dataList={dataList} />}{" "}
+        {type === "pie" && <PieChart dataList={dataList} />}
       </StyledChart.ChartContainer>
-    </StyledChart.Container>
+    </Container>
   );
 };

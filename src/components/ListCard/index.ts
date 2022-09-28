@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 72px;
+  display: flex;
   background-color: white;
   border-radius: ${(props) => props.theme.borderRadius};
-
-  display: flex;
   align-items: center;
   padding: 8px 16px;
   box-sizing: border-box;

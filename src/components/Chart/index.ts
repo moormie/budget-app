@@ -1,32 +1,5 @@
 import styled from "styled-components";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  border-radius: ${(props) => props.theme.borderRadius};
-  box-sizing: border-box;
-  width: 100%;
-  background-color: white;
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
-    rgba(17, 17, 26, 0.1) 0px 0px 8px;
-`;
-const Header = styled.div`
-  text-align: center;
-`;
-
-const HeaderText = styled.p`
-  font-size: 14px;
-  margin: 4px;
-`;
-const HeaderTitle = styled.p`
-  font-size: 24px;
-  margin: 4px;
-  font-weight: 500;
-`;
-
 const ChartContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -54,10 +27,6 @@ const BarItems = styled.div`
 `;
 
 const StyledChart = {
-  Container,
-  Header,
-  HeaderText,
-  HeaderTitle,
   ChartContainer,
   AmountContainer,
   BarItems,
