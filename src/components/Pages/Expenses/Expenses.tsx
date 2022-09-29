@@ -1,9 +1,14 @@
 import React, { FC, useEffect, useState } from "react";
 import { Header } from "../../Header/Header";
-import { Chart } from "../../Chart/Chart";
+import { BarChart } from "../../BarChart/BarChart";
 import { expensesMockData, incomesMockData } from "../../../types/mockData";
 import { IconButton } from "../../IconButton/IconButton";
-import { BarChart, CaretLeft, Cash, PieChart } from "../../../assets";
+import {
+  BarChart as BarChartIcon,
+  CaretLeft,
+  Cash,
+  PieChart,
+} from "../../../assets";
 import styled from "styled-components";
 import { myTheme } from "../../../theme";
 import { ListCard } from "../../ListCard/ListCard";
@@ -12,7 +17,7 @@ import { NavBar } from "../../NavBar/NavBar";
 import { SimpleExpenses } from "../../../types/Expenses";
 import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
 import { AmountHeader } from "../../AmountHeader/AmountHeader";
-import { Container } from "../../Container/Container";
+import { RoundedFlexContainer } from "../../RoundedFlexContainer";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -56,11 +61,11 @@ export const Expenses: FC = () => {
         endIcon={
           isBarChart ? (
             <IconButton onClick={() => setIsBarChart(!isBarChart)}>
-              <BarChart />
+              <PieChart />
             </IconButton>
           ) : (
             <IconButton onClick={() => setIsBarChart(!isBarChart)}>
-              <PieChart />
+              <BarChartIcon />
             </IconButton>
           )
         }
@@ -74,10 +79,22 @@ export const Expenses: FC = () => {
       <Spacing />
       {selectedTab === "Expenses" && (
         <>
-          <Chart
-            type={isBarChart ? "bar" : "pie"}
-            dataList={expensesByCategories}
-          />
+          <RoundedFlexContainer
+            flexDirection="column"
+            justify="center"
+            align="center"
+          >
+            <AmountHeader
+              amount={expensesMockData
+                .map((data) => data.amount)
+                .reduce((a, b) => a + b, 0)
+                .toFixed(2)}
+            />
+            <BarChart
+              type={isBarChart ? "bar" : "pie"}
+              dataList={expensesByCategories}
+            />
+          </RoundedFlexContainer>
           <Spacing />
           {expensesByCategories.map((data) => (
             <React.Fragment key={data.category}>
@@ -94,14 +111,14 @@ export const Expenses: FC = () => {
       )}
       {selectedTab === "Income" && (
         <>
-          <Container>
+          <RoundedFlexContainer>
             <AmountHeader
               amount={incomesMockData
                 .map((data) => data.amount)
                 .reduce((a, b) => a + b, 0)
                 .toFixed(2)}
             />
-          </Container>
+          </RoundedFlexContainer>
           <Spacing />
           {incomesMockData.map((data) => (
             <React.Fragment key={data.id}>

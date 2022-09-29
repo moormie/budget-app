@@ -1,19 +1,21 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { expensesMockData } from "../../types/mockData";
-import { Chart } from "./Chart";
+import { BarChart } from "./BarChart";
 
 export default {
   title: "Components/Chart",
-  component: Chart,
+  component: BarChart,
   argTypes: {
     type: {
       options: ["bar", "pie"],
       control: { type: "radio" },
     },
   },
-} as ComponentMeta<typeof Chart>;
+} as ComponentMeta<typeof BarChart>;
 
-const Template: ComponentStory<typeof Chart> = (args) => <Chart {...args} />;
+const Template: ComponentStory<typeof BarChart> = (args) => (
+  <BarChart {...args} />
+);
 
 export const Default = Template.bind({});
 

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import StyledListCard from ".";
+import { RoundedFlexContainer } from "../RoundedFlexContainer";
 
 interface ListCardProps {
   icon: JSX.Element;
@@ -17,7 +18,7 @@ export const ListCard: FC<ListCardProps> = ({
   endSublabel,
 }) => {
   return (
-    <StyledListCard.Container>
+    <RoundedFlexContainer align="center">
       {icon}
       <StyledListCard.TitleContainer>
         <StyledListCard.Title>{mainLabel}</StyledListCard.Title>
@@ -29,6 +30,6 @@ export const ListCard: FC<ListCardProps> = ({
         <div>{endLabel}</div>
         <StyledListCard.SubText>{endSublabel}</StyledListCard.SubText>
       </StyledListCard.EndContainer>
-    </StyledListCard.Container>
+    </RoundedFlexContainer>
   );
 };

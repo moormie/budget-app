@@ -1,20 +1,10 @@
 import styled from "styled-components";
 
-const Container = styled.div`
-  display: flex;
-  background-color: white;
-  border-radius: ${(props) => props.theme.borderRadius};
-  align-items: center;
-  padding: 8px 16px;
-  box-sizing: border-box;
-  box-shadow: rgba(17, 17, 17, 0.05) 0px 0px 12px;
-`;
-
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin: 16px;
+  margin: 0 16px;
 `;
 
 const Title = styled.p`
@@ -39,7 +29,6 @@ const SubText = styled.div`
 `;
 
 const StyledListCard = {
-  Container,
   TitleContainer,
   Title,
   Subtitle,

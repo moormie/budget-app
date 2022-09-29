@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { ChartBarLine } from "./ChartBarLine";
+import { BarLine } from "./BarLine";
 
 export default {
-  title: "Components/ChartBarLine",
-  component: ChartBarLine,
+  title: "Components/BarLine",
+  component: BarLine,
   decorators: [
     (Story) => (
       <div style={{ height: 200 }}>
@@ -12,10 +12,10 @@ export default {
       </div>
     ),
   ],
-} as ComponentMeta<typeof ChartBarLine>;
+} as ComponentMeta<typeof BarLine>;
 
-const Template: ComponentStory<typeof ChartBarLine> = (args) => (
-  <ChartBarLine {...args} />
+const Template: ComponentStory<typeof BarLine> = (args) => (
+  <BarLine {...args} />
 );
 
 export const Default = Template.bind({});
