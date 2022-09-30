@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 const Container = styled.div<{ open: boolean }>`
-  width: 100%;
+  width: calc(100% - 8px);
+  margin: 0 4px;
   background-color: ${(props) => props.theme.colors.yellowGreen};
   border-radius: 12px;
+  position: absolute;
   opacity: ${(props) => (props.open ? 1 : 0)};
   visibility: ${(props) => (props.open ? "visible" : "hidden")};
   transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
