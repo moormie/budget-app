@@ -21,43 +21,43 @@ export const ItemIcon: FC<Props> = ({ category }) => {
   const { gray } = myTheme.colors;
   const { primary, secondary } = getColorOfcategory(category);
   switch (category) {
-    case "Food":
+    case Category.FOOD:
       return (
         <ColoredIcon colorPrimary={primary} colorSecondary={secondary}>
           <Shopping color={gray} />
         </ColoredIcon>
       );
-    case "Car":
+    case Category.CAR:
       return (
         <ColoredIcon colorPrimary={primary} colorSecondary={secondary}>
           <Car color={gray} />
         </ColoredIcon>
       );
-    case "Home":
+    case Category.HOME:
       return (
         <ColoredIcon colorPrimary={primary} colorSecondary={secondary}>
           <Home color={gray} />
         </ColoredIcon>
       );
-    case "Entertainment":
+    case Category.ENTERTAINMENT:
       return (
         <ColoredIcon colorPrimary={primary} colorSecondary={secondary}>
           <Entertainment color={gray} />
         </ColoredIcon>
       );
-    case "Medical":
+    case Category.MEDICAL:
       return (
         <ColoredIcon colorPrimary={primary} colorSecondary={secondary}>
           <Health color={gray} />
         </ColoredIcon>
       );
-    case "Personal":
+    case Category.PERSONAL:
       return (
         <ColoredIcon colorPrimary={primary} colorSecondary={secondary}>
           <Person color={gray} />
         </ColoredIcon>
       );
-    case "Travel":
+    case Category.TRAVEL:
       return (
         <ColoredIcon colorPrimary={primary} colorSecondary={secondary}>
           <Plane color={gray} />
