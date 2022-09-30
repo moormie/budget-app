@@ -10,9 +10,9 @@ const getColorOfcategory = (category: Category): Color => {
   const { gray, green, grape, yellow, yellowGreen, red, brown, orange, dark } =
     myTheme.colors;
   switch (category) {
-    case Category.FOOD:
+    case "Food":
       return { primary: green, secondary: dark.green };
-    case Category.CAR:
+    case "Car":
       return { primary: grape, secondary: dark.grape };
     case "Home":
       return { primary: brown, secondary: dark.brown };

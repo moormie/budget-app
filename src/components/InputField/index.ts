@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   align-items: center;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.gray};
   border-radius: 12px;
   margin: 4px;
   box-sizing: border-box;
@@ -14,10 +14,13 @@ const InputField = styled.input`
   font-size: 16px;
   border: none;
   border-radius: 12px;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.gray};
   outline: none;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.lightGray};
+  }
   &:focus-visible {
-    background-color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.lightGray};
   }
   &::-webkit-calendar-picker-indicator {
     display: none;
