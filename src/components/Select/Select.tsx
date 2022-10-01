@@ -2,7 +2,6 @@ import { FC, useRef, useState } from "react";
 import StyledSelect from ".";
 import { CaretDown, CaretUp } from "../../assets";
 import useOnClickOutside from "../../useOnClickOutside";
-import { IconButton } from "../IconButton/IconButton";
 import { InputField } from "../InputField/InputField";
 import { MenuList } from "../MenuList/MenuList";
 
@@ -30,19 +29,14 @@ export const Select: FC<Props> = ({
 
   return (
     <StyledSelect.Container>
-      <div onClick={() => setOpen(!open)}>
-        <InputField
-          ref={ref}
-          disabled
-          value={value}
-          endAdornment={
-            <IconButton onClick={() => {}}>
-              {open ? <CaretUp /> : <CaretDown />}
-            </IconButton>
-          }
-          placeholder={placeholder}
-        />
-      </div>
+      <InputField
+        ref={ref}
+        disabled
+        value={value}
+        endAdornment={open ? <CaretUp /> : <CaretDown />}
+        placeholder={placeholder}
+        onClick={() => setOpen(!open)}
+      />
       <MenuList
         open={open}
         values={options}

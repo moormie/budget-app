@@ -8,11 +8,20 @@ interface Props {
   endAdornment?: React.ReactNode;
   placeholder?: string;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
 export const InputField = forwardRef<HTMLInputElement, Props>(
   (
-    { type = "text", endAdornment, placeholder, value, setValue, disabled },
+    {
+      type = "text",
+      endAdornment,
+      placeholder,
+      value,
+      setValue,
+      disabled,
+      onClick,
+    },
     ref
   ) => {
     const onChange = (value: string) => {
@@ -20,14 +29,13 @@ export const InputField = forwardRef<HTMLInputElement, Props>(
     };
 
     return (
-      <StyledInputField.Container>
+      <StyledInputField.Container onClick={onClick} ref={ref}>
         <StyledInputField.InputField
           type={type}
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           disabled={disabled}
-          ref={ref}
         />
         {endAdornment && (
           <StyledInputField.EndAdornment>

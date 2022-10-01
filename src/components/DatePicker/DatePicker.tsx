@@ -3,7 +3,6 @@ import StyledDatePicker from ".";
 import { Calendar } from "../Calendar/Calendar";
 import { Calendar as CalendarIcon } from "../../assets/CalendarIcon";
 import { InputField } from "../InputField/InputField";
-import { IconButton } from "../IconButton/IconButton";
 import { Moment } from "moment";
 import moment from "moment";
 import useOnClickOutside from "../../useOnClickOutside";
@@ -21,9 +20,8 @@ export const DatePicker: FC = () => {
   useOnClickOutside(ref, () => setOpen(false));
 
   return (
-    <StyledDatePicker.Container>
+    <StyledDatePicker.Container ref={ref}>
       <InputField
-        ref={ref}
         placeholder="DD/MM/YYYY"
         value={
           selectedDate
@@ -31,11 +29,8 @@ export const DatePicker: FC = () => {
             : moment().format("DD/MM/YYYY")
         }
         disabled
-        endAdornment={
-          <IconButton onClick={() => setOpen(!open)}>
-            <CalendarIcon width="18px" height="18px" />
-          </IconButton>
-        }
+        endAdornment={<CalendarIcon width="18px" height="18px" />}
+        onClick={() => setOpen(!open)}
       />
       <Calendar open={open} value={selectedDate} setValue={onChangeDate} />
     </StyledDatePicker.Container>
