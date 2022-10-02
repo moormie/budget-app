@@ -4,6 +4,7 @@ import { CaretDown, CaretUp } from "../../assets";
 import useOnClickOutside from "../../useOnClickOutside";
 import { InputField } from "../InputField/InputField";
 import { MenuList } from "../MenuList/MenuList";
+import { Delayed } from "../Delayed";
 
 interface Props {
   value: string;
@@ -37,12 +38,9 @@ export const Select: FC<Props> = ({
         placeholder={placeholder}
         onClick={() => setOpen(!open)}
       />
-      <MenuList
-        open={open}
-        values={options}
-        onSelect={onSelect}
-        selectedItem={value}
-      />
+      <Delayed open={open}>
+        <MenuList values={options} onSelect={onSelect} selectedItem={value} />
+      </Delayed>
     </StyledSelect.Container>
   );
 };

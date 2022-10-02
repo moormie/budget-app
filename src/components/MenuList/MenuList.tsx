@@ -3,14 +3,14 @@ import StyledMenuList from ".";
 
 interface Props {
   values: string[];
-  open?: boolean;
+  visible?: boolean;
   selectedItem?: string;
   onSelect?: (value: string) => void;
 }
 
 export const MenuList: FC<Props> = ({
   values,
-  open = true,
+  visible = true,
   selectedItem,
   onSelect,
 }) => {
@@ -19,7 +19,7 @@ export const MenuList: FC<Props> = ({
   };
 
   return (
-    <StyledMenuList.Container open={open}>
+    <StyledMenuList.Container visible={visible}>
       <StyledMenuList.List>
         {values.map((value, index) => (
           <StyledMenuList.ListItem

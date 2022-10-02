@@ -3,17 +3,16 @@ import styled from "styled-components";
 const black = "#000000";
 const white = "#ffffff";
 
-const MainWrapper = styled.div<{ open: boolean }>`
+const MainWrapper = styled.div<{ visible: boolean }>`
   width: 240px;
   border-radius: ${(props) => props.theme.borderRadius};
   padding: 20px;
   background-color: ${(props) => props.theme.colors.green};
   box-shadow: -6px 7px 54px -24px rgba(0, 0, 0, 0.5);
-  opacity: ${(props) => (props.open ? 1 : 0)};
-  visibility: ${(props) => (props.open ? "visible" : "hidden")};
   position: absolute;
-  transition: all 320ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
-    transform 213ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  animation: ${(props) =>
+      props.visible ? props.theme.animation.show : props.theme.animation.hide}
+    0.3s ease-out;
 `;
 
 const CalendarHeaderWrapper = styled.div`

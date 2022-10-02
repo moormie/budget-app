@@ -6,6 +6,7 @@ import { InputField } from "../InputField/InputField";
 import { Moment } from "moment";
 import moment from "moment";
 import useOnClickOutside from "../../useOnClickOutside";
+import { Delayed } from "../Delayed";
 
 export const DatePicker: FC = () => {
   const [open, setOpen] = useState(false);
@@ -32,7 +33,9 @@ export const DatePicker: FC = () => {
         endAdornment={<CalendarIcon width="18px" height="18px" />}
         onClick={() => setOpen(!open)}
       />
-      <Calendar open={open} value={selectedDate} setValue={onChangeDate} />
+      <Delayed open={open}>
+        <Calendar value={selectedDate} setValue={onChangeDate} />
+      </Delayed>
     </StyledDatePicker.Container>
   );
 };

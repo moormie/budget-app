@@ -7,6 +7,9 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
+  args: {
+    visible: true
+  }
 } as ComponentMeta<typeof MenuList>;
 
 const Template: ComponentStory<typeof MenuList> = (args) => (

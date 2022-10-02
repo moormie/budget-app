@@ -8,21 +8,21 @@ import { generateWeeksOfTheMonth } from "./helpers";
 interface CalendarProps {
   value: Moment | null;
   setValue: (date: Moment) => void;
-  open?: boolean;
+  visible?: boolean;
 }
 
 export const Calendar: FC<CalendarProps> = ({
-  open = true,
+  visible = true,
   value,
   setValue,
 }) => {
   const [calendarDate, setCalendarDate] = useState<Moment>(moment());
 
   useEffect(() => {
-    if (value && open) {
+    if (value && visible) {
       setCalendarDate(value);
     }
-  }, [value, open]);
+  }, [value, visible]);
 
   const currentDay = useMemo(() => moment(), []);
 
@@ -38,7 +38,7 @@ export const Calendar: FC<CalendarProps> = ({
   );
 
   return (
-    <StyledCalendar.MainWrapper open={open}>
+    <StyledCalendar.MainWrapper visible={visible}>
       <StyledCalendar.CalendarHeaderWrapper>
         <IconButton onClick={() => onChangeMonth("backward")}>
           <CaretLeft />
