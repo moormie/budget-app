@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme, Keyframes, keyframes } from "styled-components";
 
 interface Color {
   grape: string;
@@ -12,6 +12,10 @@ interface Color {
 
 interface MyTheme extends DefaultTheme {
   borderRadius: string;
+  animation: {
+    show: Keyframes;
+    hide: Keyframes;
+  };
   colors: {
     lightGray: string;
     gray: string;
@@ -27,8 +31,32 @@ interface MyTheme extends DefaultTheme {
   };
 }
 
+const show = keyframes`
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }`;
+
+const hide = keyframes`
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }`;
+
 export const myTheme: MyTheme = {
   borderRadius: "18px",
+  animation: {
+    show,
+    hide,
+  },
   colors: {
     lightGray: "#f2f2f2",
     gray: "#e0e0e0",
