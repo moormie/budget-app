@@ -12,38 +12,6 @@ function useEventListener<K extends keyof WindowEventMap>(
   handler: (event: WindowEventMap[K]) => void,
   element?: undefined,
   options?: boolean | AddEventListenerOptions
-): void;
-
-// Element Event based useEventListener interface
-function useEventListener<
-  K extends keyof HTMLElementEventMap,
-  T extends HTMLElement = HTMLDivElement
->(
-  eventName: K,
-  handler: (event: HTMLElementEventMap[K]) => void,
-  element: RefObject<T>,
-  options?: boolean | AddEventListenerOptions
-): void;
-
-// Document Event based useEventListener interface
-function useEventListener<K extends keyof DocumentEventMap>(
-  eventName: K,
-  handler: (event: DocumentEventMap[K]) => void,
-  element: RefObject<Document>,
-  options?: boolean | AddEventListenerOptions
-): void;
-
-function useEventListener<
-  KW extends keyof WindowEventMap,
-  KH extends keyof HTMLElementEventMap,
-  T extends HTMLElement | void = void
->(
-  eventName: KW | KH,
-  handler: (
-    event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event
-  ) => void,
-  element?: RefObject<T>,
-  options?: boolean | AddEventListenerOptions
 ) {
   // Create a ref that stores handler
   const savedHandler = useRef(handler);
@@ -54,7 +22,7 @@ function useEventListener<
 
   useEffect(() => {
     // Define the listening target
-    const targetElement: T | Window = element?.current || window;
+    const targetElement: Window = window;
     if (!(targetElement && targetElement.addEventListener)) {
       return;
     }
@@ -78,7 +46,7 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   mouseEvent: "mousedown" | "mouseup" = "mousedown"
 ): void {
   useEventListener(mouseEvent, (event) => {
-    const el = ref?.current;
+    const el = ref.current;
 
     // Do nothing if clicking ref's element or descendent elements
     if (!el || el.contains(event.target as Node)) {
