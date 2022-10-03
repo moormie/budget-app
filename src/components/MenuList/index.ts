@@ -1,14 +1,16 @@
-import styled  from "styled-components";
+import styled from "styled-components";
 
 const Container = styled.div<{ visible: boolean }>`
   width: calc(100% - 8px);
   margin: 0 4px;
+  z-index: 1;
   background-color: ${(props) => props.theme.colors.yellowGreen};
   border-radius: 12px;
   position: absolute;
   animation: ${(props) =>
       props.visible ? props.theme.animation.show : props.theme.animation.hide}
-    0.3s ease-out;`;
+    0.3s ease-out;
+`;
 
 const List = styled.ul`
   list-style-type: none;

@@ -10,15 +10,16 @@ import { InputField } from "../InputField/InputField";
 import { Select } from "../Select/Select";
 
 interface Props {
-  isOpen: boolean;
+  visible?: boolean;
+  onClose: (isOpen: boolean) => void;
 }
 
-export const AddExpenses: FC<Props> = ({ isOpen }) => {
+export const AddExpenses: FC<Props> = ({ visible = true, onClose }) => {
   return (
-    <StyledModal.MainContainer>
+    <StyledModal.MainContainer open={visible}>
       <Header
         endIcon={
-          <IconButton onClick={() => {}}>
+          <IconButton onClick={() => onClose(false)}>
             <Close />
           </IconButton>
         }

@@ -4,7 +4,11 @@ import { Add, BarChart, Menu } from "../../assets";
 import { IconButton } from "../IconButton/IconButton";
 import { myTheme } from "../../theme";
 
-export const BottomNavBar: FC = () => {
+interface Props {
+  onClickButton: () => void;
+}
+
+export const BottomNavBar: FC<Props> = ({ onClickButton }) => {
   return (
     <StyledNavBar.MainContainer>
       <StyledNavBar.IconContainer>
@@ -15,7 +19,7 @@ export const BottomNavBar: FC = () => {
           size="large"
           colorPrimary={myTheme.colors.yellow}
           colorSecondary={myTheme.colors.dark.orange}
-          onClick={() => {}}
+          onClick={onClickButton}
         >
           <Add color={myTheme.colors.lightGray} />
         </IconButton>
