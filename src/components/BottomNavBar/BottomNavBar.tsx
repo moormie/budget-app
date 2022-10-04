@@ -3,6 +3,7 @@ import StyledNavBar from ".";
 import { Add, BarChart, Menu } from "../../assets";
 import { IconButton } from "../IconButton/IconButton";
 import { myTheme } from "../../theme";
+import { Link } from "react-router-dom";
 
 interface Props {
   onClickButton: () => void;
@@ -12,7 +13,9 @@ export const BottomNavBar: FC<Props> = ({ onClickButton }) => {
   return (
     <StyledNavBar.MainContainer>
       <StyledNavBar.IconContainer>
-        <Menu color={myTheme.colors.dark.grape} />
+        <Link to="details">
+          <Menu color={myTheme.colors.dark.grape} />
+        </Link>
       </StyledNavBar.IconContainer>
       <StyledNavBar.ButtonContainer>
         <IconButton

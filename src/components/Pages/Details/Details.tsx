@@ -9,6 +9,7 @@ import { NavBar } from "../../NavBar/NavBar";
 import { SimpleExpenses } from "../../../types/Expenses";
 import { Expenses } from "./Expenses";
 import { Incomes } from "./Incomes";
+import { useNavigate } from "react-router-dom";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -26,6 +27,7 @@ export const Details: FC = () => {
     SimpleExpenses[]
   >([]);
   const [isBarChart, setIsBarChart] = useState(true);
+  let navigate = useNavigate();
 
   useEffect(() => {
     const resultList: SimpleExpenses[] = [];
@@ -40,12 +42,16 @@ export const Details: FC = () => {
     setExpensesByCategories(resultList);
   }, []);
 
+  const onClickBack = () => {
+      navigate("/")
+  }
+
   return (
     <MainContainer>
       <Header
         title="Transactions"
         startIcon={
-          <IconButton onClick={() => {}}>
+          <IconButton onClick={onClickBack}>
             <CaretLeft />
           </IconButton>
         }
