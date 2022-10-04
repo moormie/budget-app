@@ -5,6 +5,7 @@ import useOnClickOutside from "../../useOnClickOutside";
 import { InputField } from "../InputField/InputField";
 import { MenuList } from "../MenuList/MenuList";
 import { Delayed } from "../Delayed";
+import { myTheme } from "../../theme";
 
 interface Props {
   value: string;
@@ -34,7 +35,13 @@ export const Select: FC<Props> = ({
         ref={ref}
         disabled
         value={value}
-        endAdornment={open ? <CaretUp /> : <CaretDown />}
+        endAdornment={
+          open ? (
+            <CaretUp color={myTheme.colors.dark.green} />
+          ) : (
+            <CaretDown color={myTheme.colors.dark.green} />
+          )
+        }
         placeholder={placeholder}
         onClick={() => setOpen(!open)}
       />

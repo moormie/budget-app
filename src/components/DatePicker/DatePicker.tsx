@@ -7,6 +7,7 @@ import { Moment } from "moment";
 import moment from "moment";
 import useOnClickOutside from "../../useOnClickOutside";
 import { Delayed } from "../Delayed";
+import { myTheme } from "../../theme";
 
 export const DatePicker: FC = () => {
   const [open, setOpen] = useState(false);
@@ -30,7 +31,13 @@ export const DatePicker: FC = () => {
             : moment().format("DD/MM/YYYY")
         }
         disabled
-        endAdornment={<CalendarIcon width="18px" height="18px" />}
+        endAdornment={
+          <CalendarIcon
+            width="18px"
+            height="18px"
+            color={myTheme.colors.dark.green}
+          />
+        }
         onClick={() => setOpen(!open)}
       />
       <Delayed open={open}>

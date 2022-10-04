@@ -27,7 +27,7 @@ export const AddExpenses: FC<Props> = ({ visible = true, onClose }) => {
       <StyledModal.Title>
         <h3>Add Expenses</h3>
       </StyledModal.Title>
-      <InputField />
+      <InputField type="number" endAdornment="€" />
       <StyledModal.Spacing />
       <Select
         value={""}
