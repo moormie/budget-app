@@ -40,14 +40,18 @@ export const DetailsScreen: FC<Props> = ({
           </IconButton>
         }
         endIcon={
-          isBarChart ? (
-            <IconButton onClick={() => setIsBarChart(!isBarChart)}>
-              <PieChart />
-            </IconButton>
+          selectedTab === "Expenses" ? (
+            isBarChart ? (
+              <IconButton onClick={() => setIsBarChart(!isBarChart)}>
+                <PieChart />
+              </IconButton>
+            ) : (
+              <IconButton onClick={() => setIsBarChart(!isBarChart)}>
+                <BarChartIcon />
+              </IconButton>
+            )
           ) : (
-            <IconButton onClick={() => setIsBarChart(!isBarChart)}>
-              <BarChartIcon />
-            </IconButton>
+            <></>
           )
         }
       />

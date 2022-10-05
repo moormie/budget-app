@@ -43,7 +43,7 @@ const Link = styled.a<{ active?: boolean }>`
   height: 100%;
   width: 100%;
   -webkit-transition: 0.4s;
-  transition: 0.4s;
+  transition: 0.4s ease-in;
   cursor: pointer;
 `;
 
