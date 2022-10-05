@@ -9,12 +9,16 @@ import useOnClickOutside from "../../useOnClickOutside";
 import { Delayed } from "../Delayed";
 import { myTheme } from "../../theme";
 
-export const DatePicker: FC = () => {
+interface Props {
+  value: Moment | null;
+  setValue: (value: Moment | null) => void;
+}
+
+export const DatePicker: FC<Props> = ({ value, setValue }) => {
   const [open, setOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Moment | null>(moment());
 
   const onChangeDate = (date: Moment) => {
-    setSelectedDate(date);
+    setValue(date);
     setOpen(false);
   };
 
@@ -26,8 +30,8 @@ export const DatePicker: FC = () => {
       <InputField
         placeholder="DD/MM/YYYY"
         value={
-          selectedDate
-            ? moment(selectedDate).format("DD/MM/YYYY")
+          value
+            ? moment(value).format("DD/MM/YYYY")
             : moment().format("DD/MM/YYYY")
         }
         disabled
@@ -41,7 +45,7 @@ export const DatePicker: FC = () => {
         onClick={() => setOpen(!open)}
       />
       <Delayed open={open}>
-        <Calendar value={selectedDate} setValue={onChangeDate} />
+        <Calendar value={value} setValue={onChangeDate} />
       </Delayed>
     </StyledDatePicker.Container>
   );

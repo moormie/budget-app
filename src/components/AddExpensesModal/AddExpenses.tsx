@@ -1,7 +1,10 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import StyledModal from ".";
+import moment from "moment";
+import { Moment } from "moment";
 import { Close } from "../../assets";
 import { Category } from "../../types/Category";
+import { Expenses } from "../../types/Expenses";
 import { Button } from "../Button/Button";
 import { DatePicker } from "../DatePicker/DatePicker";
 import { Header } from "../Header/Header";
@@ -10,11 +13,31 @@ import { InputField } from "../InputField/InputField";
 import { Select } from "../Select/Select";
 
 interface Props {
-  visible?: boolean;
+  onSave: (newExpense: Expenses) => void;
   onClose: (isOpen: boolean) => void;
+  visible?: boolean;
 }
 
-export const AddExpenses: FC<Props> = ({ visible = true, onClose }) => {
+export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
+  const [amount, setAmount] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [note, setNote] = useState("");
+  const [date, setDate] = useState<Moment | null>(moment());
+
+  const onSubmit = () => {
+    if (!!amount && category && date) {
+      const newExpense: Expenses = {
+        // TODO
+        id: "001001122",
+        amount: Number(amount),
+        category: category as Category,
+        note,
+        date: moment(date).format("DD/MM/YYYY"),
+      };
+      onSave(newExpense);
+    }
+  };
+
   return (
     <StyledModal.MainContainer open={visible}>
       <Header
@@ -27,21 +50,30 @@ export const AddExpenses: FC<Props> = ({ visible = true, onClose }) => {
       <StyledModal.Title>
         <h3>Add Expenses</h3>
       </StyledModal.Title>
-      <InputField type="number" endAdornment="€" />
+      <InputField
+        type="number"
+        endAdornment="€"
+        value={amount}
+        setValue={setAmount}
+      />
       <StyledModal.Spacing />
       <Select
-        value={""}
+        value={category}
         options={Object.values(Category).map((e) => e)}
-        setValue={() => {}}
+        setValue={setCategory}
         placeholder="Select Category"
       />
       <StyledModal.Spacing />
-      <InputField placeholder="Note" />
+      <InputField placeholder="Note" value={note} setValue={setNote} />
       <StyledModal.Spacing />
-      <DatePicker />
+      <DatePicker value={date} setValue={setDate} />
       <StyledModal.Spacing />
       <StyledModal.ButtonContainer>
-        <Button label="Save" />
+        <Button
+          label="Save"
+          onClick={onSubmit}
+          disabled={!amount || !category || !date}
+        />
       </StyledModal.ButtonContainer>
     </StyledModal.MainContainer>
   );

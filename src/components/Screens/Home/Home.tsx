@@ -14,6 +14,8 @@ import fox from "../../../fox.png";
 import { AddExpenses } from "../../AddExpensesModal/AddExpenses";
 import { Delayed } from "../../Delayed";
 import { Expenses } from "../../../types/Expenses";
+import { useAppDispatch } from "../../../app/hooks";
+import { addNew } from "../../../features/expenses/expensesSlice";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -29,10 +31,16 @@ interface Props {
 }
 
 export const HomeScreen: FC<Props> = ({ expensesList }) => {
-  const [addNew, setAddNew] = useState(false);
+  const dispatch = useAppDispatch();
+  const [isAddNewOpen, setIsAddNewOpen] = useState(false);
+
+  const onAddNew = (newExpense: Expenses) => {
+    dispatch(addNew(newExpense));
+    setIsAddNewOpen(false);
+  };
   return (
     <React.Fragment>
-      <Delayed open={!addNew}>
+      <Delayed open={!isAddNewOpen}>
         <MainContainer>
           <Header
             title="John Doe"
@@ -76,11 +84,11 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
           ))}
         </MainContainer>
       </Delayed>
-      <Delayed open={!addNew}>
-        <BottomNavBar onClickButton={() => setAddNew(true)} />
+      <Delayed open={!isAddNewOpen}>
+        <BottomNavBar onClickButton={() => setIsAddNewOpen(true)} />
       </Delayed>
-      <Delayed open={addNew}>
-        <AddExpenses onClose={() => setAddNew(false)} />
+      <Delayed open={isAddNewOpen}>
+        <AddExpenses onSave={onAddNew} onClose={() => setIsAddNewOpen(false)} />
       </Delayed>
     </React.Fragment>
   );

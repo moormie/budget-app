@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { AddExpenses } from "./AddExpenses";
-import { useArgs } from "@storybook/client-api";
 
 export default {
   title: "Components/AddExpenses",
@@ -13,16 +12,8 @@ export default {
   },
 } as ComponentMeta<typeof AddExpenses>;
 
-const Template: ComponentStory<typeof AddExpenses> = (args) => {
-  const [{ isOpen = false }, updateArgs] = useArgs();
-
-  return (
-    <AddExpenses
-      {...args}
-      visible={isOpen}
-      onClose={(open) => updateArgs({ open })}
-    />
-  );
-};
+const Template: ComponentStory<typeof AddExpenses> = (args) => (
+  <AddExpenses {...args} />
+);
 
 export const Default = Template.bind({});
