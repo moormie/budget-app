@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { Expenses } from "../../types/Expenses";
 import { fetchExpensesData } from "./expensesAPI";
@@ -21,7 +21,11 @@ export const getExpensesData = createAsyncThunk("expenses/get", async () => {
 const expensesSlice = createSlice({
   name: "expenses",
   initialState,
-  reducers: {},
+  reducers: {
+    addNew: (state, action: PayloadAction<Expenses>) => {
+      state.dataList.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getExpensesData.pending, (state) => {
@@ -36,6 +40,8 @@ const expensesSlice = createSlice({
       });
   },
 });
+
+export const { addNew } = expensesSlice.actions;
 
 export const selectExpenses = (state: RootState) => state.expenses.dataList;
 
