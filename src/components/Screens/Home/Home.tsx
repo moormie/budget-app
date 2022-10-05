@@ -4,7 +4,7 @@ import { Header } from "../../Header/Header";
 import { MainCard } from "../../MainCard/MainCard";
 import { ListCard } from "../../ListCard/ListCard";
 import { BottomNavBar } from "../../BottomNavBar/BottomNavBar";
-import { expensesMockData, incomesMockData } from "../../../types/mockData";
+import { incomesMockData } from "../../../types/mockData";
 import { myTheme } from "../../../theme";
 import { ItemIcon } from "../../ItemIcon";
 import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
@@ -13,6 +13,7 @@ import { Settings } from "../../../assets";
 import fox from "../../../fox.png";
 import { AddExpenses } from "../../AddExpensesModal/AddExpenses";
 import { Delayed } from "../../Delayed";
+import { Expenses } from "../../../types/Expenses";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -23,7 +24,11 @@ const Spacing = styled.div`
   height: 18px;
 `;
 
-export const Home: FC = () => {
+interface Props {
+  expensesList: Expenses[];
+}
+
+export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const [addNew, setAddNew] = useState(false);
   return (
     <React.Fragment>
@@ -51,13 +56,13 @@ export const Home: FC = () => {
             totalIncome={incomesMockData
               .map((data) => data.amount)
               .reduce((a, b) => a + b, 0)}
-            totalExpenses={expensesMockData
+            totalExpenses={expensesList
               .map((data) => data.amount)
               .reduce((a, b) => a + b, 0)}
           />
           <Spacing />
           <h3>Transactions</h3>
-          {expensesMockData.map((data) => (
+          {expensesList.map((data) => (
             <React.Fragment key={data.id}>
               <ListCard
                 icon={<ItemIcon category={data.category} />}

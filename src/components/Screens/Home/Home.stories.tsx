@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { expensesMockData } from "../../../types/mockData";
+import { HomeScreen } from "./Home";
 import { MemoryRouter } from "react-router-dom";
 
-import { BottomNavBar } from "./BottomNavBar";
-
 export default {
-  title: "Components/BottomNavBar",
-  component: BottomNavBar,
+  title: "Screens/Home",
+  component: HomeScreen,
   parameters: {
     layout: "fullscreen",
   },
@@ -16,10 +16,14 @@ export default {
       </MemoryRouter>
     ),
   ],
-} as ComponentMeta<typeof BottomNavBar>;
+} as ComponentMeta<typeof HomeScreen>;
 
-const Template: ComponentStory<typeof BottomNavBar> = (args) => (
-  <BottomNavBar {...args} />
+const Template: ComponentStory<typeof HomeScreen> = (args) => (
+  <HomeScreen {...args} />
 );
 
 export const Default = Template.bind({});
+
+Default.args = {
+  expensesList: expensesMockData,
+};
