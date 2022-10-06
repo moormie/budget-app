@@ -1,20 +1,31 @@
-import { FC, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { FC, useEffect, useState, useMemo } from "react";
+import { useAppSelector } from "../app/hooks";
+import { Loading } from "../components/Loading";
 import { HomeScreen } from "../components/Screens/Home/Home";
-import {
-  getExpensesData,
-  selectExpenses,
-} from "../features/expenses/expensesSlice";
+import { Expenses } from "../types/Expenses";
 
 const HomePage: FC = () => {
-  const expensesList = useAppSelector(selectExpenses);
-  const dispatch = useAppDispatch();
+  const { dataList, status } = useAppSelector((state) => state.expenses);
+
+  const [sortedExpensesList, setSortedExpensesList] = useState<Expenses[]>([]);
+
+  const loading = useMemo(() => {
+    return status === "loading";
+  }, [status]);
 
   useEffect(() => {
-    dispatch(getExpensesData());
-  }, [dispatch]);
+    dataList.length > 0 &&
+      setSortedExpensesList(
+        [...dataList].sort((a, b) => a.date.localeCompare(b.date))
+      );
+  }, [dataList]);
 
-  return <HomeScreen expensesList={expensesList} />;
+  return (
+    <>
+      {loading && <Loading />}
+      <HomeScreen expensesList={loading ? [] : sortedExpensesList} />
+    </>
+  );
 };
 
 export default HomePage;

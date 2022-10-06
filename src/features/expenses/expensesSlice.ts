@@ -14,8 +14,13 @@ const initialState: ExpensesState = {
 };
 
 export const getExpensesData = createAsyncThunk("expenses/get", async () => {
-  const response = await fetchExpensesData();
-  return response.data;
+  try {
+    const response = await fetchExpensesData();
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 });
 
 const expensesSlice = createSlice({

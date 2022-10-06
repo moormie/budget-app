@@ -1,20 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 import { DetailsScreen } from "../components/Screens/Details/Details";
-import {
-  getExpensesData,
-  selectExpenses,
-} from "../features/expenses/expensesSlice";
+import { selectExpenses } from "../features/expenses/expensesSlice";
 import { SimpleExpenses } from "../types/Expenses";
 
 const DetailsPage: FC = () => {
   const expensesList = useAppSelector(selectExpenses);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getExpensesData());
-  }, [dispatch]);
 
   const [expensesByCategories, setExpensesByCategories] = useState<
     SimpleExpenses[]
