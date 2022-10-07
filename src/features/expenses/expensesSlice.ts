@@ -30,6 +30,12 @@ const expensesSlice = createSlice({
     addNew: (state, action: PayloadAction<Expenses>) => {
       state.dataList.push(action.payload);
     },
+    remove: (state, action: PayloadAction<string>) => {
+      const itemIndex = state.dataList.findIndex(
+        (i) => i.id === action.payload
+      );
+      state.dataList.splice(itemIndex, 1);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -46,7 +52,7 @@ const expensesSlice = createSlice({
   },
 });
 
-export const { addNew } = expensesSlice.actions;
+export const { addNew, remove } = expensesSlice.actions;
 
 export const selectExpenses = (state: RootState) => state.expenses.dataList;
 
