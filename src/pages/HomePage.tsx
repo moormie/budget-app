@@ -1,3 +1,4 @@
+import moment from "moment";
 import { FC, useEffect, useState, useMemo } from "react";
 import { useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
@@ -16,7 +17,9 @@ const HomePage: FC = () => {
   useEffect(() => {
     dataList.length > 0 &&
       setSortedExpensesList(
-        [...dataList].sort((a, b) => a.date.localeCompare(b.date))
+        [...dataList].sort((a, b) =>
+          moment(a.date).format("X").localeCompare(moment(b.date).format("X"))
+        )
       );
   }, [dataList]);
 

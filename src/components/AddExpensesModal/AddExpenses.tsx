@@ -32,7 +32,7 @@ export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
         amount: Number(amount),
         category: category as Category,
         note,
-        date: moment(date).format("DD/MM/YYYY"),
+        date: moment(date),
       };
       onSave(newExpense);
     }
@@ -70,6 +70,7 @@ export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
       <StyledModal.Spacing />
       <StyledModal.ButtonContainer>
         <Button
+          variant="success"
           label="Save"
           onClick={onSubmit}
           disabled={!amount || !category || !date}
