@@ -4,13 +4,22 @@ import StyledButton from ".";
 interface ButtonProps {
   label: string;
   onClick: () => void;
-  icon?: React.ReactNode;
   disabled?: boolean;
+  variant?: "success" | "error";
 }
 
-export const Button: FC<ButtonProps> = ({ label, onClick, icon, disabled }) => {
+export const Button: FC<ButtonProps> = ({
+  label,
+  onClick,
+  disabled,
+  variant,
+}) => {
   return (
-    <StyledButton.Button onClick={onClick} disabled={disabled}>
+    <StyledButton.Button
+      onClick={onClick}
+      disabled={disabled}
+      variant={variant}
+    >
       <StyledButton.Label>{label}</StyledButton.Label>
     </StyledButton.Button>
   );
