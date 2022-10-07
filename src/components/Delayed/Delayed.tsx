@@ -3,28 +3,28 @@ import { FC, useState, useEffect, cloneElement } from "react";
 interface Props {
   children: JSX.Element;
   waitBeforeShow?: number;
-  open: boolean;
+  visible: boolean;
 }
 
 export const Delayed: FC<Props> = ({
   children,
   waitBeforeShow = 300,
-  open,
+  visible,
 }) => {
   const [isShown, setIsShown] = useState(false);
 
   useEffect(() => {
-    if (open) {
-      setIsShown(open);
+    if (visible) {
+      setIsShown(visible);
     } else {
       const timer = setTimeout(() => {
-        setIsShown(open);
+        setIsShown(visible);
       }, waitBeforeShow);
       return () => {
         clearTimeout(timer);
       };
     }
-  }, [waitBeforeShow, open]);
+  }, [waitBeforeShow, visible]);
 
-  return isShown ? cloneElement(children, { visible: open }) : <></>;
+  return isShown ? cloneElement(children, { visible }) : <></>;
 };

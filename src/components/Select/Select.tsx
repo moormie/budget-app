@@ -45,7 +45,7 @@ export const Select: FC<Props> = ({
         placeholder={placeholder}
         onClick={() => setOpen(!open)}
       />
-      <Delayed open={open}>
+      <Delayed visible={open}>
         <MenuList values={options} onSelect={onSelect} selectedItem={value} />
       </Delayed>
     </StyledSelect.Container>
