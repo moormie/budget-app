@@ -8,6 +8,7 @@ interface Color {
   yellowGreen: string;
   green: string;
   brown: string;
+  gray: string;
 }
 
 interface MyTheme extends DefaultTheme {
@@ -82,6 +83,7 @@ export const myTheme: MyTheme = {
       yellowGreen: "#8c974c",
       green: "#566b40",
       brown: "#3c2b1f",
+      gray: "#a6a6a6",
     },
   },
 };

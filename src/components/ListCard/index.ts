@@ -28,12 +28,25 @@ const SubText = styled.div`
   text-align: end;
 `;
 
+const DeleteContainer = styled.div<{ visible: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${(props) => (props.visible ? "50px" : "0px")};
+  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  opacity: ${(props) => (props.visible ? "1" : "0")};
+  height: ${(props) => (props.visible ? "100%" : "0px")};
+  margin-left: ${(props) => (props.visible ? "16px" : "0px")};
+  transition: all 0.3s ease-in-out;
+`;
+
 const StyledListCard = {
   TitleContainer,
   Title,
   Subtitle,
   EndContainer,
   SubText,
+  DeleteContainer,
 };
 
 export default StyledListCard;

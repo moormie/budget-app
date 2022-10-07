@@ -5,13 +5,14 @@ interface FlexProps {
   flexDirection?: "column" | "row";
   justify?: "end" | "center" | "start";
   align?: "end" | "center" | "start";
+  [key: string]: any;
 }
 
 const Container = styled.div<FlexProps>`
   display: flex;
   flex-direction: ${(props) => props.flexDirection ?? "row"};
   justify-content: ${(props) => props.justify ?? "start"};
-  align-items: ${(props) => props.align ?? "start"};
+  align-items: ${(props) => props.align ?? ""};
   padding: 16px;
   border-radius: ${(props) => props.theme.borderRadius};
   box-sizing: border-box;
