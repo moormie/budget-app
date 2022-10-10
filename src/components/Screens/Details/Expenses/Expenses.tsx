@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { BarChart } from "../../../BarChart/BarChart";
+import { Chart } from "../../../Chart/Chart";
 import { expensesMockData } from "../../../../types/mockData";
 import styled from "styled-components";
 import { ListCard } from "../../../ListCard/ListCard";
@@ -31,7 +31,7 @@ export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
             .reduce((a, b) => a + b, 0)
             .toFixed(2)}
         />
-        <BarChart
+        <Chart
           type={isBarChart ? "bar" : "pie"}
           dataList={expensesByCategories}
         />

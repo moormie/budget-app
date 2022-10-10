@@ -10,7 +10,7 @@ interface Props {
   type: "bar" | "pie";
 }
 
-export const BarChart: FC<Props> = ({ dataList = [], type }) => {
+export const Chart: FC<Props> = ({ dataList = [], type }) => {
   const max = Math.max(...dataList.map((data) => data.amount));
 
   return (
