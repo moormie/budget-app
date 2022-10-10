@@ -5,11 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Expenses } from "../../../types/Expenses";
-
-export interface ExpensesState {
-  dataList: Expenses[];
-  status: "idle" | "loading" | "failed";
-}
+import { ExpensesState } from "../../../features/expenses/expensesSlice";
 
 const Mockstore = (props: {
   initialState: ExpensesState;
@@ -18,7 +14,7 @@ const Mockstore = (props: {
   <Provider
     store={configureStore({
       reducer: {
-        taskbox: createSlice({
+        expenses: createSlice({
           name: "expenses",
           initialState: props.initialState,
           reducers: {

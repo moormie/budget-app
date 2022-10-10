@@ -13,12 +13,14 @@ export const BarChart: FC<Props> = ({ dataList = [] }) => {
 
   return (
     <>
-      <StyledChart.AmountContainer>
-        {[0, 1, 2, 3].map((e) => (
-          <div key={e}>€{Math.round(max - (e * max) / 4)}</div>
-        ))}
-        <div key="zero">€ 0</div>
-      </StyledChart.AmountContainer>
+      {max > 0 && (
+        <StyledChart.AmountContainer>
+          {[0, 1, 2, 3].map((e) => (
+            <div key={e}>€{Math.round(max - (e * max) / 4)}</div>
+          ))}
+          <div key="zero">€ 0</div>
+        </StyledChart.AmountContainer>
+      )}
       <StyledChart.BarItems>
         {dataList.map((data, index) => {
           const { primary } = getColorOfcategory(data.category);
