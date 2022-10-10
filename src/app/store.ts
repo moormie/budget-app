@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { fetchExpensesData } from "../features/expenses/expensesAPI";
 import expensesReducer from "../features/expenses/expensesSlice";
+import detailsReducer from "../features/details/detailsSlice";
 
 export const store = configureStore({
   reducer: {
     expenses: expensesReducer,
+    details: detailsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
