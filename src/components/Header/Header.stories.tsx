@@ -7,12 +7,12 @@ export default {
   title: "Components/Header",
   component: Header,
   argTypes: {
-    startIcon: {
+    startElement: {
       table: {
         disable: true,
       },
     },
-    endIcon: {
+    endElement: {
       table: {
         disable: true,
       },
@@ -30,12 +30,12 @@ export const EndIcon = Template.bind({});
 Default.args = {
   title: "User Name",
   subtitle: "Welcome!",
-  startIcon: (
+  startElement: (
     <ColoredIcon>
       <Person />
     </ColoredIcon>
   ),
-  endIcon: (
+  endElement: (
     <ColoredIcon>
       <Settings />
     </ColoredIcon>
@@ -48,7 +48,7 @@ NoIcons.args = {
 StartIcon.args = {
   title: "User Name",
   subtitle: "Welcome!",
-  startIcon: (
+  startElement: (
     <ColoredIcon>
       <Person />
     </ColoredIcon>
@@ -56,7 +56,7 @@ StartIcon.args = {
 };
 EndIcon.args = {
   title: "User Name",
-  endIcon: (
+  endElement: (
     <ColoredIcon>
       <Settings />
     </ColoredIcon>

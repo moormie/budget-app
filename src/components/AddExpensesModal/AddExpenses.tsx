@@ -41,7 +41,7 @@ export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
   return (
     <StyledModal.MainContainer open={visible}>
       <Header
-        endIcon={
+        endElement={
           <IconButton onClick={() => onClose(false)}>
             <Close />
           </IconButton>

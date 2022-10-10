@@ -37,6 +37,7 @@ export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
         />
       </RoundedFlexContainer>
       <Spacing />
+      <h3>Summary by Category</h3>
       {expensesByCategories.map((data) => (
         <React.Fragment key={data.category}>
           <ListCard

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Header } from "../../Header/Header";
 import { MainCard } from "../../MainCard/MainCard";
@@ -18,6 +18,9 @@ import { useAppDispatch } from "../../../app/hooks";
 import { addNew, remove } from "../../../features/expenses/expensesSlice";
 import moment from "moment";
 import { Alert } from "../../Alert/Alert";
+import { Select } from "../../Select/Select";
+import { SortTypes } from "../../../types/SortTypes";
+import { getSortedExpensesList } from "../../../helpers/getSortedExpensesList";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -34,26 +37,27 @@ interface Props {
 
 export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const dispatch = useAppDispatch();
+  const [expenses, setExpenses] = useState(expensesList);
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [sortValue, setSortValue] = useState("");
 
   const onAddNew = (newExpense: Expenses) => {
     dispatch(addNew(newExpense));
     setIsAddNewOpen(false);
   };
 
-  const onOpenDelete = (selected: Expenses) => {
-    setSelectedExpense(selected);
-    setIsDeleteOpen(true);
-  };
-
   const onDelete = () => {
     if (selectedExpense?.id) {
       dispatch(remove(selectedExpense.id));
-      setIsDeleteOpen(false);
+      setSelectedExpense(undefined);
     }
   };
+
+  useEffect(() => {
+    const resultList = getSortedExpensesList(expensesList, sortValue);
+    setExpenses(resultList);
+  }, [sortValue, expensesList]);
 
   return (
     <React.Fragment>
@@ -62,7 +66,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
           <Header
             title="John Doe"
             subtitle="Welcome"
-            startIcon={
+            startElement={
               <ColoredIcon
                 colorPrimary={myTheme.colors.grape}
                 colorSecondary={myTheme.colors.grape}
@@ -70,7 +74,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
                 <img src={fox} alt="" style={{ width: 36, height: 36 }} />
               </ColoredIcon>
             }
-            endIcon={
+            endElement={
               <IconButton onClick={() => {}}>
                 <Settings />
               </IconButton>
@@ -86,8 +90,19 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
               .reduce((a, b) => a + b, 0)}
           />
           <Spacing />
-          <h3>Transactions</h3>
-          {expensesList.map((data) => (
+          <Header
+            title="Transactions"
+            endElement={
+              <Select
+                value={sortValue}
+                setValue={setSortValue}
+                options={Object.values(SortTypes)}
+                placeholder="Sort by"
+              />
+            }
+          />
+          <Spacing />
+          {expenses.map((data) => (
             <React.Fragment key={data.id}>
               <ListCard
                 icon={<ItemIcon category={data.category} />}
@@ -95,7 +110,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
                 sublabel={data.note}
                 endLabel={`€ ${data.amount}`}
                 endSublabel={moment(data.date).format("DD/MM/YYYY")}
-                onClickDelete={() => onOpenDelete(data)}
+                onClickDelete={() => setSelectedExpense(data)}
               />
               <Spacing />
             </React.Fragment>
@@ -108,11 +123,11 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
       <Delayed visible={isAddNewOpen}>
         <AddExpenses onSave={onAddNew} onClose={() => setIsAddNewOpen(false)} />
       </Delayed>
-      <Delayed visible={isDeleteOpen}>
+      <Delayed visible={selectedExpense !== undefined}>
         <Alert
           message={`Delete transaction: ${selectedExpense?.category} - € ${selectedExpense?.amount}`}
           note={selectedExpense?.note}
-          onClose={() => setIsDeleteOpen(false)}
+          onClose={() => setSelectedExpense(undefined)}
           onSubmit={onDelete}
         />
       </Delayed>

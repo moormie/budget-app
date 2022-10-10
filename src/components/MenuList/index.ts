@@ -33,7 +33,9 @@ const ListItem = styled.li<{ selected?: boolean }>`
     background-color: ${(props) => props.theme.colors.green};
   }
   background-color: ${(props) =>
-    props.selected ? props.theme.colors.green : ""};
+    props.selected ? props.theme.colors.dark.green : ""};
+  color: ${(props) =>
+    props.selected ? props.theme.colors.yellowGreen : "black"};
 `;
 
 const StyledMenuList = {

@@ -34,12 +34,12 @@ export const DetailsScreen: FC<Props> = ({
     <MainContainer>
       <Header
         title="Transactions"
-        startIcon={
+        startElement={
           <IconButton onClick={onClickBack}>
             <CaretLeft />
           </IconButton>
         }
-        endIcon={
+        endElement={
           selectedTab === "Expenses" ? (
             isBarChart ? (
               <IconButton onClick={() => setIsBarChart(!isBarChart)}>
