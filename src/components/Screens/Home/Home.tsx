@@ -14,13 +14,14 @@ import fox from "../../../fox.png";
 import { AddExpenses } from "../../AddExpensesModal/AddExpenses";
 import { Delayed } from "../../Delayed";
 import { Expenses } from "../../../types/Expenses";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { addNew, remove } from "../../../features/expenses/expensesSlice";
 import moment from "moment";
 import { Alert } from "../../Alert/Alert";
 import { Select } from "../../Select/Select";
-import { SortTypes } from "../../../types/SortTypes";
+import { SortType } from "../../../types/SortType";
 import { getSortedExpensesList } from "../../../helpers/getSortedExpensesList";
+import { setSortValue } from "../../../features/details/detailsSlice";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -37,10 +38,10 @@ interface Props {
 
 export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const dispatch = useAppDispatch();
+  const { sortValue } = useAppSelector((state) => state.details);
   const [expenses, setExpenses] = useState(expensesList);
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
-  const [sortValue, setSortValue] = useState("");
 
   const onAddNew = (newExpense: Expenses) => {
     dispatch(addNew(newExpense));
@@ -52,6 +53,10 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
       dispatch(remove(selectedExpense.id));
       setSelectedExpense(undefined);
     }
+  };
+
+  const selectSortValue = (value: string) => {
+    dispatch(setSortValue(value as SortType));
   };
 
   useEffect(() => {
@@ -94,9 +99,10 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
             title="Transactions"
             endElement={
               <Select
+                style={{ width: 190 }}
                 value={sortValue}
-                setValue={setSortValue}
-                options={Object.values(SortTypes)}
+                setValue={selectSortValue}
+                options={Object.values(SortType)}
                 placeholder="Sort by"
               />
             }

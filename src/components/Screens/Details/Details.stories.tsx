@@ -7,6 +7,7 @@ import {
   DetailType,
 } from "../../../features/details/detailsSlice";
 import { expensesMockData } from "../../../types/mockData";
+import { SortType } from "../../../types/SortType";
 import { DetailsScreen } from "./Details";
 
 const Mockstore = (props: {
@@ -38,6 +39,7 @@ const Mockstore = (props: {
 const initialState: DetailsState = {
   type: DetailType.EXPENSES,
   chart: ChartType.BAR,
+  sortValue: SortType.DATE_ASC,
 };
 
 export default {

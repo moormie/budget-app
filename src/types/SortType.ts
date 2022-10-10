@@ -1,4 +1,4 @@
-export enum SortTypes {
+export enum SortType {
   CATEGORY = "Category",
   DATE_ASC = "Date Oldest",
   DATE_DESC = "Date Newest",

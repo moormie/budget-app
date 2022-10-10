@@ -12,6 +12,7 @@ interface Props {
   setValue: (value: string) => void;
   options: string[];
   placeholder?: string;
+  style?: React.CSSProperties;
 }
 
 export const Select: FC<Props> = ({
@@ -19,6 +20,7 @@ export const Select: FC<Props> = ({
   setValue,
   options,
   placeholder,
+  style,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -30,7 +32,7 @@ export const Select: FC<Props> = ({
   useOnClickOutside(ref, () => setOpen(false));
 
   return (
-    <StyledSelect.Container>
+    <StyledSelect.Container style={style}>
       <InputField
         ref={ref}
         disabled
