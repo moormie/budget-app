@@ -1,4 +1,4 @@
-import React, { FC, useId } from "react";
+import React, { FC } from "react";
 import { Chart } from "../../../Chart/Chart";
 import { expensesMockData } from "../../../../types/mockData";
 import styled from "styled-components";
@@ -39,7 +39,7 @@ export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
       <Spacing />
       <h3>Summary by Category</h3>
       {expensesByCategories.map((data) => (
-        <React.Fragment key={useId() + data.category}>
+        <React.Fragment key={data.category}>
           <ListCard
             icon={<ItemIcon category={data.category} />}
             mainLabel={data.category}
