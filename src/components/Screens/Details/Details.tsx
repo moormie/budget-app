@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Header } from "../../Header/Header";
 import { IconButton } from "../../IconButton/IconButton";
 import { BarChart as BarChartIcon, CaretLeft, PieChart } from "../../../assets";
@@ -8,6 +8,13 @@ import { NavBar } from "../../NavBar/NavBar";
 import { SimpleExpenses } from "../../../types/Expenses";
 import { Expenses } from "./Expenses";
 import { Incomes } from "./Incomes";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import {
+  ChartType,
+  DetailType,
+  setChart,
+  setType,
+} from "../../../features/details/detailsSlice";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -27,8 +34,16 @@ export const DetailsScreen: FC<Props> = ({
   expensesByCategories,
   onClickBack,
 }) => {
-  const [selectedTab, setSelectedTab] = useState<string>("Expenses");
-  const [isBarChart, setIsBarChart] = useState(true);
+  const { type, chart } = useAppSelector((state) => state.details);
+  const dispatch = useAppDispatch();
+
+  const selectTab = (tab: string) => {
+    dispatch(setType(tab as DetailType));
+  };
+
+  const selectChart = (type: ChartType) => {
+    dispatch(setChart(type));
+  };
 
   return (
     <MainContainer>
@@ -40,13 +55,13 @@ export const DetailsScreen: FC<Props> = ({
           </IconButton>
         }
         endElement={
-          selectedTab === "Expenses" ? (
-            isBarChart ? (
-              <IconButton onClick={() => setIsBarChart(!isBarChart)}>
+          type === DetailType.EXPENSES ? (
+            chart === ChartType.BAR ? (
+              <IconButton onClick={() => selectChart(ChartType.PIE)}>
                 <PieChart />
               </IconButton>
             ) : (
-              <IconButton onClick={() => setIsBarChart(!isBarChart)}>
+              <IconButton onClick={() => selectChart(ChartType.BAR)}>
                 <BarChartIcon />
               </IconButton>
             )
@@ -57,18 +72,18 @@ export const DetailsScreen: FC<Props> = ({
       />
       <Spacing />
       <NavBar
-        elements={["Income", "Expenses"]}
-        selectedElement={selectedTab}
-        onSelectElement={setSelectedTab}
+        elements={Object.values(DetailType)}
+        selectedElement={type}
+        onSelectElement={selectTab}
       />
       <Spacing />
-      {selectedTab === "Expenses" && (
+      {type === DetailType.EXPENSES && (
         <Expenses
-          isBarChart={isBarChart}
+          isBarChart={chart === ChartType.BAR}
           expensesByCategories={expensesByCategories}
         />
       )}
-      {selectedTab === "Income" && <Incomes />}
+      {type === DetailType.INCOME && <Incomes />}
     </MainContainer>
   );
 };
