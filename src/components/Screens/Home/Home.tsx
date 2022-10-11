@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { Header } from "../../Header/Header";
 import { MainCard } from "../../MainCard/MainCard";
@@ -20,7 +20,6 @@ import moment from "moment";
 import { Alert } from "../../Alert/Alert";
 import { Select } from "../../Select/Select";
 import { SortType } from "../../../types/SortType";
-import { getSortedExpensesList } from "../../../helpers/getSortedExpensesList";
 import { setSortValue } from "../../../features/details/detailsSlice";
 
 const MainContainer = styled.div`
@@ -39,7 +38,6 @@ interface Props {
 export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const dispatch = useAppDispatch();
   const { sortValue } = useAppSelector((state) => state.details);
-  const [expenses, setExpenses] = useState(expensesList);
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
 
@@ -58,11 +56,6 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const selectSortValue = (value: string) => {
     dispatch(setSortValue(value as SortType));
   };
-
-  useEffect(() => {
-    const resultList = getSortedExpensesList(expensesList, sortValue);
-    setExpenses(resultList);
-  }, [sortValue, expensesList]);
 
   return (
     <React.Fragment>
@@ -108,7 +101,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
             }
           />
           <Spacing />
-          {expenses.map((data) => (
+          {expensesList.map((data) => (
             <React.Fragment key={data.id}>
               <ListCard
                 icon={<ItemIcon category={data.category} />}
