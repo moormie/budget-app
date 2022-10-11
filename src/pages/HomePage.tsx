@@ -7,7 +7,9 @@ import { Expenses } from "../types/Expenses";
 
 const HomePage: FC = () => {
   const { dataList, status } = useAppSelector((state) => state.expenses);
-  const { sortValue } = useAppSelector((state) => state.details);
+  const { transactionSortValue: sortValue } = useAppSelector(
+    (state) => state.details
+  );
 
   const [sortedExpensesList, setSortedExpensesList] = useState<Expenses[]>([]);
 
@@ -17,7 +19,7 @@ const HomePage: FC = () => {
 
   useEffect(() => {
     const resultList = getSortedExpensesList(dataList, sortValue);
-    setSortedExpensesList(resultList);
+    setSortedExpensesList(resultList as Expenses[]);
   }, [sortValue, dataList]);
 
   return (

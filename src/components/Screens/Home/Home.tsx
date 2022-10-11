@@ -20,7 +20,7 @@ import moment from "moment";
 import { Alert } from "../../Alert/Alert";
 import { Select } from "../../Select/Select";
 import { SortType } from "../../../types/SortType";
-import { setSortValue } from "../../../features/details/detailsSlice";
+import { setTransactionSortValue } from "../../../features/details/detailsSlice";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -37,7 +37,9 @@ interface Props {
 
 export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const dispatch = useAppDispatch();
-  const { sortValue } = useAppSelector((state) => state.details);
+  const { transactionSortValue: sortValue } = useAppSelector(
+    (state) => state.details
+  );
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
 
@@ -54,7 +56,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
   };
 
   const selectSortValue = (value: string) => {
-    dispatch(setSortValue(value as SortType));
+    dispatch(setTransactionSortValue(value as SortType));
   };
 
   return (

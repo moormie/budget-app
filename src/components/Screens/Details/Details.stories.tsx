@@ -39,7 +39,8 @@ const Mockstore = (props: {
 const initialState: DetailsState = {
   type: DetailType.EXPENSES,
   chart: ChartType.BAR,
-  sortValue: SortType.DATE_ASC,
+  transactionSortValue: SortType.DATE_ASC,
+  summarySortValue: SortType.CATEGORY,
 };
 
 export default {

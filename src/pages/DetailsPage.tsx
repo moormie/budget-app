@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
 import { DetailsScreen } from "../components/Screens/Details/Details";
+import { getSortedExpensesList } from "../helpers/getSortedExpensesList";
 import { SimpleExpenses } from "../types/Expenses";
 
 const DetailsPage: FC = () => {
   const { dataList, status } = useAppSelector((state) => state.expenses);
+  const { summarySortValue } = useAppSelector((state) => state.details);
 
   const loading = useMemo(() => {
     return status === "loading";
@@ -30,8 +32,9 @@ const DetailsPage: FC = () => {
         });
       }
     });
-    setExpensesByCategories(resultList);
-  }, [dataList]);
+    const sortedList = getSortedExpensesList(resultList, summarySortValue);
+    setExpensesByCategories(sortedList);
+  }, [dataList, summarySortValue]);
 
   const onClickBack = () => {
     navigate("/");
@@ -40,7 +43,7 @@ const DetailsPage: FC = () => {
     <>
       {loading && <Loading />}
       <DetailsScreen
-        expensesByCategories={loading ? [] : expensesByCategories}
+        expensesByCategories={expensesByCategories}
         onClickBack={onClickBack}
       />
     </>

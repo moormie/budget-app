@@ -1,10 +1,10 @@
-import { Expenses } from "../types/Expenses";
+import { Expenses, SimpleExpenses } from "../types/Expenses";
 import { SortType } from "../types/SortType";
 
 export const getSortedExpensesList = (
-  expensesList: Expenses[],
+  expensesList: Expenses[] | SimpleExpenses[],
   sortValue: string
-) => {
+): Expenses[] | SimpleExpenses[] => {
   switch (sortValue) {
     case SortType.CATEGORY:
       return [...expensesList].sort((a, b) =>
@@ -16,11 +16,11 @@ export const getSortedExpensesList = (
     case SortType.AMOUNT_DESC:
       return [...expensesList].sort((a, b) => b.amount - a.amount);
     case SortType.DATE_ASC:
-      return [...expensesList].sort((a, b) =>
+      return [...(expensesList as Expenses[])].sort((a, b) =>
         a.date.format("X").localeCompare(b.date.format("X"))
       );
     case SortType.DATE_DESC:
-      return [...expensesList].sort((a, b) =>
+      return [...(expensesList as Expenses[])].sort((a, b) =>
         b.date.format("X").localeCompare(a.date.format("X"))
       );
     default:
