@@ -1,6 +1,9 @@
 import { FC, useMemo } from "react";
 import styled, { keyframes } from "styled-components";
-import { getPieChartBackgroundColor } from "../../helpers/getPieChartBackgroundColor";
+import {
+  getPieChartBackgroundColor,
+  PieChartColors,
+} from "../../helpers/getPieChartBackgroundColor";
 import { SimpleExpenses } from "../../types/Expenses";
 
 const spin = keyframes`
@@ -21,11 +24,14 @@ const grow = keyframes`
   }
 `;
 
-const Container = styled.div<{ color: string }>`
+const Container = styled.div<{ colors: PieChartColors[] }>`
   height: 150px;
   width: 150px;
   border-radius: 50%;
-  background: ${(props) => "conic-gradient(" + props.color + ")"};
+  background: ${(props) =>
+    `conic-gradient(${props.colors
+      .map((color) => `${color.color} ${color.start} ${color.end}`)
+      .join(",")})`};
   position: relative;
   animation: ${spin} 2s ease-out;
 `;
@@ -46,9 +52,13 @@ interface Props {
 }
 
 export const PieChart: FC<Props> = ({ dataList }) => {
-  const color = useMemo(() => getPieChartBackgroundColor(dataList), [dataList]);
+  const colors = useMemo(
+    () => getPieChartBackgroundColor(dataList),
+    [dataList]
+  );
+
   return (
-    <Container id="my-pie-chart" color={color}>
+    <Container id="my-pie-chart" colors={colors}>
       <InnerContainer />
     </Container>
   );

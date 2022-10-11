@@ -12,14 +12,14 @@ import {
   Plane,
 } from "../../assets";
 import { ColoredIcon } from "../ColoredIcon/ColoredIcon";
-import getColorOfcategory from "../../helpers/getColorOfCategory";
+import getColorOfCategory from "../../helpers/getColorOfCategory";
 
 interface Props {
   category: Category;
 }
 export const ItemIcon: FC<Props> = ({ category }) => {
   const { gray } = myTheme.colors;
-  const { primary, secondary } = getColorOfcategory(category);
+  const { primary, secondary } = getColorOfCategory(category);
   switch (category) {
     case Category.FOOD:
       return (

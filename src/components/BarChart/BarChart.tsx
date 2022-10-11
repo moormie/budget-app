@@ -1,6 +1,6 @@
 import { FC } from "react";
 import StyledChart from ".";
-import getColorOfcategory from "../../helpers/getColorOfCategory";
+import getColorOfCategory from "../../helpers/getColorOfCategory";
 import { SimpleExpenses } from "../../types/Expenses";
 import { BarLine } from "../ChartBarLine/BarLine";
 
@@ -23,7 +23,7 @@ export const BarChart: FC<Props> = ({ dataList = [] }) => {
       )}
       <StyledChart.BarItems>
         {dataList.map((data, index) => {
-          const { primary } = getColorOfcategory(data.category);
+          const { primary } = getColorOfCategory(data.category);
           return (
             <BarLine
               key={index}

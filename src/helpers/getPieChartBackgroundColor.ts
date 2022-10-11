@@ -1,46 +1,40 @@
 import { SimpleExpenses } from "../types/Expenses";
-import getColorOfcategory from "./getColorOfCategory";
+import { getCategoriesPercentage } from "./getCategoriesAmount";
+import getColorOfCategory from "./getColorOfCategory";
 
-
-const getCategoriesAmount = (dataList: SimpleExpenses[]) => {
-  const categoryList: SimpleExpenses[] = [];
-
-  dataList.forEach((data) => {
-    const exist = categoryList.find((r) => r.category === data.category);
-    if (exist) {
-      exist.amount = exist.amount + data.amount;
-    } else {
-      categoryList.push(data);
-    }
-  });
-
-  return [...categoryList].sort((a, b) => a.amount - b.amount);
-};
+export interface PieChartColors {
+  color: string;
+  start: string;
+  end: string;
+}
 
 /*  format should be fit to conic-gradient
-    #B2BC76 0% 2.67%,
-    #665075 2.67% 3.57%,
-    #C75554 3.57% 7.13%,
-    #D9B35B 7.13% 9.51%,
-    #DF810B 9.51% 19.49%,
-    #778C62 19.49% 27.93%,
-    #71533d 27.93%
+    #B2BC76 0% 5.00%,
+    #665075 5.00% 10.00%,
+    #C75554 10.00% 20.00%,
+    #D9B35B 20.00% 25.00%,
+    #DF810B 25.00% 50.00%,
+    #778C62 50.00% 75.00%,
+    #71533d 75.00%
 */
 export const getPieChartBackgroundColor = (dataList: SimpleExpenses[]) => {
-  const sum = dataList.map((data) => data.amount).reduce((a, b) => a + b, 0);
-  const resultList: string[] = [];
+  const percentageList = getCategoriesPercentage(dataList);
 
-  const sortedList = getCategoriesAmount(dataList);
-  sortedList.forEach((data, index) => {
-    const prevPercentage =
-      index === 0 ? 0 : ((sortedList[index - 1].amount / sum) * 100).toFixed(2);
-    const percentage = ((data.amount / sum) * 100).toFixed(2);
-    const { primary } = getColorOfcategory(data.category);
-    if (index === sortedList.length - 1) {
-      resultList.push(`${primary} ${prevPercentage}%`);
-    } else {
-      resultList.push(`${primary} ${prevPercentage}% ${percentage}%`);
-    }
+  return percentageList.map((data, index) => {
+    const { primary } = getColorOfCategory(data.category);
+
+    const start =
+      index === 0
+        ? 0
+        : percentageList
+            .slice(0, index)
+            .map((e) => e.percentage)
+            .reduce((a, b) => a + b, 0);
+    const end = start + data.percentage;
+    return {
+      color: primary,
+      start: `${start.toFixed(2)}%`,
+      end: `${end.toFixed(2)}%`,
+    } as PieChartColors;
   });
-  return resultList.join(",");
 };

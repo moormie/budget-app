@@ -6,7 +6,7 @@ interface Color {
   secondary?: string;
 }
 
-const getColorOfcategory = (category: Category): Color => {
+const getColorOfCategory = (category: Category): Color => {
   const { gray, green, grape, yellow, yellowGreen, red, brown, orange, dark } =
     myTheme.colors;
   switch (category) {
@@ -14,19 +14,19 @@ const getColorOfcategory = (category: Category): Color => {
       return { primary: green, secondary: dark.green };
     case Category.CAR:
       return { primary: grape, secondary: dark.grape };
-    case "Home":
+    case Category.HOME:
       return { primary: brown, secondary: dark.brown };
-    case "Entertainment":
+    case Category.ENTERTAINMENT:
       return { primary: yellowGreen, secondary: dark.yellowGreen };
-    case "Medical":
+    case Category.MEDICAL:
       return { primary: red, secondary: dark.red };
-    case "Personal":
+    case Category.PERSONAL:
       return { primary: yellow, secondary: dark.yellow };
-    case "Travel":
+    case Category.TRAVEL:
       return { primary: orange, secondary: dark.orange };
     default:
       return { primary: gray };
   }
 };
 
-export default getColorOfcategory;
+export default getColorOfCategory;
