@@ -2,7 +2,12 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  @media (min-width: 600px) {
+    grid-template-columns: 33% 33% 33%;
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: 50% 50%;
+  }
   width: 100%;
   background-color: white;
 `;

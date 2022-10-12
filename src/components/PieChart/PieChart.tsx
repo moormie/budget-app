@@ -1,54 +1,13 @@
 import { FC, useMemo } from "react";
-import styled, { keyframes } from "styled-components";
-import {
-  getPieChartBackgroundColor,
-  PieChartColors,
-} from "../../helpers/getPieChartBackgroundColor";
-import { SimpleExpenses } from "../../types/Expenses";
-
-const spin = keyframes`
-  from {
-    opacity: 0;
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
-
-const grow = keyframes`
-  from {
-    height: 0px;
-    width: 0px;
-    top: 75px;
-    left: 75px
-  }
-`;
-
-const Container = styled.div<{ colors: PieChartColors[] }>`
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  background: ${(props) =>
-    `conic-gradient(${props.colors
-      .map((color) => `${color.color} ${color.start} ${color.end}`)
-      .join(",")})`};
-  position: relative;
-  animation: ${spin} 2s ease-out;
-`;
-
-const InnerContainer = styled.div`
-  position: absolute;
-  background-color: white;
-  height: 110px;
-  width: 110px;
-  top: 20px;
-  left: 20px;
-  border-radius: 50%;
-  animation: ${grow} 2s ease-out;
-`;
+import StyledPieChart from ".";
+import { getCategoriesPercentage } from "../../helpers/getCategoriesAmount";
+import { getPieChartBackgroundColor } from "../../helpers/getPieChartBackgroundColor";
+import { ExpensesPercentage } from "../../types/Expenses";
+import { expensesMockData } from "../../types/mockData";
+import { Legend } from "../Legend/Legend";
 
 interface Props {
-  dataList: SimpleExpenses[];
+  dataList: ExpensesPercentage[];
 }
 
 export const PieChart: FC<Props> = ({ dataList }) => {
@@ -58,8 +17,16 @@ export const PieChart: FC<Props> = ({ dataList }) => {
   );
 
   return (
-    <Container id="my-pie-chart" colors={colors}>
-      <InnerContainer />
-    </Container>
+    <StyledPieChart.Container>
+      <StyledPieChart.Item>
+        <StyledPieChart.Pie colors={colors}>
+          <StyledPieChart.Inner />
+        </StyledPieChart.Pie>
+      </StyledPieChart.Item>
+      <StyledPieChart.Spacing />
+      <StyledPieChart.Item>
+        <Legend dataList={getCategoriesPercentage(expensesMockData)} />
+      </StyledPieChart.Item>
+    </StyledPieChart.Container>
   );
 };
