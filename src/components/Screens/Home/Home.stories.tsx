@@ -6,9 +6,15 @@ import { Provider } from "react-redux";
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Expenses } from "../../../types/Expenses";
 import { ExpensesState } from "../../../features/expenses/expensesSlice";
+import { SortType } from "../../../types/SortType";
+import {
+  ChartType,
+  DetailsState,
+  DetailType,
+} from "../../../features/details/detailsSlice";
 
 const Mockstore = (props: {
-  initialState: ExpensesState;
+  initialState: ExpensesState & DetailsState;
   children: JSX.Element;
 }) => (
   <Provider
@@ -21,6 +27,24 @@ const Mockstore = (props: {
             addNew: (state, action: PayloadAction<Expenses>) => {
               alert(JSON.stringify(action.payload));
             },
+            remove: (state, action: PayloadAction<string>) => {
+              const itemIndex = state.dataList.findIndex(
+                (i) => i.id === action.payload
+              );
+              state.dataList.splice(itemIndex, 1);
+            },
+          },
+        }).reducer,
+        details: createSlice({
+          name: "details",
+          initialState: props.initialState,
+          reducers: {
+            setTransactionSortValue: (
+              state,
+              action: PayloadAction<SortType>
+            ) => {
+              state.transactionSortValue = action.payload;
+            },
           },
         }).reducer,
       },
@@ -30,9 +54,13 @@ const Mockstore = (props: {
   </Provider>
 );
 
-const initialState: ExpensesState = {
+const initialStateExpenses: ExpensesState & DetailsState = {
   dataList: [],
   status: "idle",
+  type: DetailType.EXPENSES,
+  chart: ChartType.BAR,
+  transactionSortValue: SortType.DATE_DESC,
+  summarySortValue: SortType.CATEGORY,
 };
 
 export default {
@@ -44,12 +72,15 @@ export default {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <Mockstore initialState={initialState}>
+        <Mockstore initialState={initialStateExpenses}>
           <Story />
         </Mockstore>
       </MemoryRouter>
     ),
   ],
+  args: {
+    expensesList: expensesMockData,
+  },
 } as ComponentMeta<typeof HomeScreen>;
 
 const Template: ComponentStory<typeof HomeScreen> = (args) => (
@@ -58,6 +89,4 @@ const Template: ComponentStory<typeof HomeScreen> = (args) => (
 
 export const Default = Template.bind({});
 
-Default.args = {
-  expensesList: expensesMockData,
-};
+Default.args = {};

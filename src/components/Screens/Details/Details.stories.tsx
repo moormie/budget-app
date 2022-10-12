@@ -6,6 +6,7 @@ import {
   DetailsState,
   DetailType,
 } from "../../../features/details/detailsSlice";
+import { getCategoriesAmount } from "../../../helpers/getCategoriesAmount";
 import { expensesMockData } from "../../../types/mockData";
 import { SortType } from "../../../types/SortType";
 import { DetailsScreen } from "./Details";
@@ -26,6 +27,9 @@ const Mockstore = (props: {
             },
             setChart: (state, action: PayloadAction<ChartType>) => {
               state.chart = action.payload;
+            },
+            setSummarySortValue: (state, action: PayloadAction<SortType>) => {
+              state.summarySortValue = action.payload;
             },
           },
         }).reducer,
@@ -57,7 +61,7 @@ export default {
     ),
   ],
   args: {
-    expensesByCategories: expensesMockData,
+    expensesByCategories: getCategoriesAmount(expensesMockData),
   },
 } as ComponentMeta<typeof DetailsScreen>;
 
