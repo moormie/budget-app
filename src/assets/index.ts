@@ -20,3 +20,5 @@ export { Plane } from "./PlaneIcon";
 export { Cash } from "./CashIcon";
 export { Close } from "./CloseIcon";
 export { Trash } from "./TrashIcon";
+export { Sliders } from "./SlidersIcon";
+export { ArrowUpDown } from "./ArrowUpDown";
