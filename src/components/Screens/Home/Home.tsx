@@ -123,11 +123,8 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
         <BottomNavBar onClickButton={() => setIsAddNewOpen(true)} />
       </Delayed>
       <Delayed visible={isAddNewOpen}>
-        <SlideUpModal>
-          <AddExpenses
-            onSave={onAddNew}
-            onClose={() => setIsAddNewOpen(false)}
-          />
+        <SlideUpModal onClose={() => setIsAddNewOpen(false)}>
+          <AddExpenses onSave={onAddNew} />
         </SlideUpModal>
       </Delayed>
       <Delayed visible={selectedExpense !== undefined}>

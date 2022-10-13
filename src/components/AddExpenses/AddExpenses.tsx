@@ -15,11 +15,9 @@ import { Select } from "../Select/Select";
 
 interface Props {
   onSave: (newExpense: Expenses) => void;
-  onClose: (isOpen: boolean) => void;
-  visible?: boolean;
 }
 
-export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
+export const AddExpenses: FC<Props> = ({ onSave }) => {
   const [amount, setAmount] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [note, setNote] = useState("");
@@ -40,13 +38,6 @@ export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
 
   return (
     <>
-      <Header
-        endElement={
-          <IconButton onClick={() => onClose(false)}>
-            <Close />
-          </IconButton>
-        }
-      />
       <StyledModal.Title>
         <h3>Add Expenses</h3>
       </StyledModal.Title>
