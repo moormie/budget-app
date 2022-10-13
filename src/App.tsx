@@ -5,6 +5,7 @@ import DetailsPage from "./pages/DetailsPage";
 import { useAppDispatch } from "./app/hooks";
 import { getExpensesData } from "./features/expenses/expensesSlice";
 import { useEffect } from "react";
+import ExpensesPage from "./pages/ExpensesPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/details" element={<DetailsPage />} />
+        <Route path="/expenses" element={<ExpensesPage />} />
       </Routes>
     </BrowserRouter>
   );
