@@ -15,16 +15,21 @@ export const SortExpenses: FC<Props> = ({ onSubmit }) => {
     <div>
       <StyledModal.Title>
         <h3>Sort Expenses</h3>
-        <Select
-          value={sortValue}
-          setValue={setSortValue}
-          options={Object.values(SortType)}
-          placeholder="Sort by"
-        />
-        <StyledModal.Spacing />
-        <StyledModal.Spacing />
-        <Button label="Save" onClick={onSubmit} />
       </StyledModal.Title>
+      <Select
+        value={sortValue}
+        setValue={setSortValue}
+        options={Object.values(SortType)}
+        placeholder="Sort by"
+      />
+      <StyledModal.Spacing />
+      <StyledModal.Spacing />
+      <Button
+        variant="success"
+        disabled={!sortValue}
+        label="Save"
+        onClick={onSubmit}
+      />
     </div>
   );
 };

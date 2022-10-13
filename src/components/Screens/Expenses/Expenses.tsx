@@ -1,12 +1,15 @@
 import moment from "moment";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import StyledExpenses from ".";
 import { ArrowUpDown, CaretLeft, Sliders } from "../../../assets";
 import { Expenses } from "../../../types/Expenses";
+import { Delayed } from "../../Delayed/Delayed";
 import { Header } from "../../Header/Header";
 import { IconButton } from "../../IconButton/IconButton";
 import { ItemIcon } from "../../ItemIcon";
 import { ListCard } from "../../ListCard/ListCard";
+import { SlideUpModal } from "../../SlideUpModal/SlideUpModal";
+import { SortExpenses } from "../../SortExpenses/SortExpenses";
 
 interface Props {
   dataList: Expenses[];
@@ -14,40 +17,48 @@ interface Props {
 }
 
 export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
-  return (
-    <StyledExpenses.Container>
-      <Header
-        title="All Expenses"
-        startElement={
-          <IconButton onClick={onClickBack}>
-            <CaretLeft />
-          </IconButton>
-        }
-        endElement={
-          <>
-            <IconButton onClick={() => {}}>
-              <ArrowUpDown />
-            </IconButton>
-            <IconButton onClick={() => {}}>
-              <Sliders />
-            </IconButton>
-          </>
-        }
-      />
-      <StyledExpenses.Spacing />
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
-      {dataList.map((data) => (
-        <React.Fragment key={data.id}>
-          <ListCard
-            icon={<ItemIcon category={data.category} />}
-            mainLabel={data.category}
-            sublabel={data.note}
-            endLabel={`€ ${data.amount}`}
-            endSublabel={moment(data.date).format("DD/MM/YYYY")}
-          />
-          <StyledExpenses.Spacing />
-        </React.Fragment>
-      ))}
-    </StyledExpenses.Container>
+  return (
+    <>
+      <StyledExpenses.Container>
+        <Header
+          title="All Expenses"
+          startElement={
+            <IconButton onClick={onClickBack}>
+              <CaretLeft />
+            </IconButton>
+          }
+          endElement={
+            <>
+              <IconButton onClick={() => setIsSortOpen(true)}>
+                <ArrowUpDown />
+              </IconButton>
+              <IconButton onClick={() => {}}>
+                <Sliders />
+              </IconButton>
+            </>
+          }
+        />
+        <StyledExpenses.Spacing />
+        {dataList.map((data) => (
+          <React.Fragment key={data.id}>
+            <ListCard
+              icon={<ItemIcon category={data.category} />}
+              mainLabel={data.category}
+              sublabel={data.note}
+              endLabel={`€ ${data.amount}`}
+              endSublabel={moment(data.date).format("DD/MM/YYYY")}
+            />
+            <StyledExpenses.Spacing />
+          </React.Fragment>
+        ))}
+      </StyledExpenses.Container>
+      <Delayed visible={isSortOpen}>
+        <SlideUpModal onClose={() => setIsSortOpen(false)}>
+          <SortExpenses onSubmit={() => {}} />
+        </SlideUpModal>
+      </Delayed>
+    </>
   );
 };
