@@ -11,7 +11,7 @@ import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
 import { IconButton } from "../../IconButton/IconButton";
 import { Settings } from "../../../assets";
 import fox from "../../../fox.png";
-import { AddExpenses } from "../../AddExpensesModal/AddExpenses";
+import { AddExpenses } from "../../AddExpenses/AddExpenses";
 import { Delayed } from "../../Delayed";
 import { Expenses } from "../../../types/Expenses";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
@@ -21,6 +21,7 @@ import { Alert } from "../../Alert/Alert";
 import { Select } from "../../Select/Select";
 import { SortType } from "../../../types/SortType";
 import { setTransactionSortValue } from "../../../features/details/detailsSlice";
+import { SlideUpModal } from "../../SlideUpModal/SlideUpModal";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -91,7 +92,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
           />
           <Spacing />
           <Header
-            title="Transactions"
+            title={`Transactions ${moment().format("MMMM")}`}
             endElement={
               <Select
                 style={{ width: 190 }}
@@ -122,7 +123,12 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
         <BottomNavBar onClickButton={() => setIsAddNewOpen(true)} />
       </Delayed>
       <Delayed visible={isAddNewOpen}>
-        <AddExpenses onSave={onAddNew} onClose={() => setIsAddNewOpen(false)} />
+        <SlideUpModal>
+          <AddExpenses
+            onSave={onAddNew}
+            onClose={() => setIsAddNewOpen(false)}
+          />
+        </SlideUpModal>
       </Delayed>
       <Delayed visible={selectedExpense !== undefined}>
         <Alert

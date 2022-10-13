@@ -7,9 +7,6 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-  args: {
-    visible: true,
-  },
 } as ComponentMeta<typeof AddExpenses>;
 
 const Template: ComponentStory<typeof AddExpenses> = (args) => (

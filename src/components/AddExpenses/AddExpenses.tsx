@@ -28,7 +28,6 @@ export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
   const onSubmit = () => {
     if (!!amount && category && date) {
       const newExpense: Expenses = {
-        // TODO
         id: uuidv4(),
         amount: Number(amount),
         category: category as Category,
@@ -40,7 +39,7 @@ export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
   };
 
   return (
-    <StyledModal.MainContainer open={visible}>
+    <>
       <Header
         endElement={
           <IconButton onClick={() => onClose(false)}>
@@ -77,6 +76,6 @@ export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
           disabled={!amount || !category || !date}
         />
       </StyledModal.ButtonContainer>
-    </StyledModal.MainContainer>
+    </>
   );
 };
