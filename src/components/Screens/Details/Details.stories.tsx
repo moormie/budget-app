@@ -1,51 +1,9 @@
-import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Provider } from "react-redux";
-import {
-  ChartType,
-  DetailsState,
-  DetailType,
-} from "../../../features/details/detailsSlice";
+import { mockInitialState, Mockstore } from "../../../features/MockStore/MockStore";
 import { getCategoriesAmount } from "../../../helpers/getCategoriesAmount";
 import { expensesMockData } from "../../../types/mockData";
-import { SortType } from "../../../types/SortType";
 import { DetailsScreen } from "./Details";
 
-const Mockstore = (props: {
-  initialState: DetailsState;
-  children: JSX.Element;
-}) => (
-  <Provider
-    store={configureStore({
-      reducer: {
-        details: createSlice({
-          name: "details",
-          initialState: props.initialState,
-          reducers: {
-            setType: (state, action: PayloadAction<DetailType>) => {
-              state.type = action.payload;
-            },
-            setChart: (state, action: PayloadAction<ChartType>) => {
-              state.chart = action.payload;
-            },
-            setSummarySortValue: (state, action: PayloadAction<SortType>) => {
-              state.summarySortValue = action.payload;
-            },
-          },
-        }).reducer,
-      },
-    })}
-  >
-    {props.children}
-  </Provider>
-);
-
-const initialState: DetailsState = {
-  type: DetailType.EXPENSES,
-  chart: ChartType.BAR,
-  transactionSortValue: SortType.DATE_ASC,
-  summarySortValue: SortType.CATEGORY,
-};
 
 export default {
   title: "Screens/Details",
@@ -55,7 +13,7 @@ export default {
   },
   decorators: [
     (Story) => (
-      <Mockstore initialState={initialState}>
+      <Mockstore initialState={mockInitialState}>
         <Story />
       </Mockstore>
     ),
