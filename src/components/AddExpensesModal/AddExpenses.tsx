@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import StyledModal from ".";
 import moment from "moment";
+import { v4 as uuidv4 } from "uuid";
 import { Moment } from "moment";
 import { Close } from "../../assets";
 import { Category } from "../../types/Category";
@@ -28,7 +29,7 @@ export const AddExpenses: FC<Props> = ({ onSave, visible = true, onClose }) => {
     if (!!amount && category && date) {
       const newExpense: Expenses = {
         // TODO
-        id: "001001122",
+        id: uuidv4(),
         amount: Number(amount),
         category: category as Category,
         note,
