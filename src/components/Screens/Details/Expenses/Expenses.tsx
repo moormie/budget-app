@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { Chart } from "../../../Chart/Chart";
-import { expensesMockData } from "../../../../types/mockData";
 import styled from "styled-components";
 import { ListCard } from "../../../ListCard/ListCard";
 import { ItemIcon } from "../../../ItemIcon";
@@ -38,7 +37,7 @@ export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
         align="center"
       >
         <AmountHeader
-          amount={expensesMockData
+          amount={expensesByCategories
             .map((data) => data.amount)
             .reduce((a, b) => a + b, 0)
             .toFixed(2)}

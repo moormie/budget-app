@@ -25,7 +25,7 @@ export const PieChart: FC<Props> = ({ dataList }) => {
       </StyledPieChart.Item>
       <StyledPieChart.Spacing />
       <StyledPieChart.Item>
-        <Legend dataList={getCategoriesPercentage(expensesMockData)} />
+        <Legend dataList={dataList} />
       </StyledPieChart.Item>
     </StyledPieChart.Container>
   );
