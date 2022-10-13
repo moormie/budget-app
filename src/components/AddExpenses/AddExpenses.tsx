@@ -3,13 +3,10 @@ import StyledModal from ".";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 import { Moment } from "moment";
-import { Close } from "../../assets";
 import { Category } from "../../types/Category";
 import { Expenses } from "../../types/Expenses";
 import { Button } from "../Button/Button";
 import { DatePicker } from "../DatePicker/DatePicker";
-import { Header } from "../Header/Header";
-import { IconButton } from "../IconButton/IconButton";
 import { InputField } from "../InputField/InputField";
 import { Select } from "../Select/Select";
 
