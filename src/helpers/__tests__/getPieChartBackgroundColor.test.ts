@@ -1,23 +1,20 @@
 import { Category } from "../../types/Category";
 import { getPieChartBackgroundColor } from "../getPieChartBackgroundColor";
 import { myTheme } from "../../theme";
+import { ExpensesPercentage } from "../../types/Expenses";
 
-const dataList = [
+const dataList: ExpensesPercentage[] = [
   {
     category: Category.FOOD,
-    amount: 15,
+    percentage: 15,
   },
   {
     category: Category.CAR,
-    amount: 20,
+    percentage: 20,
   },
   {
     category: Category.TRAVEL,
-    amount: 45,
-  },
-  {
-    category: Category.CAR,
-    amount: 20,
+    percentage: 65,
   },
 ];
 
@@ -30,11 +27,11 @@ const resultList = [
   {
     color: myTheme.colors.grape,
     start: "15.00%",
-    end: "55.00%",
+    end: "35.00%",
   },
   {
     color: myTheme.colors.orange,
-    start: "55.00%",
+    start: "35.00%",
     end: "100.00%",
   },
 ];
