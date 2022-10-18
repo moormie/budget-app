@@ -3,14 +3,10 @@ import { FC, useEffect, useState, useMemo } from "react";
 import { useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
 import { HomeScreen } from "../components/Screens/Home/Home";
-import { getSortedExpensesList } from "../helpers/getSortedExpensesList";
 import { Expenses } from "../types/Expenses";
 
 const HomePage: FC = () => {
   const { dataList, status } = useAppSelector((state) => state.expenses);
-  const { transactionSortValue: sortValue } = useAppSelector(
-    (state) => state.details
-  );
 
   const [sortedExpensesList, setSortedExpensesList] = useState<Expenses[]>([]);
 
@@ -23,9 +19,8 @@ const HomePage: FC = () => {
       (e) =>
         e.date.month() === moment().month() && e.date.year() === moment().year()
     );
-    const resultList = getSortedExpensesList(actualMonth, sortValue);
-    setSortedExpensesList(resultList as Expenses[]);
-  }, [sortValue, dataList]);
+    setSortedExpensesList(actualMonth as Expenses[]);
+  }, [dataList]);
 
   return (
     <>

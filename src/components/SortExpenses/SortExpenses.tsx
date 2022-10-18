@@ -5,11 +5,17 @@ import { Button } from "../Button/Button";
 import { Select } from "../Select/Select";
 
 interface Props {
-  onSubmit: () => void;
+  value?: string;
+  onSubmit: (value: string) => void;
+  onReset: () => void;
 }
 
-export const SortExpenses: FC<Props> = ({ onSubmit }) => {
-  const [sortValue, setSortValue] = useState<string>("");
+export const SortExpenses: FC<Props> = ({ value, onSubmit, onReset }) => {
+  const [selectedValue, setSelectedValue] = useState(value);
+
+  const saveValue = () => {
+    selectedValue && onSubmit(selectedValue);
+  };
 
   return (
     <div>
@@ -17,19 +23,22 @@ export const SortExpenses: FC<Props> = ({ onSubmit }) => {
         <h3>Sort Expenses</h3>
       </StyledModal.Title>
       <Select
-        value={sortValue}
-        setValue={setSortValue}
+        value={selectedValue ?? ""}
+        setValue={setSelectedValue}
         options={Object.values(SortType)}
         placeholder="Sort by"
       />
       <StyledModal.Spacing />
       <StyledModal.Spacing />
-      <Button
-        variant="success"
-        disabled={!sortValue}
-        label="Save"
-        onClick={onSubmit}
-      />
+      <StyledModal.ButtonContainer>
+        <Button label="Reset" onClick={onReset} />
+        <Button
+          variant="success"
+          disabled={!selectedValue}
+          label="Save"
+          onClick={saveValue}
+        />
+      </StyledModal.ButtonContainer>
     </div>
   );
 };

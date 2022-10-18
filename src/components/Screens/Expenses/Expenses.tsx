@@ -1,8 +1,11 @@
 import moment from "moment";
 import React, { FC, useState } from "react";
 import StyledExpenses from ".";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { ArrowUpDown, CaretLeft, Sliders } from "../../../assets";
+import { setTransactionSortValue } from "../../../features/details/detailsSlice";
 import { Expenses } from "../../../types/Expenses";
+import { SortType } from "../../../types/SortType";
 import { Delayed } from "../../Delayed/Delayed";
 import { Header } from "../../Header/Header";
 import { IconButton } from "../../IconButton/IconButton";
@@ -18,6 +21,18 @@ interface Props {
 
 export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const { transactionSortValue } = useAppSelector((state) => state.details);
+
+  const onSubmit = (value: string) => {
+    dispatch(setTransactionSortValue(value as SortType));
+    setIsSortOpen(false);
+  };
+
+  const onReset = () => {
+    dispatch(setTransactionSortValue(undefined));
+    setIsSortOpen(false);
+  };
 
   return (
     <>
@@ -58,7 +73,11 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
       </StyledExpenses.Container>
       <Delayed visible={isSortOpen}>
         <SlideUpModal onClose={() => setIsSortOpen(false)}>
-          <SortExpenses onSubmit={() => {}} />
+          <SortExpenses
+            value={transactionSortValue}
+            onSubmit={onSubmit}
+            onReset={onReset}
+          />
         </SlideUpModal>
       </Delayed>
     </>

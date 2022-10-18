@@ -51,7 +51,7 @@ export const Mockstore = (props: {
             },
             setTransactionSortValue: (
               state,
-              action: PayloadAction<SortType>
+              action: PayloadAction<SortType | undefined>
             ) => {
               state.transactionSortValue = action.payload;
             },

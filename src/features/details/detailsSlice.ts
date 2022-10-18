@@ -13,14 +13,13 @@ export enum ChartType {
 export interface DetailsState {
   type: DetailType;
   chart: ChartType;
-  transactionSortValue: SortType;
+  transactionSortValue?: SortType;
   summarySortValue: SortType;
 }
 
 const initialState: DetailsState = {
   type: DetailType.EXPENSES,
   chart: ChartType.BAR,
-  transactionSortValue: SortType.DATE_DESC,
   summarySortValue: SortType.CATEGORY,
 };
 
@@ -34,7 +33,10 @@ const detailsSlice = createSlice({
     setChart: (state, action: PayloadAction<ChartType>) => {
       state.chart = action.payload;
     },
-    setTransactionSortValue: (state, action: PayloadAction<SortType>) => {
+    setTransactionSortValue: (
+      state,
+      action: PayloadAction<SortType | undefined>
+    ) => {
       state.transactionSortValue = action.payload;
     },
     setSummarySortValue: (state, action: PayloadAction<SortType>) => {

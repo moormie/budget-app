@@ -14,13 +14,10 @@ import fox from "../../../fox.png";
 import { AddExpenses } from "../../AddExpenses/AddExpenses";
 import { Delayed } from "../../Delayed";
 import { Expenses } from "../../../types/Expenses";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useAppDispatch } from "../../../app/hooks";
 import { addNew, remove } from "../../../features/expenses/expensesSlice";
 import moment from "moment";
 import { Alert } from "../../Alert/Alert";
-import { Select } from "../../Select/Select";
-import { SortType } from "../../../types/SortType";
-import { setTransactionSortValue } from "../../../features/details/detailsSlice";
 import { SlideUpModal } from "../../SlideUpModal/SlideUpModal";
 
 const MainContainer = styled.div`
@@ -38,9 +35,7 @@ interface Props {
 
 export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const dispatch = useAppDispatch();
-  const { transactionSortValue: sortValue } = useAppSelector(
-    (state) => state.details
-  );
+
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
 
@@ -54,10 +49,6 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
       dispatch(remove(selectedExpense.id));
       setSelectedExpense(undefined);
     }
-  };
-
-  const selectSortValue = (value: string) => {
-    dispatch(setTransactionSortValue(value as SortType));
   };
 
   return (
@@ -90,18 +81,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
             .reduce((a, b) => a + b, 0)}
         />
         <Spacing />
-        <Header
-          title={`Transactions ${moment().format("MMMM")}`}
-          endElement={
-            <Select
-              style={{ width: 190 }}
-              value={sortValue}
-              setValue={selectSortValue}
-              options={Object.values(SortType)}
-              placeholder="Sort by"
-            />
-          }
-        />
+        <Header title={`Transactions In ${moment().format("MMMM")} 🍂`} />
         <Spacing />
         {expensesList.map((data) => (
           <React.Fragment key={data.id}>

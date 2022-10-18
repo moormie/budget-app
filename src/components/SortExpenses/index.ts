@@ -10,7 +10,11 @@ const Spacing = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  padding: 48px 0;
+  display: flex;
+  justify-content: space-between;
+  > * {
+    margin: 8px;
+  }
 `;
 
 const StyledModal = {
