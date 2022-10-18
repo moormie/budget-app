@@ -6,9 +6,6 @@ import { BottomNavBar } from "./BottomNavBar";
 export default {
   title: "Components/BottomNavBar",
   component: BottomNavBar,
-  parameters: {
-    layout: "fullscreen",
-  },
   decorators: [
     (Story) => (
       <MemoryRouter>

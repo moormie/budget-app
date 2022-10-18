@@ -8,9 +8,6 @@ import { DetailsScreen } from "./Details";
 export default {
   title: "Screens/Details",
   component: DetailsScreen,
-  parameters: {
-    layout: "fullscreen",
-  },
   decorators: [
     (Story) => (
       <Mockstore initialState={mockInitialState}>

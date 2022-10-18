@@ -7,9 +7,6 @@ import { mockInitialState, Mockstore } from "../../../features/MockStore/MockSto
 export default {
   title: "Screens/Home",
   component: HomeScreen,
-  parameters: {
-    layout: "fullscreen",
-  },
   decorators: [
     (Story) => (
       <MemoryRouter>

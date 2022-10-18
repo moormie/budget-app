@@ -7,6 +7,11 @@ import { InputField } from "./InputField";
 export default {
   title: "Components/InputField",
   component: InputField,
+  parameters: {
+    backgrounds: {
+      default: "light",
+    },
+  },
 } as ComponentMeta<typeof InputField>;
 
 const Template: ComponentStory<typeof InputField> = (args) => (

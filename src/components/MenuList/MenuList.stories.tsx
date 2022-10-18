@@ -4,9 +4,6 @@ import { MenuList } from "./MenuList";
 export default {
   title: "Components/MenuList",
   component: MenuList,
-  parameters: {
-    layout: "fullscreen",
-  },
   args: {
     visible: true
   }

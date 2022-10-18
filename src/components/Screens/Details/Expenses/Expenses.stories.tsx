@@ -34,9 +34,6 @@ const dataList = [
 export default {
   title: "Components/Expenses",
   component: Expenses,
-  parameters: {
-    layout: "fullscreen",
-  },
   args: {
     expensesByCategories: dataList,
     isBarChart: true,

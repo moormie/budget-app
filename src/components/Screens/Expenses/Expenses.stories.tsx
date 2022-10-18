@@ -5,9 +5,6 @@ import { ExpensesList } from "./Expenses";
 export default {
   title: "Screens/ExpensesList",
   component: ExpensesList,
-  parameters: {
-    layout: "fullscreen",
-  },
   args: {
     visible: true,
   },

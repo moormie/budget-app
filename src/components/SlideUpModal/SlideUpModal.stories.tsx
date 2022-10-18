@@ -4,9 +4,6 @@ import { SlideUpModal } from "./SlideUpModal";
 export default {
   title: "Components/SlideUpModal",
   component: SlideUpModal,
-  parameters: {
-    layout: "fullscreen",
-  },
   args: {
     visible: true,
   },

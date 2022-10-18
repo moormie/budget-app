@@ -1,5 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import { myTheme } from "../src/theme";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 export const decorators = [
   (Story) => (
@@ -15,6 +16,14 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+  },
+  layout: "fullscreen",
+  backgrounds: {
+    default: "light",
+  },
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
+    defaultViewport: "iphonexr",
   },
 };
 

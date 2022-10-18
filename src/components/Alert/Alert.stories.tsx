@@ -6,9 +6,6 @@ import { useArgs } from "@storybook/client-api";
 export default {
   title: "Components/Alert",
   component: Alert,
-  parameters: {
-    layout: "fullscreen",
-  },
   args: {
     visible: false,
   },
