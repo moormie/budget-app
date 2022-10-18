@@ -17,7 +17,7 @@ const InputField = styled.input`
   background-color: white;
   outline: none;
   &:focus-visible {
-    background-color: ${(props) => props.theme.colors.white};
+    background-color: white;
   }
   &::-webkit-calendar-picker-indicator {
     display: none;

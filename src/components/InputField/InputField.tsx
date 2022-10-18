@@ -1,13 +1,10 @@
-import { forwardRef } from "react";
+import { forwardRef, InputHTMLAttributes } from "react";
 import StyledInputField from ".";
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   value?: string;
   setValue?: (value: string) => void;
-  type?: "text" | "date" | "number";
   endAdornment?: React.ReactNode;
-  placeholder?: string;
-  disabled?: boolean;
   onClick?: () => void;
 }
 
@@ -29,7 +26,11 @@ export const InputField = forwardRef<HTMLInputElement, Props>(
     };
 
     return (
-      <StyledInputField.Container onClick={onClick} ref={ref}>
+      <StyledInputField.Container
+        onClick={onClick}
+        ref={ref}
+        data-testid="input-field"
+      >
         <StyledInputField.InputField
           type={type}
           placeholder={placeholder}
