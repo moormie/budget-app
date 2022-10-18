@@ -24,7 +24,7 @@ const slideout = keyframes`
     top: 100vh;
   }`;
 
-const MainContainer = styled.div<{ open: boolean }>`
+const MainContainer = styled.div<{ open?: boolean }>`
   background-color: ${(props) => props.theme.colors.lightGray};
   padding: 24px;
   position: absolute;
@@ -35,7 +35,7 @@ const MainContainer = styled.div<{ open: boolean }>`
   border-radius: 24px 24px 0 0;
   box-sizing: border-box;
   box-shadow: rgba(17, 17, 17, 0.3) 0px 0px 20px 5px;
-  animation: ${(props) => (props.open ? slidein : slideout)} 0.3s ease-in-out;
+  animation: ${(props) => (props.open ? slidein : slideout)} 0.4s ease-in-out;
 `;
 
 const StyledModal = {

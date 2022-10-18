@@ -62,50 +62,50 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
 
   return (
     <React.Fragment>
-      <Delayed visible={!isAddNewOpen}>
-        <MainContainer>
-          <Header
-            title="John Doe"
-            subtitle="Welcome"
-            startElement={
-              <ColoredIcon
-                colorPrimary={myTheme.colors.grape}
-                colorSecondary={myTheme.colors.grape}
-              >
-                <img src={fox} alt="" style={{ width: 36, height: 36 }} />
-              </ColoredIcon>
-            }
-            endElement={
-              <IconButton onClick={() => {}}>
-                <Settings />
-              </IconButton>
-            }
-          />
-          <Spacing />
-          <MainCard
-            totalIncome={incomesMockData
-              .map((data) => data.amount)
-              .reduce((a, b) => a + b, 0)}
-            totalExpenses={expensesList
-              .map((data) => data.amount)
-              .reduce((a, b) => a + b, 0)}
-          />
-          <Spacing />
-          <Header
-            title={`Transactions ${moment().format("MMMM")}`}
-            endElement={
-              <Select
-                style={{ width: 190 }}
-                value={sortValue}
-                setValue={selectSortValue}
-                options={Object.values(SortType)}
-                placeholder="Sort by"
-              />
-            }
-          />
-          <Spacing />
-          {expensesList.map((data) => (
-            <React.Fragment key={data.id}>
+      <MainContainer>
+        <Header
+          title="John Doe"
+          subtitle="Welcome"
+          startElement={
+            <ColoredIcon
+              colorPrimary={myTheme.colors.grape}
+              colorSecondary={myTheme.colors.grape}
+            >
+              <img src={fox} alt="" style={{ width: 36, height: 36 }} />
+            </ColoredIcon>
+          }
+          endElement={
+            <IconButton onClick={() => {}}>
+              <Settings />
+            </IconButton>
+          }
+        />
+        <Spacing />
+        <MainCard
+          totalIncome={incomesMockData
+            .map((data) => data.amount)
+            .reduce((a, b) => a + b, 0)}
+          totalExpenses={expensesList
+            .map((data) => data.amount)
+            .reduce((a, b) => a + b, 0)}
+        />
+        <Spacing />
+        <Header
+          title={`Transactions ${moment().format("MMMM")}`}
+          endElement={
+            <Select
+              style={{ width: 190 }}
+              value={sortValue}
+              setValue={selectSortValue}
+              options={Object.values(SortType)}
+              placeholder="Sort by"
+            />
+          }
+        />
+        <Spacing />
+        {expensesList.map((data) => (
+          <React.Fragment key={data.id}>
+            <Delayed visible={!isAddNewOpen}>
               <ListCard
                 icon={<ItemIcon category={data.category} />}
                 mainLabel={data.category}
@@ -114,11 +114,11 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
                 endSublabel={moment(data.date).format("DD/MM/YYYY")}
                 onClickDelete={() => setSelectedExpense(data)}
               />
-              <Spacing />
-            </React.Fragment>
-          ))}
-        </MainContainer>
-      </Delayed>
+            </Delayed>
+            <Spacing />
+          </React.Fragment>
+        ))}
+      </MainContainer>
       <Delayed visible={!isAddNewOpen}>
         <BottomNavBar onClickButton={() => setIsAddNewOpen(true)} />
       </Delayed>

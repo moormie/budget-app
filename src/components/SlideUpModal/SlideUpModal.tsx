@@ -12,7 +12,7 @@ interface Props {
 
 export const SlideUpModal: FC<Props> = ({ visible, onClose, children }) => {
   return (
-    <StyledModal.MainContainer open={visible ?? true}>
+    <StyledModal.MainContainer open={visible}>
       <Header
         endElement={
           <IconButton onClick={onClose}>

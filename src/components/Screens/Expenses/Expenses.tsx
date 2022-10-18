@@ -43,13 +43,15 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
         <StyledExpenses.Spacing />
         {dataList.map((data) => (
           <React.Fragment key={data.id}>
-            <ListCard
-              icon={<ItemIcon category={data.category} />}
-              mainLabel={data.category}
-              sublabel={data.note}
-              endLabel={`€ ${data.amount}`}
-              endSublabel={moment(data.date).format("DD/MM/YYYY")}
-            />
+            <Delayed visible={!isSortOpen}>
+              <ListCard
+                icon={<ItemIcon category={data.category} />}
+                mainLabel={data.category}
+                sublabel={data.note}
+                endLabel={`€ ${data.amount}`}
+                endSublabel={moment(data.date).format("DD/MM/YYYY")}
+              />
+            </Delayed>
             <StyledExpenses.Spacing />
           </React.Fragment>
         ))}
