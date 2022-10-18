@@ -1,3 +1,4 @@
+import moment from "moment";
 import { FC, useEffect, useState, useMemo } from "react";
 import { useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
@@ -18,7 +19,11 @@ const HomePage: FC = () => {
   }, [status]);
 
   useEffect(() => {
-    const resultList = getSortedExpensesList(dataList, sortValue);
+    const actualMonth = dataList.filter(
+      (e) =>
+        e.date.month() === moment().month() && e.date.year() === moment().year()
+    );
+    const resultList = getSortedExpensesList(actualMonth, sortValue);
     setSortedExpensesList(resultList as Expenses[]);
   }, [sortValue, dataList]);
 

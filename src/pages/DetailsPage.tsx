@@ -1,3 +1,4 @@
+import moment from "moment";
 import { FC, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
@@ -8,6 +9,7 @@ import { getSortedExpensesList } from "../helpers/getSortedExpensesList";
 import { SimpleExpenses } from "../types/Expenses";
 
 const DetailsPage: FC = () => {
+  const navigate = useNavigate();
   const { dataList, status } = useAppSelector((state) => state.expenses);
   const { summarySortValue } = useAppSelector((state) => state.details);
 
@@ -18,10 +20,13 @@ const DetailsPage: FC = () => {
   const [expensesByCategories, setExpensesByCategories] = useState<
     SimpleExpenses[]
   >([]);
-  let navigate = useNavigate();
 
   useEffect(() => {
-    const resultList = getCategoriesAmount(dataList);
+    const actualMonth = dataList.filter(
+      (e) =>
+        e.date.month() === moment().month() && e.date.year() === moment().year()
+    );
+    const resultList = getCategoriesAmount(actualMonth);
     const sortedList = getSortedExpensesList(resultList, summarySortValue);
     setExpensesByCategories(sortedList);
   }, [dataList, summarySortValue]);
