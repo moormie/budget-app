@@ -3,6 +3,7 @@ import { FC, useEffect, useState, useMemo } from "react";
 import { useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
 import { HomeScreen } from "../components/Screens/Home/Home";
+import { getSortedExpensesList } from "../helpers/getSortedExpensesList";
 import { Expenses } from "../types/Expenses";
 
 const HomePage: FC = () => {
@@ -19,7 +20,7 @@ const HomePage: FC = () => {
       (e) =>
         e.date.month() === moment().month() && e.date.year() === moment().year()
     );
-    setSortedExpensesList(actualMonth as Expenses[]);
+    setSortedExpensesList(getSortedExpensesList(actualMonth) as Expenses[]);
   }, [dataList]);
 
   return (

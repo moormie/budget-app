@@ -3,7 +3,7 @@ import { SortType } from "../types/SortType";
 
 export const getSortedExpensesList = (
   expensesList: Expenses[] | SimpleExpenses[],
-  sortValue: string
+  sortValue?: string
 ): Expenses[] | SimpleExpenses[] => {
   switch (sortValue) {
     case SortType.CATEGORY:
@@ -24,6 +24,8 @@ export const getSortedExpensesList = (
         b.date.format("X").localeCompare(a.date.format("X"))
       );
     default:
-      return expensesList;
+      return [...(expensesList as Expenses[])].sort((a, b) =>
+        b.date.format("X").localeCompare(a.date.format("X"))
+      );
   }
 };
