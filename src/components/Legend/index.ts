@@ -3,10 +3,10 @@ import styled from "styled-components";
 const Container = styled.div`
   display: grid;
   @media (min-width: 600px) {
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 1fr 1fr 1fr;
   }
   @media (max-width: 600px) {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
   }
   width: 100%;
   background-color: white;

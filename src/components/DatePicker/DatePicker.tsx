@@ -12,9 +12,10 @@ import { myTheme } from "../../theme";
 interface Props {
   value: Moment | null;
   setValue: (value: Moment | null) => void;
+  placeholder?: string;
 }
 
-export const DatePicker: FC<Props> = ({ value, setValue }) => {
+export const DatePicker: FC<Props> = ({ value, setValue, placeholder }) => {
   const [open, setOpen] = useState(false);
 
   const onChangeDate = (date: Moment) => {
@@ -28,12 +29,8 @@ export const DatePicker: FC<Props> = ({ value, setValue }) => {
   return (
     <StyledDatePicker.Container ref={ref}>
       <InputField
-        placeholder="DD/MM/YYYY"
-        value={
-          value
-            ? moment(value).format("DD/MM/YYYY")
-            : moment().format("DD/MM/YYYY")
-        }
+        placeholder={placeholder ?? "DD/MM/YYYY"}
+        value={value ? moment(value).format("DD/MM/YYYY") : ""}
         disabled
         endAdornment={
           <CalendarIcon
