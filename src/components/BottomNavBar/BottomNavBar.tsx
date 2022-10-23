@@ -14,7 +14,7 @@ export const BottomNavBar: FC<Props> = ({ onClickButton }) => {
     <StyledNavBar.MainContainer>
       <StyledNavBar.IconContainer>
         <Link to="details">
-          <BarChart color={myTheme.colors.dark.grape} />
+          <BarChart color={myTheme.colors.dark.grape} width="24" height="24" />
         </Link>
       </StyledNavBar.IconContainer>
       <StyledNavBar.ButtonContainer>
@@ -24,12 +24,12 @@ export const BottomNavBar: FC<Props> = ({ onClickButton }) => {
           colorSecondary={myTheme.colors.dark.orange}
           onClick={onClickButton}
         >
-          <Add color={myTheme.colors.lightGray} />
+          <Add color={myTheme.colors.lightGray} width="28" height="28" />
         </IconButton>
       </StyledNavBar.ButtonContainer>
       <StyledNavBar.IconContainer>
         <Link to="expenses">
-          <Menu color={myTheme.colors.dark.grape} />
+          <Menu color={myTheme.colors.dark.grape} width="24" height="24" />
         </Link>
       </StyledNavBar.IconContainer>
     </StyledNavBar.MainContainer>

@@ -8,9 +8,9 @@ interface IconButtonProps {
 
 export const StyledIconButton = styled.button<IconButtonProps>`
   width: ${(props) =>
-    props.size === "small" ? "20px" : props.size === "large" ? "50px" : "34px"};
+    props.size === "small" ? "20px" : props.size === "large" ? "60px" : "34px"};
   height: ${(props) =>
-    props.size === "small" ? "20px" : props.size === "large" ? "50px" : "34px"};
+    props.size === "small" ? "20px" : props.size === "large" ? "60px" : "34px"};
   display: flex;
   background: linear-gradient(
     ${(props) => props.colorPrimary},

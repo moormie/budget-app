@@ -5,7 +5,7 @@ const MainContainer = styled.div`
   bottom: 0;
   width: 100%;
   background-color: ${(props) => props.theme.colors.yellowGreen};
-  height: 64px;
+  height: 72px;
   border-radius: 24px 24px 0 0;
   display: flex;
   align-items: center;
@@ -15,7 +15,7 @@ const MainContainer = styled.div`
 
 const ButtonContainer = styled.div`
   position: absolute;
-  bottom: 32px;
+  bottom: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,7 @@ const ButtonContainer = styled.div`
 `;
 
 const IconContainer = styled.div`
-  padding: 20px;
+  padding: 28px;
   cursor: pointer;
 `;
 
