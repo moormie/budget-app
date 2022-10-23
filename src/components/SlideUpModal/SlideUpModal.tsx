@@ -12,15 +12,17 @@ interface Props {
 
 export const SlideUpModal: FC<Props> = ({ visible, onClose, children }) => {
   return (
-    <StyledModal.MainContainer open={visible}>
-      <Header
-        endElement={
-          <IconButton onClick={onClose}>
-            <Close />
-          </IconButton>
-        }
-      />
-      {children}
-    </StyledModal.MainContainer>
+    <StyledModal.Container visible={visible}>
+      <StyledModal.MainContainer visible={visible}>
+        <Header
+          endElement={
+            <IconButton onClick={onClose}>
+              <Close />
+            </IconButton>
+          }
+        />
+        {children}
+      </StyledModal.MainContainer>
+    </StyledModal.Container>
   );
 };
