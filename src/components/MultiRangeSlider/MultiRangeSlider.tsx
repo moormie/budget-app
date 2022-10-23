@@ -18,7 +18,6 @@ export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   onChangeTo,
   color,
 }) => {
-
   const minValRef = useRef<HTMLInputElement>(null);
   const maxValRef = useRef<HTMLInputElement>(null);
   const range = useRef<HTMLDivElement>(null);
@@ -31,7 +30,7 @@ export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   useEffect(() => {
     if (maxValRef.current) {
       const minPercent = getPercent(rangeValues.min);
-      const maxPercent = getPercent(+maxValRef.current.value); 
+      const maxPercent = getPercent(Number(maxValRef.current.value));
       if (range.current) {
         range.current.style.left = `${minPercent}%`;
         range.current.style.width = `${maxPercent - minPercent}%`;
@@ -41,7 +40,7 @@ export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
 
   useEffect(() => {
     if (minValRef.current) {
-      const minPercent = getPercent(+minValRef.current.value);
+      const minPercent = getPercent(Number(minValRef.current.value));
       const maxPercent = getPercent(rangeValues.max);
 
       if (range.current) {
@@ -63,7 +62,7 @@ export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
   };
 
   return (
-    <div>
+    <>
       <div className="container">
         <input
           type="range"
@@ -103,6 +102,6 @@ export const MultiRangeSlider: FC<MultiRangeSliderProps> = ({
         <div className="slider-value">{rangeValues.min}</div>
         <div className="slider-value">{rangeValues.max}</div>
       </div>
-    </div>
+    </>
   );
 };

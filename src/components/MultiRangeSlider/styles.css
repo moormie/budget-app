@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  padding-bottom: 16px;
+  padding: 16px 8px;
+  position: relative;
 }
 
 .slider {
@@ -25,14 +25,13 @@
 }
 
 .slider-range {
-  background-color: #0beee3;
+  background-color: #424242;
   z-index: 2;
 }
 
 .slider-values {
   display: flex;
   justify-content: space-between;
-  padding: 0 6px;
 }
 
 .slider-value {
@@ -52,7 +51,7 @@
   pointer-events: none;
   position: absolute;
   height: 0;
-  width: calc(100% - 24px);
+  width: calc(100% - 16px);
   outline: none;
 }
 

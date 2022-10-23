@@ -9,6 +9,13 @@ export default {
     min: 0,
     max: 100,
   },
+  decorators: [
+    (Story) => (
+      <div style={{ margin: 16 }}>
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof MultiRangeSlider>;
 
 const Template: ComponentStory<typeof MultiRangeSlider> = (args) => {
