@@ -1,6 +1,7 @@
 import { FC } from "react";
 import StyledModal from ".";
 import { Button } from "../Button/Button";
+import { ModalBackground } from "../ModalBackground";
 
 interface Props {
   message: string;
@@ -18,7 +19,7 @@ export const Alert: FC<Props> = ({
   onSubmit,
 }) => {
   return (
-    <StyledModal.Container visible={visible}>
+    <ModalBackground visible={visible}>
       <StyledModal.Modal visible={visible}>
         <h2>Are you sure?</h2>
         <span>{message}</span>
@@ -28,6 +29,6 @@ export const Alert: FC<Props> = ({
           <Button label="Delete" onClick={onSubmit} variant="error" />
         </StyledModal.ButtonContainer>
       </StyledModal.Modal>
-    </StyledModal.Container>
+    </ModalBackground>
   );
 };

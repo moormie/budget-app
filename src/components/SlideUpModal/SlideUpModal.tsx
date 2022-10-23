@@ -3,6 +3,7 @@ import StyledModal from ".";
 import { Close } from "../../assets";
 import { Header } from "../Header/Header";
 import { IconButton } from "../IconButton/IconButton";
+import { ModalBackground } from "../ModalBackground";
 
 interface Props {
   visible?: boolean;
@@ -12,7 +13,7 @@ interface Props {
 
 export const SlideUpModal: FC<Props> = ({ visible, onClose, children }) => {
   return (
-    <StyledModal.Container visible={visible}>
+    <ModalBackground visible={visible}>
       <StyledModal.MainContainer visible={visible}>
         <Header
           endElement={
@@ -23,6 +24,6 @@ export const SlideUpModal: FC<Props> = ({ visible, onClose, children }) => {
         />
         {children}
       </StyledModal.MainContainer>
-    </StyledModal.Container>
+    </ModalBackground>
   );
 };
