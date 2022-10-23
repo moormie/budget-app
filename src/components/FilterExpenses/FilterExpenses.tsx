@@ -34,13 +34,6 @@ export const FilterExpenses: FC<Props> = ({ onReset, onSubmit }) => {
     setCategories(updatedList);
   };
 
-  console.log(categories);
-  console.log(dateFrom);
-  console.log(dateTo);
-  console.log(amountFrom);
-  console.log(amountTo);
-  console.log(note);
-
   return (
     <div>
       <StyledFilter.Title>

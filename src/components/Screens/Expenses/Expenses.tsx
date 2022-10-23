@@ -7,6 +7,7 @@ import { setTransactionSortValue } from "../../../features/details/detailsSlice"
 import { Expenses } from "../../../types/Expenses";
 import { SortType } from "../../../types/SortType";
 import { Delayed } from "../../Delayed/Delayed";
+import { FilterExpenses } from "../../FilterExpenses/FilterExpenses";
 import { Header } from "../../Header/Header";
 import { IconButton } from "../../IconButton/IconButton";
 import { ItemIcon } from "../../ItemIcon";
@@ -21,6 +22,7 @@ interface Props {
 
 export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { transactionSortValue } = useAppSelector((state) => state.details);
 
@@ -49,7 +51,7 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
               <IconButton onClick={() => setIsSortOpen(true)}>
                 <ArrowUpDown />
               </IconButton>
-              <IconButton onClick={() => {}}>
+              <IconButton onClick={() => setIsFilterOpen(true)}>
                 <Sliders />
               </IconButton>
             </>
@@ -58,7 +60,7 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
         <StyledExpenses.Spacing />
         {dataList.map((data) => (
           <React.Fragment key={data.id}>
-            <Delayed visible={!isSortOpen}>
+            <Delayed visible={!isSortOpen && !isFilterOpen}>
               <ListCard
                 icon={<ItemIcon category={data.category} />}
                 mainLabel={data.category}
@@ -78,6 +80,11 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
             onSubmit={onSubmit}
             onReset={onReset}
           />
+        </SlideUpModal>
+      </Delayed>
+      <Delayed visible={isFilterOpen}>
+        <SlideUpModal onClose={() => setIsFilterOpen(false)}>
+          <FilterExpenses onSubmit={() => {}} onReset={() => {}} />
         </SlideUpModal>
       </Delayed>
     </>
