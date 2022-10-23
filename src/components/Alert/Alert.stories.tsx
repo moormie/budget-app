@@ -14,8 +14,6 @@ export default {
 const Template: ComponentStory<typeof Alert> = ({ ...args }) => {
   const [{ visible }, updateArgs] = useArgs();
 
-  const handleClose = () => updateArgs({ visible: visible });
-
   return (
     <>
       <div style={{ margin: 32 }}>
