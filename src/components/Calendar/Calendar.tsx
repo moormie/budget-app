@@ -9,12 +9,14 @@ interface CalendarProps {
   value: Moment | null;
   setValue: (date: Moment) => void;
   visible?: boolean;
+  style?: React.CSSProperties;
 }
 
 export const Calendar: FC<CalendarProps> = ({
   visible = true,
   value,
   setValue,
+  style,
 }) => {
   const [calendarDate, setCalendarDate] = useState<Moment>(moment());
 
@@ -38,7 +40,7 @@ export const Calendar: FC<CalendarProps> = ({
   );
 
   return (
-    <StyledCalendar.MainWrapper visible={visible}>
+    <StyledCalendar.MainWrapper visible={visible} style={style}>
       <StyledCalendar.CalendarHeaderWrapper>
         <IconButton onClick={() => onChangeMonth("backward")}>
           <CaretLeft />

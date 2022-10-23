@@ -42,7 +42,11 @@ export const DatePicker: FC<Props> = ({ value, setValue, placeholder }) => {
         onClick={() => setOpen(!open)}
       />
       <Delayed visible={open}>
-        <Calendar value={value} setValue={onChangeDate} />
+        <Calendar
+          value={value}
+          setValue={onChangeDate}
+          style={{ zIndex: 20 }}
+        />
       </Delayed>
     </StyledDatePicker.Container>
   );
