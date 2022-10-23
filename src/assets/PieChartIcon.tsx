@@ -9,7 +9,7 @@ interface Props {
 export const PieChart: FC<Props> = ({
   width = "20",
   height = "20",
-  color = "currentColor",
+  color = "black",
 }) => {
   return (
     <svg
