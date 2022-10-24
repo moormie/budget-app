@@ -9,20 +9,45 @@ import { DatePicker } from "../DatePicker/DatePicker";
 import { InputField } from "../InputField/InputField";
 import { MultiRangeSlider } from "../MultiRangeSlider";
 
-interface Props {
-  onSubmit: () => void;
-  onReset: () => void;
+interface FilterValues {
+  categories: Category[];
+  dateFrom: Moment | null;
+  dateTo: Moment | null;
+  amountFrom: number;
+  amountTo: number;
+  note: string;
 }
 
-export const FilterExpenses: FC<Props> = ({ onReset, onSubmit }) => {
+interface Props {
+  onSubmit: (
+    categories: Category[],
+    dateFrom?: Moment | null,
+    dateTo?: Moment | null,
+    amountFrom?: number,
+    amountTo?: number,
+    note?: string
+  ) => void;
+  onReset: () => void;
+  maxAmount: number;
+  filterValues: FilterValues;
+}
 
-  //TODO redux store
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [dateFrom, setDateFrom] = useState<Moment | null>(null);
-  const [dateTo, setDateTo] = useState<Moment | null>(null);
-  const [amountFrom, setAmountFrom] = useState<number>(0);
-  const [amountTo, setAmountTo] = useState<number>(100);
-  const [note, setNote] = useState("");
+export const FilterExpenses: FC<Props> = ({
+  onSubmit,
+  onReset,
+  maxAmount,
+  filterValues,
+}) => {
+  const [categories, setCategories] = useState<Category[]>(
+    filterValues.categories
+  );
+  const [dateFrom, setDateFrom] = useState<Moment | null>(
+    filterValues.dateFrom
+  );
+  const [dateTo, setDateTo] = useState<Moment | null>(filterValues.dateTo);
+  const [amountFrom, setAmountFrom] = useState<number>(filterValues.amountFrom);
+  const [amountTo, setAmountTo] = useState<number>(filterValues.amountTo);
+  const [note, setNote] = useState(filterValues.note);
 
   const onChangeCategory = (category: Category) => {
     const updatedList = [...categories];
@@ -32,6 +57,20 @@ export const FilterExpenses: FC<Props> = ({ onReset, onSubmit }) => {
       updatedList.splice(updatedList.indexOf(category), 1);
     }
     setCategories(updatedList);
+  };
+
+  const onSave = () => {
+    onSubmit(categories, dateFrom, dateTo, amountFrom, amountTo, note);
+  };
+
+  const onResetAll = () => {
+    setCategories([]);
+    setDateFrom(null);
+    setDateTo(null);
+    setAmountFrom(0);
+    setAmountTo(maxAmount);
+    setNote("");
+    onReset();
   };
 
   return (
@@ -45,6 +84,7 @@ export const FilterExpenses: FC<Props> = ({ onReset, onSubmit }) => {
           key={category}
           value={category}
           setValue={() => onChangeCategory(category)}
+          checked={categories.includes(category)}
         />
       ))}
       <hr />
@@ -55,7 +95,7 @@ export const FilterExpenses: FC<Props> = ({ onReset, onSubmit }) => {
       <h4>Amount</h4>
       <MultiRangeSlider
         min={0}
-        max={100}
+        max={maxAmount}
         rangeValues={{ min: amountFrom, max: amountTo }}
         onChangeFrom={setAmountFrom}
         onChangeTo={setAmountTo}
@@ -65,8 +105,8 @@ export const FilterExpenses: FC<Props> = ({ onReset, onSubmit }) => {
       <h4>Note</h4>
       <InputField value={note} setValue={setNote} />
       <StyledFilter.ButtonContainer>
-        <Button label="Reset" onClick={onReset} />
-        <Button variant="success" label="Save" onClick={onSubmit} />
+        <Button label="Reset" onClick={onResetAll} />
+        <Button variant="success" label="Save" onClick={onSave} />
       </StyledFilter.ButtonContainer>
     </div>
   );

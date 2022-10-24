@@ -5,6 +5,8 @@ import { ChartType, DetailsState, DetailType } from "../details/detailsSlice";
 import { Expenses } from "../../types/Expenses";
 import { SortType } from "../../types/SortType";
 import { FilterState } from "../filters/filterSlice";
+import { Category } from "../../types/Category";
+import { Moment } from "moment";
 
 export const mockInitialState: ExpensesState & DetailsState & FilterState = {
   dataList: [],
@@ -12,6 +14,10 @@ export const mockInitialState: ExpensesState & DetailsState & FilterState = {
   type: DetailType.EXPENSES,
   chart: ChartType.BAR,
   sortValue: SortType.DATE_DESC,
+  categories: [],
+  dateFrom: null,
+  dateTo: null,
+  amountFrom: 0,
 };
 
 export const Mockstore = (props: {
@@ -46,11 +52,35 @@ export const Mockstore = (props: {
             setChart: (state, action: PayloadAction<ChartType>) => {
               state.chart = action.payload;
             },
+          },
+        }).reducer,
+        filter: createSlice({
+          name: "filter",
+          initialState: props.initialState,
+          reducers: {
             setSortValue: (
               state,
               action: PayloadAction<SortType | undefined>
             ) => {
               state.sortValue = action.payload;
+            },
+            setCategories: (state, action: PayloadAction<Category[]>) => {
+              state.categories = action.payload;
+            },
+            setDateFrom: (state, action: PayloadAction<Moment | null>) => {
+              state.dateFrom = action.payload;
+            },
+            setDateTo: (state, action: PayloadAction<Moment | null>) => {
+              state.dateTo = action.payload;
+            },
+            setAmountFrom: (state, action: PayloadAction<number>) => {
+              state.amountFrom = action.payload;
+            },
+            setAmountTo: (state, action: PayloadAction<number>) => {
+              state.amountTo = action.payload;
+            },
+            setNote: (state, action: PayloadAction<string>) => {
+              state.note = action.payload;
             },
           },
         }).reducer,

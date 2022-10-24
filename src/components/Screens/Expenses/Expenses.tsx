@@ -1,10 +1,19 @@
-import moment from "moment";
+import moment, { Moment } from "moment";
 import React, { FC, useState } from "react";
 import StyledExpenses from ".";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { ArrowUpDown, CaretLeft, Sliders } from "../../../assets";
 import { remove } from "../../../features/expenses/expensesSlice";
-import { setSortValue } from "../../../features/filters/filterSlice";
+import {
+  setAmountFrom,
+  setAmountTo,
+  setCategories,
+  setDateFrom,
+  setDateTo,
+  setNote,
+  setSortValue,
+} from "../../../features/filters/filterSlice";
+import { Category } from "../../../types/Category";
 import { Expenses } from "../../../types/Expenses";
 import { SortType } from "../../../types/SortType";
 import { Alert } from "../../Alert/Alert";
@@ -26,6 +35,9 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   const dispatch = useAppDispatch();
   const { sortValue } = useAppSelector((state) => state.filter);
 
+  const { categories, dateFrom, dateTo, amountFrom, amountTo, note } =
+    useAppSelector((state) => state.filter);
+
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
@@ -39,17 +51,46 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
     }
   };
 
-  const onSubmit = (value: string) => {
+  const onSubmitSort = (value: string) => {
     dispatch(setSortValue(value as SortType));
     setIsSortOpen(false);
   };
 
-  const onReset = () => {
+  const onResetSort = () => {
     dispatch(setSortValue(undefined));
     setIsSortOpen(false);
   };
 
-  const onDelete = () => {
+  const onSubmitFilter = (
+    categories: Category[],
+    dateFrom?: Moment | null,
+    dateTo?: Moment | null,
+    amountFrom?: number,
+    amountTo?: number,
+    note?: string
+  ) => {
+    dispatch(setCategories(categories));
+    dispatch(setDateFrom(dateFrom ?? null));
+    dispatch(setDateTo(dateTo ?? null));
+    dispatch(setAmountFrom(amountFrom ?? 0));
+    dispatch(
+      setAmountTo(amountTo ?? Math.max(...dataList.map((data) => data.amount)))
+    );
+    dispatch(setNote(note ?? ""));
+    setIsFilterOpen(false);
+  };
+
+  const onResetFilter = () => {
+    categories.length > 0 && dispatch(setCategories([]));
+    dateFrom !== null && dispatch(setDateFrom(null));
+    dateTo !== null && dispatch(setDateTo(null));
+    amountFrom !== 0 && dispatch(setAmountFrom(0));
+    amountTo !== undefined &&
+      dispatch(setAmountTo(Math.max(...dataList.map((data) => data.amount))));
+    !!note && dispatch(setNote(""));
+  };
+
+  const onDeleteExpense = () => {
     if (selectedExpense?.id) {
       dispatch(remove(selectedExpense.id));
       setSelectedExpense(undefined);
@@ -101,14 +142,27 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
         <SlideUpModal onClose={() => setIsSortOpen(false)}>
           <SortExpenses
             value={sortValue}
-            onSubmit={onSubmit}
-            onReset={onReset}
+            onSubmit={onSubmitSort}
+            onReset={onResetSort}
           />
         </SlideUpModal>
       </Delayed>
       <Delayed visible={isFilterOpen}>
         <SlideUpModal onClose={() => setIsFilterOpen(false)}>
-          <FilterExpenses onSubmit={() => {}} onReset={() => {}} />
+          <FilterExpenses
+            onSubmit={onSubmitFilter}
+            onReset={onResetFilter}
+            maxAmount={Math.max(...dataList.map((data) => data.amount))}
+            filterValues={{
+              categories,
+              dateFrom,
+              dateTo,
+              amountFrom,
+              amountTo:
+                amountTo ?? Math.max(...dataList.map((data) => data.amount)),
+              note: note ?? "",
+            }}
+          />
         </SlideUpModal>
       </Delayed>
       <Delayed visible={isDeleteOpen}>
@@ -116,7 +170,7 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
           message={`Delete transaction: ${selectedExpense?.category} - € ${selectedExpense?.amount}`}
           note={selectedExpense?.note}
           onClose={() => setIsDeleteOpen(false)}
-          onSubmit={onDelete}
+          onSubmit={onDeleteExpense}
         />
       </Delayed>
     </>

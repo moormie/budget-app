@@ -37,9 +37,10 @@ const CheckboxInput = styled.input`
 interface Props {
   value: string;
   setValue: (value: string) => void;
+  checked: boolean;
 }
 
-export const Checkbox: FC<Props> = ({ value, setValue }) => {
+export const Checkbox: FC<Props> = ({ value, setValue, checked = false }) => {
   return (
     <CheckboxContainer>
       <CheckboxInput
@@ -47,6 +48,7 @@ export const Checkbox: FC<Props> = ({ value, setValue }) => {
         value={value}
         name="checkbox"
         onChange={(e) => setValue(e.target.value)}
+        checked={checked}
       />
       <label>{value}</label>
     </CheckboxContainer>

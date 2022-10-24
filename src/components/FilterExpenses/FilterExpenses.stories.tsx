@@ -12,4 +12,16 @@ const Template: ComponentStory<typeof FilterExpenses> = (args) => (
 
 export const Default = Template.bind({});
 
-Default.args = {};
+Default.args = {
+  onSubmit: () => {},
+  onReset: () => {},
+  maxAmount: 200,
+  filterValues: {
+    categories: [],
+    dateFrom: null,
+    dateTo: null,
+    amountFrom: 0,
+    amountTo: 200,
+    note: "",
+  },
+};
