@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import StyledListCard from ".";
 import { Trash } from "../../assets";
 import { IconButton } from "../IconButton/IconButton";
@@ -10,6 +10,8 @@ interface ListCardProps {
   sublabel?: string;
   endLabel: string;
   endSublabel: string;
+  selected?: boolean;
+  onSelect?: () => void;
   onClickDelete?: () => void;
 }
 
@@ -19,12 +21,12 @@ export const ListCard: FC<ListCardProps> = ({
   sublabel,
   endLabel,
   endSublabel,
+  selected,
+  onSelect,
   onClickDelete,
 }) => {
-  const [open, setOpen] = useState(false);
-
   return (
-    <RoundedFlexContainer align="center" onClick={() => setOpen(!open)}>
+    <RoundedFlexContainer align="center" onClick={onSelect}>
       {icon}
       <StyledListCard.TitleContainer>
         <StyledListCard.Title>{mainLabel}</StyledListCard.Title>
@@ -37,7 +39,7 @@ export const ListCard: FC<ListCardProps> = ({
         <StyledListCard.SubText>{endSublabel}</StyledListCard.SubText>
       </StyledListCard.EndContainer>
 
-      <StyledListCard.DeleteContainer visible={open}>
+      <StyledListCard.DeleteContainer visible={selected === true}>
         <IconButton onClick={onClickDelete ? onClickDelete : () => {}}>
           <Trash color="#903d3c" />
         </IconButton>

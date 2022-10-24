@@ -38,16 +38,26 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
 
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const onAddNew = (newExpense: Expenses) => {
     dispatch(addNew(newExpense));
     setIsAddNewOpen(false);
   };
 
+  const onSelect = (expense: Expenses) => {
+    if (expense.id === selectedExpense?.id) {
+      setSelectedExpense(undefined);
+    } else {
+      setSelectedExpense(expense);
+    }
+  };
+
   const onDelete = () => {
     if (selectedExpense?.id) {
       dispatch(remove(selectedExpense.id));
       setSelectedExpense(undefined);
+      setIsDeleteOpen(false);
     }
   };
 
@@ -92,7 +102,9 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
                 sublabel={data.note}
                 endLabel={`€ ${data.amount}`}
                 endSublabel={moment(data.date).format("DD/MM/YYYY")}
-                onClickDelete={() => setSelectedExpense(data)}
+                selected={selectedExpense?.id === data.id}
+                onSelect={() => onSelect(data)}
+                onClickDelete={() => setIsDeleteOpen(true)}
               />
             </Delayed>
             <Spacing />
@@ -107,11 +119,11 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
           <AddExpenses onSave={onAddNew} />
         </SlideUpModal>
       </Delayed>
-      <Delayed visible={selectedExpense !== undefined}>
+      <Delayed visible={isDeleteOpen}>
         <Alert
           message={`Delete transaction: ${selectedExpense?.category} - € ${selectedExpense?.amount}`}
           note={selectedExpense?.note}
-          onClose={() => setSelectedExpense(undefined)}
+          onClose={() => setIsDeleteOpen(false)}
           onSubmit={onDelete}
         />
       </Delayed>
