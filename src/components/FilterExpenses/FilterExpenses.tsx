@@ -87,12 +87,13 @@ export const FilterExpenses: FC<Props> = ({
           checked={categories.includes(category)}
         />
       ))}
-      <hr />
+      <br />
+      <StyledFilter.Line />
       <h4>Date</h4>
       <DatePicker value={dateFrom} setValue={setDateFrom} placeholder="From" />
       <DatePicker value={dateTo} setValue={setDateTo} placeholder="To" />
-      <hr />
-      <h4>Amount</h4>
+      <br />
+      <StyledFilter.Line />
       <MultiRangeSlider
         min={0}
         max={maxAmount}
@@ -101,7 +102,8 @@ export const FilterExpenses: FC<Props> = ({
         onChangeTo={setAmountTo}
         color={myTheme.colors.dark.green}
       />
-      <hr />
+      <br />
+      <StyledFilter.Line />
       <h4>Note</h4>
       <InputField value={note} setValue={setNote} />
       <StyledFilter.ButtonContainer>
