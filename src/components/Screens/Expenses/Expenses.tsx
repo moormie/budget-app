@@ -34,7 +34,6 @@ interface Props {
 export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   const dispatch = useAppDispatch();
   const { sortValue } = useAppSelector((state) => state.filter);
-
   const { categories, dateFrom, dateTo, amountFrom, amountTo, note } =
     useAppSelector((state) => state.filter);
 
@@ -42,14 +41,6 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-
-  const onSelect = (expense: Expenses) => {
-    if (expense.id === selectedExpense?.id) {
-      setSelectedExpense(undefined);
-    } else {
-      setSelectedExpense(expense);
-    }
-  };
 
   const onSubmitSort = (value: string) => {
     dispatch(setSortValue(value as SortType));
@@ -130,7 +121,7 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
                 endLabel={`€ ${data.amount}`}
                 endSublabel={moment(data.date).format("DD/MM/YYYY")}
                 selected={selectedExpense?.id === data.id}
-                onSelect={() => onSelect(data)}
+                onSelect={() => setSelectedExpense(data)}
                 onClickDelete={() => setIsDeleteOpen(true)}
               />
             </Delayed>
