@@ -5,13 +5,11 @@ import { useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
 import { DetailsScreen } from "../components/Screens/Details/Details";
 import { getCategoriesAmount } from "../helpers/getCategoriesAmount";
-import { getSortedExpensesList } from "../helpers/getSortedExpensesList";
 import { SimpleExpenses } from "../types/Expenses";
 
 const DetailsPage: FC = () => {
   const navigate = useNavigate();
   const { dataList, status } = useAppSelector((state) => state.expenses);
-  const { summarySortValue } = useAppSelector((state) => state.details);
 
   const loading = useMemo(() => {
     return status === "loading";
@@ -26,10 +24,8 @@ const DetailsPage: FC = () => {
       (e) =>
         e.date.month() === moment().month() && e.date.year() === moment().year()
     );
-    const resultList = getCategoriesAmount(actualMonth);
-    const sortedList = getSortedExpensesList(resultList, summarySortValue);
-    setExpensesByCategories(sortedList);
-  }, [dataList, summarySortValue]);
+    setExpensesByCategories(getCategoriesAmount(actualMonth));
+  }, [dataList]);
 
   const onClickBack = () => {
     navigate("/");

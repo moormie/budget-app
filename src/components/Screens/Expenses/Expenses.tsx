@@ -24,7 +24,7 @@ interface Props {
 
 export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   const dispatch = useAppDispatch();
-  const { transactionSortValue } = useAppSelector((state) => state.details);
+  const { sortValue } = useAppSelector((state) => state.details);
 
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -100,7 +100,7 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
       <Delayed visible={isSortOpen}>
         <SlideUpModal onClose={() => setIsSortOpen(false)}>
           <SortExpenses
-            value={transactionSortValue}
+            value={sortValue}
             onSubmit={onSubmit}
             onReset={onReset}
           />

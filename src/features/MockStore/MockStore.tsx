@@ -10,7 +10,7 @@ export const mockInitialState: ExpensesState & DetailsState = {
   status: "idle",
   type: DetailType.EXPENSES,
   chart: ChartType.BAR,
-  transactionSortValue: SortType.DATE_DESC,
+  sortValue: SortType.DATE_DESC,
   summarySortValue: SortType.CATEGORY,
 };
 
@@ -53,7 +53,7 @@ export const Mockstore = (props: {
               state,
               action: PayloadAction<SortType | undefined>
             ) => {
-              state.transactionSortValue = action.payload;
+              state.sortValue = action.payload;
             },
           },
         }).reducer,

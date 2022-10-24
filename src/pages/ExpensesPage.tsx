@@ -9,7 +9,9 @@ import { Expenses } from "../types/Expenses";
 const ExpensesPage: FC = () => {
   const navigate = useNavigate();
   const { dataList, status } = useAppSelector((state) => state.expenses);
-  const { transactionSortValue } = useAppSelector((state) => state.details);
+  const { sortValue: transactionSortValue } = useAppSelector(
+    (state) => state.details
+  );
 
   const [sortedExpensesList, setSortedExpensesList] = useState<Expenses[]>([]);
 
