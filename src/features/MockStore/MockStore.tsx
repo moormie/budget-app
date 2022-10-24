@@ -4,18 +4,18 @@ import { ExpensesState } from "../expenses/expensesSlice";
 import { ChartType, DetailsState, DetailType } from "../details/detailsSlice";
 import { Expenses } from "../../types/Expenses";
 import { SortType } from "../../types/SortType";
+import { FilterState } from "../filters/filterSlice";
 
-export const mockInitialState: ExpensesState & DetailsState = {
+export const mockInitialState: ExpensesState & DetailsState & FilterState = {
   dataList: [],
   status: "idle",
   type: DetailType.EXPENSES,
   chart: ChartType.BAR,
   sortValue: SortType.DATE_DESC,
-  summarySortValue: SortType.CATEGORY,
 };
 
 export const Mockstore = (props: {
-  initialState: ExpensesState & DetailsState;
+  initialState: ExpensesState & DetailsState & FilterState;
   children: JSX.Element;
 }) => (
   <Provider
@@ -46,10 +46,7 @@ export const Mockstore = (props: {
             setChart: (state, action: PayloadAction<ChartType>) => {
               state.chart = action.payload;
             },
-            setSummarySortValue: (state, action: PayloadAction<SortType>) => {
-              state.summarySortValue = action.payload;
-            },
-            setTransactionSortValue: (
+            setSortValue: (
               state,
               action: PayloadAction<SortType | undefined>
             ) => {

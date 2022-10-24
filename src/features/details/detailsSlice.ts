@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SortType } from "../../types/SortType";
 
 export enum DetailType {
   INCOME = "Income",
@@ -13,14 +12,11 @@ export enum ChartType {
 export interface DetailsState {
   type: DetailType;
   chart: ChartType;
-  sortValue?: SortType;
-  summarySortValue: SortType;
 }
 
 const initialState: DetailsState = {
   type: DetailType.EXPENSES,
   chart: ChartType.BAR,
-  summarySortValue: SortType.CATEGORY,
 };
 
 const detailsSlice = createSlice({
@@ -33,23 +29,9 @@ const detailsSlice = createSlice({
     setChart: (state, action: PayloadAction<ChartType>) => {
       state.chart = action.payload;
     },
-    setTransactionSortValue: (
-      state,
-      action: PayloadAction<SortType | undefined>
-    ) => {
-      state.sortValue = action.payload;
-    },
-    setSummarySortValue: (state, action: PayloadAction<SortType>) => {
-      state.summarySortValue = action.payload;
-    },
   },
 });
 
-export const {
-  setType,
-  setChart,
-  setTransactionSortValue,
-  setSummarySortValue,
-} = detailsSlice.actions;
+export const { setType, setChart } = detailsSlice.actions;
 
 export default detailsSlice.reducer;

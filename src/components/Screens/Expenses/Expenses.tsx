@@ -3,8 +3,8 @@ import React, { FC, useState } from "react";
 import StyledExpenses from ".";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { ArrowUpDown, CaretLeft, Sliders } from "../../../assets";
-import { setTransactionSortValue } from "../../../features/details/detailsSlice";
 import { remove } from "../../../features/expenses/expensesSlice";
+import { setSortValue } from "../../../features/filters/filterSlice";
 import { Expenses } from "../../../types/Expenses";
 import { SortType } from "../../../types/SortType";
 import { Alert } from "../../Alert/Alert";
@@ -24,7 +24,7 @@ interface Props {
 
 export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   const dispatch = useAppDispatch();
-  const { sortValue } = useAppSelector((state) => state.details);
+  const { sortValue } = useAppSelector((state) => state.filter);
 
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -40,12 +40,12 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   };
 
   const onSubmit = (value: string) => {
-    dispatch(setTransactionSortValue(value as SortType));
+    dispatch(setSortValue(value as SortType));
     setIsSortOpen(false);
   };
 
   const onReset = () => {
-    dispatch(setTransactionSortValue(undefined));
+    dispatch(setSortValue(undefined));
     setIsSortOpen(false);
   };
 

@@ -9,17 +9,15 @@ import { Expenses } from "../types/Expenses";
 const ExpensesPage: FC = () => {
   const navigate = useNavigate();
   const { dataList, status } = useAppSelector((state) => state.expenses);
-  const { sortValue: transactionSortValue } = useAppSelector(
-    (state) => state.details
-  );
+  const { sortValue } = useAppSelector((state) => state.filter);
 
   const [sortedExpensesList, setSortedExpensesList] = useState<Expenses[]>([]);
 
   useEffect(() => {
     setSortedExpensesList(
-      getSortedExpensesList(dataList, transactionSortValue) as Expenses[]
+      getSortedExpensesList(dataList, sortValue) as Expenses[]
     );
-  }, [transactionSortValue, dataList]);
+  }, [sortValue, dataList]);
 
   const loading = useMemo(() => {
     return status === "loading";
