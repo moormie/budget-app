@@ -16,6 +16,12 @@ const ButtonContainer = styled.div`
   }
 `;
 
+const ErrorText = styled.span`
+  font-size: 0.8em;
+  color: ${(props) => props.theme.colors.red};
+  margin-left: 12px;
+`;
+
 const Line = styled.hr`
   border: 1px solid #a6a6a6;
 `;
@@ -24,6 +30,7 @@ const StyledFilter = {
   Container,
   Title,
   ButtonContainer,
+  ErrorText,
   Line,
 };
 

@@ -1,5 +1,5 @@
 import { Moment } from "moment";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import StyledFilter from ".";
 import { myTheme } from "../../theme";
 import { Category } from "../../types/Category";
@@ -33,6 +33,15 @@ export const FilterExpenses: FC<Props> = ({
   const [amountFrom, setAmountFrom] = useState<number>(filterValues.amountFrom);
   const [amountTo, setAmountTo] = useState<number>(filterValues.amountTo);
   const [note, setNote] = useState(filterValues.note);
+  const [dateError, setDateError] = useState("");
+
+  useEffect(() => {
+    if (dateFrom?.isAfter(dateTo)) {
+      setDateError("Start date must be before end date");
+    } else {
+      setDateError("")
+    }
+  }, [dateFrom, dateTo]);
 
   const onChangeCategory = (category: Category) => {
     const updatedList = [...categories];
@@ -77,6 +86,9 @@ export const FilterExpenses: FC<Props> = ({
       <h4>Date</h4>
       <DatePicker value={dateFrom} setValue={setDateFrom} placeholder="From" />
       <DatePicker value={dateTo} setValue={setDateTo} placeholder="To" />
+      {dateError && (
+        <StyledFilter.ErrorText>{dateError}</StyledFilter.ErrorText>
+      )}
       <br />
       <StyledFilter.Line />
       <MultiRangeSlider
@@ -93,7 +105,7 @@ export const FilterExpenses: FC<Props> = ({
       <InputField value={note} setValue={setNote} />
       <StyledFilter.ButtonContainer>
         <Button label="Reset" onClick={onResetAll} />
-        <Button variant="success" label="Save" onClick={onSave} />
+        <Button variant="success" label="Save" onClick={onSave} disabled={!!dateError}/>
       </StyledFilter.ButtonContainer>
     </div>
   );

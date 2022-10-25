@@ -12,7 +12,7 @@ const MainWrapper = styled.div<{ visible: boolean }>`
   position: absolute;
   animation: ${(props) =>
       props.visible ? props.theme.animation.show : props.theme.animation.hide}
-    0.3s ease-out;
+    0.4s ease-out;
 `;
 
 const CalendarHeaderWrapper = styled.div`
