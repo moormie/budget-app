@@ -27,6 +27,9 @@ const InputField = styled.input`
     -webkit-appearance: none;
     margin: 0;
   }
+  &:disabled {
+    color: black;
+  }
   padding: 18px;
   width: 100%;
 `;
@@ -35,7 +38,7 @@ const EndAdornment = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
+  margin-right: 8px;
 `;
 
 const StyledInputField = {

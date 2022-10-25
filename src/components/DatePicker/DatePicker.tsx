@@ -8,6 +8,8 @@ import moment from "moment";
 import useOnClickOutside from "../../useOnClickOutside";
 import { Delayed } from "../Delayed";
 import { myTheme } from "../../theme";
+import { IconButton } from "../IconButton/IconButton";
+import { Close } from "../../assets";
 
 interface Props {
   value: Moment | null;
@@ -33,19 +35,33 @@ export const DatePicker: FC<Props> = ({ value, setValue, placeholder }) => {
         value={value ? moment(value).format("DD/MM/YYYY") : ""}
         disabled
         endAdornment={
-          <CalendarIcon
-            width="18px"
-            height="18px"
-            color={myTheme.colors.dark.green}
-          />
+          <>
+            {value && (
+              <div style={{ marginRight: 8 }}>
+                <IconButton onClick={() => setValue(null)}>
+                  <Close
+                    width="18px"
+                    height="18px"
+                    color={myTheme.colors.dark.red}
+                  />
+                </IconButton>
+              </div>
+            )}
+            <IconButton onClick={() => setOpen(!open)}>
+              <CalendarIcon
+                width="18px"
+                height="18px"
+                color={myTheme.colors.dark.green}
+              />
+            </IconButton>
+          </>
         }
-        onClick={() => setOpen(!open)}
       />
       <Delayed visible={open}>
         <Calendar
           value={value}
           setValue={onChangeDate}
-          style={{ zIndex: 20 }}
+          style={{ zIndex: 20, right: "calc(50% - 140px)" }}
         />
       </Delayed>
     </StyledDatePicker.Container>
