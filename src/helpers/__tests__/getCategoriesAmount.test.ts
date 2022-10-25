@@ -32,19 +32,17 @@ const dataList = [
   },
 ];
 
-const resultList = [
-  { category: "Food", amount: 60 },
-  { category: "Car", amount: 40 },
-];
-
 describe("convert expenses list", () => {
   it("gets categories and amount", () => {
-    expect(getCategoriesAmount(dataList).length).toBe(2);
-    expect(getCategoriesAmount(dataList)[0]).toStrictEqual(resultList[0]);
-    expect(getCategoriesAmount(dataList)[1]).toStrictEqual(resultList[1]);
+    const categoryList = getCategoriesAmount(dataList);
+    expect(categoryList.length).toBe(2);
+    expect(categoryList[0]).toStrictEqual({ category: "Food", amount: 60 });
+    expect(categoryList[1]).toStrictEqual({ category: "Car", amount: 40 });
   });
   it("gets categories and percentage", () => {
-    expect(getCategoriesPercentage(dataList)[0]).toStrictEqual(resultList[0]);
-    expect(getCategoriesPercentage(dataList)[1]).toStrictEqual(resultList[1]);
+    const categoryList = getCategoriesPercentage(dataList)
+    expect(categoryList.length).toBe(2);
+    expect(categoryList[0]).toStrictEqual({category: "Food", percentage: 60});
+    expect(categoryList[1]).toStrictEqual({category: "Car", percentage: 40});
   });
 });
