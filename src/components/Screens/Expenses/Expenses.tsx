@@ -1,21 +1,10 @@
 import moment from "moment";
 import React, { FC, useState } from "react";
 import StyledExpenses from ".";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useAppSelector } from "../../../app/hooks";
 import { ArrowUpDown, CaretLeft, Sliders } from "../../../assets";
-import { remove } from "../../../features/expenses/expensesSlice";
-import {
-  setAmountFrom,
-  setAmountTo,
-  setCategories,
-  setDateFrom,
-  setDateTo,
-  setNote,
-  setSortValue,
-} from "../../../features/filters/filterSlice";
 import { Expenses } from "../../../types/Expenses";
 import { FilterValues } from "../../../types/FilterValues";
-import { SortType } from "../../../types/SortType";
 import { Alert } from "../../Alert/Alert";
 import { Delayed } from "../../Delayed/Delayed";
 import { FilterExpenses } from "../../FilterExpenses/FilterExpenses";
@@ -29,13 +18,32 @@ import { SortExpenses } from "../../SortExpenses/SortExpenses";
 interface Props {
   dataList: Expenses[];
   onClickBack: () => void;
+  submitSort: (value: string) => void;
+  resetSort: () => void;
+  submitFilter: (values: FilterValues) => void;
+  resetFilter: () => void;
+  deleteExpense: (id: string) => void;
 }
 
-export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
-  const dispatch = useAppDispatch();
-  const { sortValue } = useAppSelector((state) => state.filter);
-  const { categories, dateFrom, dateTo, amountFrom, amountTo, note } =
-    useAppSelector((state) => state.filter);
+export const ExpensesList: FC<Props> = ({
+  dataList,
+  onClickBack,
+  submitSort,
+  resetSort,
+  submitFilter,
+  resetFilter,
+  deleteExpense,
+}) => {
+  const { dataList: allExpenses } = useAppSelector((state) => state.expenses);
+  const {
+    sortValue,
+    categories,
+    dateFrom,
+    dateTo,
+    amountFrom,
+    amountTo,
+    note,
+  } = useAppSelector((state) => state.filter);
 
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -51,38 +59,23 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   };
 
   const onSubmitSort = (value: string) => {
-    dispatch(setSortValue(value as SortType));
+    submitSort(value);
     setIsSortOpen(false);
   };
 
   const onResetSort = () => {
-    dispatch(setSortValue(undefined));
+    resetSort();
     setIsSortOpen(false);
   };
 
   const onSubmitFilter = (values: FilterValues) => {
-    dispatch(setCategories(values.categories));
-    dispatch(setDateFrom(values.dateFrom));
-    dispatch(setDateTo(values.dateTo));
-    dispatch(setAmountFrom(values.amountFrom));
-    dispatch(setAmountTo(values.amountTo));
-    dispatch(setNote(values.note));
+    submitFilter(values);
     setIsFilterOpen(false);
-  };
-
-  const onResetFilter = () => {
-    categories.length > 0 && dispatch(setCategories([]));
-    dateFrom !== null && dispatch(setDateFrom(null));
-    dateTo !== null && dispatch(setDateTo(null));
-    amountFrom !== 0 && dispatch(setAmountFrom(0));
-    amountTo !== undefined &&
-      dispatch(setAmountTo(Math.max(...dataList.map((data) => data.amount))));
-    !!note && dispatch(setNote(""));
   };
 
   const onDeleteExpense = () => {
     if (selectedExpense?.id) {
-      dispatch(remove(selectedExpense.id));
+      deleteExpense(selectedExpense.id);
       setSelectedExpense(undefined);
       setIsDeleteOpen(false);
     }
@@ -141,15 +134,15 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
         <SlideUpModal onClose={() => setIsFilterOpen(false)}>
           <FilterExpenses
             onSubmit={onSubmitFilter}
-            onReset={onResetFilter}
-            maxAmount={Math.max(...dataList.map((data) => data.amount))}
+            onReset={resetFilter}
+            maxAmount={Math.max(...allExpenses.map((data) => data.amount))}
             filterValues={{
               categories,
               dateFrom,
               dateTo,
               amountFrom,
               amountTo:
-                amountTo ?? Math.max(...dataList.map((data) => data.amount)),
+                amountTo ?? Math.max(...allExpenses.map((data) => data.amount)),
               note: note ?? "",
             }}
           />
