@@ -1,4 +1,4 @@
-import moment, { Moment } from "moment";
+import moment from "moment";
 import React, { FC, useState } from "react";
 import StyledExpenses from ".";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
@@ -13,8 +13,8 @@ import {
   setNote,
   setSortValue,
 } from "../../../features/filters/filterSlice";
-import { Category } from "../../../types/Category";
 import { Expenses } from "../../../types/Expenses";
+import { FilterValues } from "../../../types/FilterValues";
 import { SortType } from "../../../types/SortType";
 import { Alert } from "../../Alert/Alert";
 import { Delayed } from "../../Delayed/Delayed";
@@ -42,6 +42,14 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
+  const onSelect = (expense: Expenses) => {
+    if (expense.id === selectedExpense?.id) {
+      setSelectedExpense(undefined);
+    } else {
+      setSelectedExpense(expense);
+    }
+  };
+
   const onSubmitSort = (value: string) => {
     dispatch(setSortValue(value as SortType));
     setIsSortOpen(false);
@@ -52,22 +60,13 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
     setIsSortOpen(false);
   };
 
-  const onSubmitFilter = (
-    categories: Category[],
-    dateFrom?: Moment | null,
-    dateTo?: Moment | null,
-    amountFrom?: number,
-    amountTo?: number,
-    note?: string
-  ) => {
-    dispatch(setCategories(categories));
-    dispatch(setDateFrom(dateFrom ?? null));
-    dispatch(setDateTo(dateTo ?? null));
-    dispatch(setAmountFrom(amountFrom ?? 0));
-    dispatch(
-      setAmountTo(amountTo ?? Math.max(...dataList.map((data) => data.amount)))
-    );
-    dispatch(setNote(note ?? ""));
+  const onSubmitFilter = (values: FilterValues) => {
+    dispatch(setCategories(values.categories));
+    dispatch(setDateFrom(values.dateFrom));
+    dispatch(setDateTo(values.dateTo));
+    dispatch(setAmountFrom(values.amountFrom));
+    dispatch(setAmountTo(values.amountTo));
+    dispatch(setNote(values.note));
     setIsFilterOpen(false);
   };
 
@@ -121,7 +120,7 @@ export const ExpensesList: FC<Props> = ({ dataList, onClickBack }) => {
                 endLabel={`€ ${data.amount}`}
                 endSublabel={moment(data.date).format("DD/MM/YYYY")}
                 selected={selectedExpense?.id === data.id}
-                onSelect={() => setSelectedExpense(data)}
+                onSelect={() => onSelect(data)}
                 onClickDelete={() => setIsDeleteOpen(true)}
               />
             </Delayed>

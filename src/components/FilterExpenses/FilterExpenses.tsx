@@ -3,30 +3,15 @@ import { FC, useState } from "react";
 import StyledFilter from ".";
 import { myTheme } from "../../theme";
 import { Category } from "../../types/Category";
+import { FilterValues } from "../../types/FilterValues";
 import { Button } from "../Button/Button";
 import { Checkbox } from "../Checkbox/Checkbox";
 import { DatePicker } from "../DatePicker/DatePicker";
 import { InputField } from "../InputField/InputField";
 import { MultiRangeSlider } from "../MultiRangeSlider";
 
-interface FilterValues {
-  categories: Category[];
-  dateFrom: Moment | null;
-  dateTo: Moment | null;
-  amountFrom: number;
-  amountTo: number;
-  note: string;
-}
-
 interface Props {
-  onSubmit: (
-    categories: Category[],
-    dateFrom?: Moment | null,
-    dateTo?: Moment | null,
-    amountFrom?: number,
-    amountTo?: number,
-    note?: string
-  ) => void;
+  onSubmit: (values: FilterValues) => void;
   onReset: () => void;
   maxAmount: number;
   filterValues: FilterValues;
@@ -60,7 +45,7 @@ export const FilterExpenses: FC<Props> = ({
   };
 
   const onSave = () => {
-    onSubmit(categories, dateFrom, dateTo, amountFrom, amountTo, note);
+    onSubmit({ categories, dateFrom, dateTo, amountFrom, amountTo, note });
   };
 
   const onResetAll = () => {

@@ -124,6 +124,38 @@ export const expensesMockData: Expenses[] = [
     amount: 160,
     date: moment("2022-08-20"),
   },
+  {
+    id: "020",
+    category: Category.HOME,
+    amount: 500,
+    date: moment("2022-10-18"),
+    note: "Some note...",
+  },
+  {
+    id: "021",
+    category: Category.TRAVEL,
+    amount: 62,
+    date: moment("2022-10-19"),
+  },
+  {
+    id: "022",
+    category: Category.ENTERTAINMENT,
+    amount: 45,
+    date: moment("2022-10-20"),
+  },
+  {
+    id: "023",
+    category: Category.PERSONAL,
+    amount: 160,
+    date: moment("2022-10-20"),
+  },
+  {
+    id: "024",
+    category: Category.MEDICAL,
+    amount: 120,
+    date: moment("2022-10-22"),
+    note: "Some note...",
+  },
 ];
 
 export const incomesMockData: Income[] = [

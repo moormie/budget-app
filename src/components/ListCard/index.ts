@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+`;
+
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,6 +47,7 @@ const DeleteContainer = styled.div<{ visible: boolean }>`
 `;
 
 const StyledListCard = {
+  Container,
   TitleContainer,
   Title,
   Subtitle,
