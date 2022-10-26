@@ -29,12 +29,12 @@ const Line = styled.div<{ height: number; color?: string }>`
   animation: ${(props) => grow(props.height)} 1s ease-out;
 `;
 
-interface BarLine {
+interface Props {
   height: number;
   color?: string;
 }
 
-export const BarLine: FC<BarLine> = ({ height, color }) => {
+export const BarLine: FC<Props> = ({ height, color }) => {
   return (
     <Container>
       <Line height={height} color={color} />

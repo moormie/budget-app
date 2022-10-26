@@ -1,9 +1,7 @@
 import { FC, useMemo } from "react";
 import StyledPieChart from ".";
-import { getCategoriesPercentage } from "../../helpers/getCategoriesAmount";
 import { getPieChartBackgroundColor } from "../../helpers/getPieChartBackgroundColor";
 import { ExpensesPercentage } from "../../types/Expenses";
-import { expensesMockData } from "../../types/mockData";
 import { Legend } from "../Legend/Legend";
 
 interface Props {
