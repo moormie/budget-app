@@ -40,6 +40,14 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
+  const onSelect = (expense: Expenses) => {
+    if (expense.id === selectedExpense?.id) {
+      setSelectedExpense(undefined);
+    } else {
+      setSelectedExpense(expense);
+    }
+  };
+
   const onAddNew = (newExpense: Expenses) => {
     dispatch(addNew(newExpense));
     setIsAddNewOpen(false);
@@ -95,7 +103,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
                 endLabel={`€ ${data.amount}`}
                 endSublabel={moment(data.date).format("DD/MM/YYYY")}
                 selected={selectedExpense?.id === data.id}
-                onSelect={() => setSelectedExpense(data)}
+                onSelect={() => onSelect(data)}
                 onClickDelete={() => setIsDeleteOpen(true)}
               />
             </Delayed>
