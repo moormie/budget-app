@@ -6,11 +6,13 @@ import { fetchExpensesData } from "./expensesAPI";
 export interface ExpensesState {
   dataList: Expenses[];
   status: "idle" | "loading" | "failed";
+  loading: boolean
 }
 
 const initialState: ExpensesState = {
   dataList: [],
   status: "idle",
+  loading: true
 };
 
 export const getExpensesData = createAsyncThunk("expenses/get", async () => {
@@ -41,13 +43,16 @@ const expensesSlice = createSlice({
     builder
       .addCase(getExpensesData.pending, (state) => {
         state.status = "loading";
+        state.loading = true
       })
       .addCase(getExpensesData.fulfilled, (state, action) => {
         state.status = "idle";
         state.dataList = action.payload;
+        state.loading = false
       })
       .addCase(getExpensesData.rejected, (state) => {
         state.status = "failed";
+        state.loading = false
       });
   },
 });

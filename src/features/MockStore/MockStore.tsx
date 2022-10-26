@@ -11,6 +11,7 @@ import { Moment } from "moment";
 export const mockInitialState: ExpensesState & DetailsState & FilterState = {
   dataList: [],
   status: "idle",
+  loading: false,
   type: DetailType.EXPENSES,
   chart: ChartType.BAR,
   sortValue: SortType.DATE_DESC,

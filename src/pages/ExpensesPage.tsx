@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
@@ -23,7 +23,7 @@ const ExpensesPage: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { dataList: allExpenses, status } = useAppSelector(
+  const { dataList: allExpenses, loading } = useAppSelector(
     (state) => state.expenses
   );
   const {
@@ -39,28 +39,30 @@ const ExpensesPage: FC = () => {
   const [sortedExpensesList, setSortedExpensesList] = useState<Expenses[]>([]);
 
   useEffect(() => {
-    setSortedExpensesList(
-      getSortedExpensesList(allExpenses, sortValue) as Expenses[]
-    );
-  }, [sortValue, allExpenses]);
+    const filteredList = getFilteredExpenses(allExpenses, {
+      categories,
+      dateFrom,
+      dateTo,
+      amountFrom,
+      amountTo: amountTo ?? Math.max(...allExpenses.map((data) => data.amount)),
+      note,
+    }) as Expenses[];
 
-  useEffect(() => {
-    setSortedExpensesList(
-      getFilteredExpenses(allExpenses, {
-        categories,
-        dateFrom,
-        dateTo,
-        amountFrom,
-        amountTo:
-          amountTo ?? Math.max(...allExpenses.map((data) => data.amount)),
-        note,
-      }) as Expenses[]
-    );
-  }, [allExpenses, categories, dateFrom, dateTo, amountFrom, amountTo, note]);
-
-  const loading = useMemo(() => {
-    return status === "loading";
-  }, [status]);
+    const sortedList = getSortedExpensesList(
+      filteredList,
+      sortValue
+    ) as Expenses[];
+    setSortedExpensesList(sortedList);
+  }, [
+    allExpenses,
+    sortValue,
+    categories,
+    dateFrom,
+    dateTo,
+    amountFrom,
+    amountTo,
+    note,
+  ]);
 
   const onClickBack = () => {
     navigate("/");

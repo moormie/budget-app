@@ -1,5 +1,5 @@
 import moment from "moment";
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
@@ -9,11 +9,7 @@ import { SimpleExpenses } from "../types/Expenses";
 
 const DetailsPage: FC = () => {
   const navigate = useNavigate();
-  const { dataList, status } = useAppSelector((state) => state.expenses);
-
-  const loading = useMemo(() => {
-    return status === "loading";
-  }, [status]);
+  const { dataList, loading } = useAppSelector((state) => state.expenses);
 
   const [expensesByCategories, setExpensesByCategories] = useState<
     SimpleExpenses[]
