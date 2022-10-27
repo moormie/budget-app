@@ -2,6 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Button } from "../Button/Button";
 import { Alert } from "./Alert";
 import { useArgs } from "@storybook/client-api";
+import { Delayed } from "../Delayed/Delayed";
 
 export default {
   title: "Components/Alert",
@@ -22,7 +23,9 @@ const Template: ComponentStory<typeof Alert> = ({ ...args }) => {
           label="OPEN"
         ></Button>
       </div>
-      <Alert {...args} />
+      <Delayed visible={visible}>
+        <Alert {...args} onClose={() => updateArgs({ visible: !visible })} />
+      </Delayed>
     </>
   );
 };
