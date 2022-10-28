@@ -1,9 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { mockInitialState, Mockstore } from "../../../features/MockStore/MockStore";
+import {
+  mockInitialState,
+  Mockstore,
+} from "../../../features/MockStore/MockStore";
 import { getCategoriesAmount } from "../../../helpers/getCategoriesAmount";
-import { expensesMockData } from "../../../types/mockData";
+import { mockExpensesData } from "../../../types/mockData";
 import { DetailsScreen } from "./Details";
-
 
 export default {
   title: "Screens/Details",
@@ -16,7 +18,7 @@ export default {
     ),
   ],
   args: {
-    expensesByCategories: getCategoriesAmount(expensesMockData),
+    expensesByCategories: getCategoriesAmount(mockExpensesData),
   },
 } as ComponentMeta<typeof DetailsScreen>;
 

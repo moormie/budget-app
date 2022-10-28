@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { expensesMockData } from "../../types/mockData";
+import { mockExpensesData } from "../../types/mockData";
 import { Chart } from "./Chart";
 
 export default {
@@ -18,6 +18,6 @@ const Template: ComponentStory<typeof Chart> = (args) => <Chart {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  dataList: expensesMockData,
+  dataList: mockExpensesData,
   type: "bar",
 };

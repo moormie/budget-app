@@ -2,7 +2,7 @@ import React from "react";
 import { FC } from "react";
 import styled from "styled-components";
 import { Cash } from "../../../../assets";
-import { incomesMockData } from "../../../../types/mockData";
+import { mockIncomesData } from "../../../../types/mockData";
 import { AmountHeader } from "../../../AmountHeader/AmountHeader";
 import { ColoredIcon } from "../../../ColoredIcon/ColoredIcon";
 import { ListCard } from "../../../ListCard/ListCard";
@@ -19,14 +19,14 @@ export const Incomes: FC<Props> = () => {
     <>
       <RoundedFlexContainer justify="center">
         <AmountHeader
-          amount={incomesMockData
+          amount={mockIncomesData
             .map((data) => data.amount)
             .reduce((a, b) => a + b, 0)
             .toFixed(2)}
         />
       </RoundedFlexContainer>
       <Spacing />
-      {incomesMockData.map((data) => (
+      {mockIncomesData.map((data) => (
         <React.Fragment key={data.id}>
           <ListCard
             icon={

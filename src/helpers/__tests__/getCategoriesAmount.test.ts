@@ -1,5 +1,4 @@
 import moment from "moment";
-import { Category } from "../../types/Category";
 import {
   getCategoriesAmount,
   getCategoriesPercentage,
@@ -8,25 +7,25 @@ import {
 const dataList = [
   {
     id: "001",
-    category: Category.FOOD,
+    category: "Food",
     amount: 15,
     date: moment("2022-09-01"),
   },
   {
     id: "002",
-    category: Category.CAR,
+    category: "Car",
     amount: 20,
     date: moment("2022-09-03"),
   },
   {
     id: "003",
-    category: Category.FOOD,
+    category: "Food",
     amount: 45,
     date: moment("2022-09-10"),
   },
   {
     id: "004",
-    category: Category.CAR,
+    category: "Car",
     amount: 20,
     date: moment("2022-09-14"),
   },

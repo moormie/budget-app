@@ -1,5 +1,5 @@
 import { ExpensesPercentage } from "../types/Expenses";
-import getColorOfCategory from "./getColorOfCategory";
+import { mockCategoryData } from "../types/mockData";
 
 export interface PieChartColors {
   color: string;
@@ -18,7 +18,8 @@ export interface PieChartColors {
 */
 export const getPieChartBackgroundColor = (dataList: ExpensesPercentage[]) => {
   return dataList.map((data, index) => {
-    const { primary } = getColorOfCategory(data.category);
+    const category = mockCategoryData.find((c) => c.name === data.category);
+    const primary = category?.color.primary;
 
     const start =
       index === 0

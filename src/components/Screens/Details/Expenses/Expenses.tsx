@@ -7,6 +7,7 @@ import { SimpleExpenses } from "../../../../types/Expenses";
 import { AmountHeader } from "../../../AmountHeader/AmountHeader";
 import { RoundedFlexContainer } from "../../../RoundedFlexContainer";
 import { Header } from "../../../Header/Header";
+import { mockCategoryData } from "../../../../types/mockData";
 
 const Spacing = styled.div`
   height: 18px;
@@ -18,7 +19,6 @@ interface Props {
 }
 
 export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
-
   return (
     <>
       <RoundedFlexContainer
@@ -38,15 +38,19 @@ export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
         />
       </RoundedFlexContainer>
       <Spacing />
-      <Header
-        title="Summary by Category"
-      />
+      <Header title="Summary by Category" />
       <Spacing />
 
       {expensesByCategories.map((data) => (
         <React.Fragment key={data.category}>
           <ListCard
-            icon={<ItemIcon category={data.category} />}
+            icon={
+              <ItemIcon
+                category={mockCategoryData.find(
+                  (c) => c.name === data.category
+                )}
+              />
+            }
             mainLabel={data.category}
             endLabel={`€ ${data.amount.toFixed(2)}`}
             endSublabel=""

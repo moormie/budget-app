@@ -1,9 +1,9 @@
-export enum Category {
-  FOOD = "Food",
-  HOME = "Home",
-  CAR = "Car",
-  ENTERTAINMENT = "Entertainment",
-  MEDICAL = "Medical",
-  PERSONAL = "Personal",
-  TRAVEL = "Travel",
+interface CategoryColor {
+  primary: string;
+  secondary?: string;
+}
+
+export interface Category {
+  name: string;
+  color: CategoryColor;
 }

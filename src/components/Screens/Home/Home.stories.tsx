@@ -1,8 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { expensesMockData } from "../../../types/mockData";
+import { mockExpensesData } from "../../../types/mockData";
 import { HomeScreen } from "./Home";
 import { MemoryRouter } from "react-router-dom";
-import { mockInitialState, Mockstore } from "../../../features/MockStore/MockStore";
+import {
+  mockInitialState,
+  Mockstore,
+} from "../../../features/MockStore/MockStore";
 
 export default {
   title: "Screens/Home",
@@ -17,7 +20,7 @@ export default {
     ),
   ],
   args: {
-    expensesList: expensesMockData,
+    expensesList: mockExpensesData,
   },
 } as ComponentMeta<typeof HomeScreen>;
 

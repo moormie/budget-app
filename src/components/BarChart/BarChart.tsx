@@ -1,7 +1,7 @@
 import { FC } from "react";
 import StyledChart from ".";
-import getColorOfCategory from "../../helpers/getColorOfCategory";
 import { SimpleExpenses } from "../../types/Expenses";
+import { mockCategoryData } from "../../types/mockData";
 import { BarLine } from "../ChartBarLine/BarLine";
 
 interface Props {
@@ -23,7 +23,10 @@ export const BarChart: FC<Props> = ({ dataList = [] }) => {
       )}
       <StyledChart.BarItems>
         {dataList.map((data, index) => {
-          const { primary } = getColorOfCategory(data.category);
+          const category = mockCategoryData.find(
+            (c) => c.name === data.category
+          );
+          const primary = category?.color.primary;
           return (
             <BarLine
               key={index}

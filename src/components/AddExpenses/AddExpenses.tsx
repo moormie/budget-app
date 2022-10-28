@@ -3,12 +3,12 @@ import StyledModal from ".";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 import { Moment } from "moment";
-import { Category } from "../../types/Category";
 import { Expenses } from "../../types/Expenses";
 import { Button } from "../Button/Button";
 import { DatePicker } from "../DatePicker/DatePicker";
 import { InputField } from "../InputField/InputField";
 import { Select } from "../Select/Select";
+import { mockCategoryData } from "../../types/mockData";
 
 interface Props {
   onSave: (newExpense: Expenses) => void;
@@ -25,7 +25,7 @@ export const AddExpenses: FC<Props> = ({ onSave }) => {
       const newExpense: Expenses = {
         id: uuidv4(),
         amount: Number(amount),
-        category: category as Category,
+        category: category,
         note,
         date: moment(date),
       };
@@ -47,7 +47,7 @@ export const AddExpenses: FC<Props> = ({ onSave }) => {
       <StyledModal.Spacing />
       <Select
         value={category}
-        options={Object.values(Category).map((e) => e)}
+        options={mockCategoryData.map((e) => e.name)}
         setValue={setCategory}
         placeholder="Select Category"
       />

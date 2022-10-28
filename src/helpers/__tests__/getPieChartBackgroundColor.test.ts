@@ -1,19 +1,18 @@
-import { Category } from "../../types/Category";
 import { getPieChartBackgroundColor } from "../getPieChartBackgroundColor";
 import { myTheme } from "../../theme";
 import { ExpensesPercentage } from "../../types/Expenses";
 
 const dataList: ExpensesPercentage[] = [
   {
-    category: Category.FOOD,
+    category: "Food",
     percentage: 15,
   },
   {
-    category: Category.CAR,
+    category: "Car",
     percentage: 20,
   },
   {
-    category: Category.TRAVEL,
+    category: "Travel",
     percentage: 65,
   },
 ];

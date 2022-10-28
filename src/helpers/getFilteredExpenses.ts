@@ -11,7 +11,7 @@ export const getFilteredExpenses = (
   let resultList = [...dataList];
   if (categories.length > 0) {
     resultList = resultList.filter((data) =>
-      categories.includes(data.category)
+      categories.map((c) => c.name).includes(data.category)
     );
   }
   if (dateFrom) {

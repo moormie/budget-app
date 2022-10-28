@@ -1,12 +1,11 @@
 import { Moment } from "moment";
-import { Category } from "./Category";
 
 export interface ExpensesPercentage {
-  category: Category;
+  category: string;
   percentage: number;
 }
 export interface SimpleExpenses {
-  category: Category;
+  category: string;
   amount: number;
 }
 export interface Expenses extends SimpleExpenses {

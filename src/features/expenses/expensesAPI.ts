@@ -1,5 +1,5 @@
 import { Expenses } from "../../types/Expenses";
-import { expensesMockData } from "../../types/mockData";
+import { mockExpensesData } from "../../types/mockData";
 
 interface Data {
   data: Expenses[];
@@ -7,6 +7,6 @@ interface Data {
 
 export function fetchExpensesData() {
   return new Promise<Data>((resolve) =>
-    setTimeout(() => resolve({ data: expensesMockData }), 500)
+    setTimeout(() => resolve({ data: mockExpensesData }), 500)
   );
 }

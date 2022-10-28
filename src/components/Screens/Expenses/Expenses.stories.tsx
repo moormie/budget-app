@@ -3,7 +3,7 @@ import {
   mockInitialState,
   Mockstore,
 } from "../../../features/MockStore/MockStore";
-import { expensesMockData } from "../../../types/mockData";
+import { mockExpensesData } from "../../../types/mockData";
 import { ExpensesList } from "./Expenses";
 
 export default {
@@ -28,5 +28,5 @@ const Template: ComponentStory<typeof ExpensesList> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  dataList: expensesMockData,
+  dataList: mockExpensesData,
 };

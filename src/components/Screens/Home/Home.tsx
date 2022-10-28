@@ -4,7 +4,7 @@ import { Header } from "../../Header/Header";
 import { MainCard } from "../../MainCard/MainCard";
 import { ListCard } from "../../ListCard/ListCard";
 import { BottomNavBar } from "../../BottomNavBar/BottomNavBar";
-import { incomesMockData } from "../../../types/mockData";
+import { mockCategoryData, mockIncomesData } from "../../../types/mockData";
 import { myTheme } from "../../../theme";
 import { ItemIcon } from "../../ItemIcon";
 import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
@@ -85,7 +85,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
         />
         <Spacing />
         <MainCard
-          totalIncome={incomesMockData
+          totalIncome={mockIncomesData
             .map((data) => data.amount)
             .reduce((a, b) => a + b, 0)}
           totalExpenses={expensesList
@@ -99,7 +99,13 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
           <React.Fragment key={data.id}>
             <Delayed visible={!isAddNewOpen && !isSettingsOpen}>
               <ListCard
-                icon={<ItemIcon category={data.category} />}
+                icon={
+                  <ItemIcon
+                    category={mockCategoryData.find(
+                      (c) => c.name === data.category
+                    )}
+                  />
+                }
                 mainLabel={data.category}
                 sublabel={data.note}
                 endLabel={`€ ${data.amount}`}

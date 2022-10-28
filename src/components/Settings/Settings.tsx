@@ -1,15 +1,14 @@
 import { FC, useState } from "react";
 import StyledSettings from ".";
 import { Add, Trash } from "../../assets";
-import { Category } from "../../types/Category";
 import { IconButton } from "../IconButton/IconButton";
 import { myTheme } from "../../theme/theme";
-import getColorOfCategory from "../../helpers/getColorOfCategory";
 import { Select } from "../Select/Select";
 import { Button } from "../Button/Button";
 import { Delayed } from "../Delayed/Delayed";
 import { Alert } from "../Alert/Alert";
 import { AddModal } from "../AddModal/AddModal";
+import { mockCategoryData } from "../../types/mockData";
 
 interface Props {}
 
@@ -18,7 +17,7 @@ export const Settings: FC<Props> = () => {
   const [selectedCurrency, setSelectedCurrency] = useState("€ EUR");
   const [selectedCategory, setSelectedCategory] = useState<string>();
   const [categoryList, setCategoryList] = useState<string[]>(
-    Object.values(Category)
+    mockCategoryData.map((c) => c.name)
   );
   const [error, setError] = useState("");
 
@@ -39,7 +38,7 @@ export const Settings: FC<Props> = () => {
       updatedList.push(category);
       setCategoryList(updatedList);
       setIsAddNewOpen(false);
-      setError("")
+      setError("");
     }
   };
 
@@ -50,13 +49,13 @@ export const Settings: FC<Props> = () => {
 
   const onCancel = () => {
     setSelectedCurrency("€ EUR");
-    setCategoryList(Object.values(Category));
+    setCategoryList(mockCategoryData.map((c) => c.name));
   };
-  
+
   const onCancelAdd = () => {
     setIsAddNewOpen(false);
     setError("");
-  }
+  };
 
   return (
     <>
@@ -75,9 +74,12 @@ export const Settings: FC<Props> = () => {
         {categoryList.map((category) => (
           <StyledSettings.Item key={category}>
             <StyledSettings.Tag
-              colorPrimary={getColorOfCategory(category as Category).primary}
+              colorPrimary={
+                mockCategoryData.find((c) => c.name === category)?.color.primary
+              }
               colorSecondary={
-                getColorOfCategory(category as Category).secondary
+                mockCategoryData.find((c) => c.name === category)?.color
+                  .secondary
               }
             />
             <div style={{ flexGrow: 1 }}>{category}</div>

@@ -5,6 +5,7 @@ import { useAppSelector } from "../../../app/hooks";
 import { ArrowUpDown, CaretLeft, Sliders } from "../../../assets";
 import { Expenses } from "../../../types/Expenses";
 import { FilterValues } from "../../../types/FilterValues";
+import { mockCategoryData } from "../../../types/mockData";
 import { Alert } from "../../Alert/Alert";
 import { Delayed } from "../../Delayed/Delayed";
 import { FilterExpenses } from "../../FilterExpenses/FilterExpenses";
@@ -107,7 +108,13 @@ export const ExpensesList: FC<Props> = ({
           <React.Fragment key={data.id}>
             <Delayed visible={!isSortOpen && !isFilterOpen}>
               <ListCard
-                icon={<ItemIcon category={data.category} />}
+                icon={
+                  <ItemIcon
+                    category={mockCategoryData.find(
+                      (c) => c.name === data.category
+                    )}
+                  />
+                }
                 mainLabel={data.category}
                 sublabel={data.note}
                 endLabel={`€ ${data.amount}`}

@@ -1,7 +1,6 @@
 import moment from "moment";
-import { Category } from "../../types/Category";
 import { FilterValues } from "../../types/FilterValues";
-import { expensesMockData } from "../../types/mockData";
+import { mockExpensesData } from "../../types/mockData";
 import { getFilteredExpenses } from "../getFilteredExpenses";
 
 const mockFilter: FilterValues = {
@@ -16,15 +15,15 @@ const mockFilter: FilterValues = {
 describe("filtered expenses", () => {
   it("filters expenses by categories", () => {
     expect(
-      getFilteredExpenses(expensesMockData, {
+      getFilteredExpenses(mockExpensesData, {
         ...mockFilter,
-        categories: [Category.CAR, Category.FOOD],
+        categories: [{name: "Car", color: {primary: "green"}}, {name: "Food", color: {primary: "blue"}}],
       }).length
     ).toBe(6);
   });
   it("filters by date from", () => {
     expect(
-      getFilteredExpenses(expensesMockData, {
+      getFilteredExpenses(mockExpensesData, {
         ...mockFilter,
         dateFrom: moment("2022-10-03"),
       }).length
@@ -32,7 +31,7 @@ describe("filtered expenses", () => {
   });
   it("filters by date to", () => {
     expect(
-      getFilteredExpenses(expensesMockData, {
+      getFilteredExpenses(mockExpensesData, {
         ...mockFilter,
         dateTo: moment("2022-09-01"),
       }).length
@@ -40,26 +39,26 @@ describe("filtered expenses", () => {
   });
   it("filters by amount from", () => {
     expect(
-      getFilteredExpenses(expensesMockData, { ...mockFilter, amountFrom: 120 })
+      getFilteredExpenses(mockExpensesData, { ...mockFilter, amountFrom: 120 })
         .length
     ).toBe(9);
   });
   it("filters by amount to", () => {
     expect(
-      getFilteredExpenses(expensesMockData, { ...mockFilter, amountTo: 90 })
+      getFilteredExpenses(mockExpensesData, { ...mockFilter, amountTo: 90 })
         .length
     ).toBe(12);
   });
   it("filters by note", () => {
     expect(
-      getFilteredExpenses(expensesMockData, { ...mockFilter, note: "Note" })
+      getFilteredExpenses(mockExpensesData, { ...mockFilter, note: "Note" })
         .length
     ).toBe(14);
   });
   it("filters by all value", () => {
     expect(
-      getFilteredExpenses(expensesMockData, {
-        categories: [Category.TRAVEL],
+      getFilteredExpenses(mockExpensesData, {
+        categories: [{name: "Travel", color: {primary: "green"}}],
         dateFrom: moment("2022-10-10"),
         dateTo: moment("2022-10-19"),
         amountFrom: 15,

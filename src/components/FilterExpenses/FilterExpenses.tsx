@@ -4,6 +4,7 @@ import StyledFilter from ".";
 import { myTheme } from "../../theme";
 import { Category } from "../../types/Category";
 import { FilterValues } from "../../types/FilterValues";
+import { mockCategoryData } from "../../types/mockData";
 import { Button } from "../Button/Button";
 import { Checkbox } from "../Checkbox/Checkbox";
 import { DatePicker } from "../DatePicker/DatePicker";
@@ -73,10 +74,10 @@ export const FilterExpenses: FC<Props> = ({
         <h3>Filter Expenses</h3>
       </StyledFilter.Title>
       <h4>Category</h4>
-      {Object.values(Category).map((category) => (
+      {mockCategoryData.map((category) => (
         <Checkbox
-          key={category}
-          value={category}
+          key={category.name}
+          value={category.name}
           setValue={() => onChangeCategory(category)}
           checked={categories.includes(category)}
         />
