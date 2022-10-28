@@ -29,7 +29,7 @@ export const DatePicker: FC<Props> = ({ value, setValue, placeholder }) => {
   useOnClickOutside(ref, () => setOpen(false));
 
   return (
-    <StyledDatePicker.Container ref={ref}>
+    <StyledDatePicker.Container>
       <InputField
         placeholder={placeholder ?? "DD/MM/YYYY"}
         value={value ? moment(value).format("DD/MM/YYYY") : ""}
@@ -57,13 +57,15 @@ export const DatePicker: FC<Props> = ({ value, setValue, placeholder }) => {
           </>
         }
       />
-      <Delayed visible={open}>
-        <Calendar
-          value={value}
-          setValue={onChangeDate}
-          style={{ zIndex: 20, right: "calc(50% - 140px)" }}
-        />
-      </Delayed>
+      <div ref={ref}>
+        <Delayed visible={open}>
+          <Calendar
+            value={value}
+            setValue={onChangeDate}
+            style={{ zIndex: 20, right: "calc(50% - 140px)" }}
+          />
+        </Delayed>
+      </div>
     </StyledDatePicker.Container>
   );
 };
