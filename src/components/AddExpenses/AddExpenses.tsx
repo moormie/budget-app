@@ -18,7 +18,7 @@ export const AddExpenses: FC<Props> = ({ onSave }) => {
   const [amount, setAmount] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [note, setNote] = useState("");
-  const [date, setDate] = useState<Moment | null>(moment());
+  const [date, setDate] = useState<Moment | null>(null);
 
   const onSubmit = () => {
     if (!!amount && category && date) {

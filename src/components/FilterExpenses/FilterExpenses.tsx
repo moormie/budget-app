@@ -39,7 +39,7 @@ export const FilterExpenses: FC<Props> = ({
     if (dateFrom?.isAfter(dateTo)) {
       setDateError("Start date must be before end date");
     } else {
-      setDateError("")
+      setDateError("");
     }
   }, [dateFrom, dateTo]);
 
@@ -105,7 +105,12 @@ export const FilterExpenses: FC<Props> = ({
       <InputField value={note} setValue={setNote} />
       <StyledFilter.ButtonContainer>
         <Button label="Reset" onClick={onResetAll} />
-        <Button variant="success" label="Save" onClick={onSave} disabled={!!dateError}/>
+        <Button
+          variant="success"
+          label="Save"
+          onClick={onSave}
+          disabled={!!dateError}
+        />
       </StyledFilter.ButtonContainer>
     </div>
   );
