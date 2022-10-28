@@ -9,7 +9,8 @@ import { myTheme } from "../../../theme";
 import { ItemIcon } from "../../ItemIcon";
 import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
 import { IconButton } from "../../IconButton/IconButton";
-import { Settings } from "../../../assets";
+import { Settings as SettingsIcon } from "../../../assets";
+import { Settings } from "../../Settings/Settings";
 import fox from "../../../fox.png";
 import { AddExpenses } from "../../AddExpenses/AddExpenses";
 import { Delayed } from "../../Delayed";
@@ -39,6 +40,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const onSelect = (expense: Expenses) => {
     if (expense.id === selectedExpense?.id) {
@@ -76,8 +78,8 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
             </ColoredIcon>
           }
           endElement={
-            <IconButton onClick={() => {}}>
-              <Settings />
+            <IconButton onClick={() => setIsSettingsOpen(true)}>
+              <SettingsIcon />
             </IconButton>
           }
         />
@@ -95,7 +97,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
         <Spacing />
         {expensesList.map((data) => (
           <React.Fragment key={data.id}>
-            <Delayed visible={!isAddNewOpen}>
+            <Delayed visible={!isAddNewOpen && !isSettingsOpen}>
               <ListCard
                 icon={<ItemIcon category={data.category} />}
                 mainLabel={data.category}
@@ -126,6 +128,11 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
           onClose={() => setIsDeleteOpen(false)}
           onSubmit={onDelete}
         />
+      </Delayed>
+      <Delayed visible={isSettingsOpen}>
+        <SlideUpModal onClose={() => setIsSettingsOpen(false)}>
+          <Settings />
+        </SlideUpModal>
       </Delayed>
     </React.Fragment>
   );
