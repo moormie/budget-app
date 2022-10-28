@@ -38,11 +38,18 @@ const Modal = styled.div<{ visible?: boolean }>`
 
 const InputContainer = styled.div`
   border-radius: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
   box-shadow: rgb(17 17 17 / 8%) 0px 6px 13px 0px;
 `;
 
+const ErrorText = styled.span`
+  font-size: 0.8em;
+  color: ${(props) => props.theme.colors.red};
+  margin-left: 12px;
+`;
+
 const ButtonContainer = styled.div`
+  margin-top: 8px;
   display: flex;
   justify-content: space-between;
   > * {
@@ -53,6 +60,7 @@ const ButtonContainer = styled.div`
 const StyledModal = {
   Modal,
   InputContainer,
+  ErrorText,
   ButtonContainer,
 };
 

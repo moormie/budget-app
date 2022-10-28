@@ -9,13 +9,18 @@ import { Select } from "../Select/Select";
 import { Button } from "../Button/Button";
 import { Delayed } from "../Delayed/Delayed";
 import { Alert } from "../Alert/Alert";
+import { AddModal } from "../AddModal/AddModal";
 
 interface Props {}
 
 export const Settings: FC<Props> = () => {
+  const [isAddNewOpen, setIsAddNewOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("€ EUR");
-  const [selectedCategory, setSelectedCategory] = useState<Category>();
-  const [categoryList, setCategoryList] = useState(Object.values(Category));
+  const [selectedCategory, setSelectedCategory] = useState<string>();
+  const [categoryList, setCategoryList] = useState<string[]>(
+    Object.values(Category)
+  );
+  const [error, setError] = useState("");
 
   const onDeleteCategory = () => {
     if (selectedCategory) {
@@ -26,14 +31,31 @@ export const Settings: FC<Props> = () => {
     }
   };
 
+  const onAddCategory = (category: string) => {
+    if (categoryList.includes(category)) {
+      setError("Category already exists");
+    } else {
+      const updatedList = [...categoryList];
+      updatedList.push(category);
+      setCategoryList(updatedList);
+      setIsAddNewOpen(false);
+      setError("")
+    }
+  };
+
   const onSave = () => {
     console.log(selectedCurrency);
     console.log(categoryList);
   };
 
   const onCancel = () => {
-    setSelectedCurrency("€ EUR")
+    setSelectedCurrency("€ EUR");
     setCategoryList(Object.values(Category));
+  };
+  
+  const onCancelAdd = () => {
+    setIsAddNewOpen(false);
+    setError("");
   }
 
   return (
@@ -53,8 +75,10 @@ export const Settings: FC<Props> = () => {
         {categoryList.map((category) => (
           <StyledSettings.Item key={category}>
             <StyledSettings.Tag
-              colorPrimary={getColorOfCategory(category).primary}
-              colorSecondary={getColorOfCategory(category).secondary}
+              colorPrimary={getColorOfCategory(category as Category).primary}
+              colorSecondary={
+                getColorOfCategory(category as Category).secondary
+              }
             />
             <div style={{ flexGrow: 1 }}>{category}</div>
             <div>
@@ -65,7 +89,7 @@ export const Settings: FC<Props> = () => {
           </StyledSettings.Item>
         ))}
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <IconButton onClick={() => {}}>
+          <IconButton onClick={() => setIsAddNewOpen(true)}>
             <Add color={myTheme.colors.dark.green} />
           </IconButton>
         </div>
@@ -85,6 +109,13 @@ export const Settings: FC<Props> = () => {
           message={`Delete category ${selectedCategory}`}
           onClose={() => setSelectedCategory(undefined)}
           onSubmit={onDeleteCategory}
+        />
+      </Delayed>
+      <Delayed visible={isAddNewOpen}>
+        <AddModal
+          onClose={onCancelAdd}
+          onSubmit={onAddCategory}
+          errorMessage={error}
         />
       </Delayed>
     </>

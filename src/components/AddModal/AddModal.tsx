@@ -7,11 +7,18 @@ import { ModalBackground } from "../ModalBackground";
 interface Props {
   visible?: boolean;
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit: (value: string) => void;
+  errorMessage?: string;
 }
 
-export const AddModal: FC<Props> = ({ visible, onClose, onSubmit }) => {
+export const AddModal: FC<Props> = ({
+  visible,
+  onClose,
+  onSubmit,
+  errorMessage,
+}) => {
   const [category, setCategory] = useState("");
+
   return (
     <ModalBackground visible={visible}>
       <StyledModal.Modal visible={visible}>
@@ -23,11 +30,12 @@ export const AddModal: FC<Props> = ({ visible, onClose, onSubmit }) => {
             setValue={setCategory}
           />
         </StyledModal.InputContainer>
+        <StyledModal.ErrorText>{errorMessage}</StyledModal.ErrorText>
         <StyledModal.ButtonContainer>
           <Button label="Cancel" onClick={onClose} />
           <Button
             label="Save"
-            onClick={onSubmit}
+            onClick={() => onSubmit(category)}
             variant="success"
             disabled={!category}
           />
