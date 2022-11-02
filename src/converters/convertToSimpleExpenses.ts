@@ -1,9 +1,9 @@
 import { Category } from "../types/Category";
-import { SimpleExpenses } from "../types/Expenses";
-import { ExpensesCategory } from "../types/ExpensesCategory";
+import { Expenses } from "../types/Expenses";
+import { ExpensesCategory } from "../types/Expenses";
 
 export const convertToExpensesWithCategory = (
-  expenses: SimpleExpenses[],
+  expenses: Expenses[],
   categoryList: Category[]
 ) => {
   const resultList: ExpensesCategory[] = [];

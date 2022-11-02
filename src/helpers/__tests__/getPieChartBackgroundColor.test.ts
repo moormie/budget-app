@@ -4,15 +4,15 @@ import { ExpensesPercentage } from "../../types/Expenses";
 
 const dataList: ExpensesPercentage[] = [
   {
-    category: "Food",
+    category: { name: "Food", color: { primary: "#778C62" } },
     percentage: 15,
   },
   {
-    category: "Car",
+    category: { name: "Car", color: { primary: "#665075" } },
     percentage: 20,
   },
   {
-    category: "Travel",
+    category: { name: "Travel", color: { primary: "#DF810B" } },
     percentage: 65,
   },
 ];

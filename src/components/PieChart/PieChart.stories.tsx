@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { getCategoriesPercentage } from "../../helpers/getCategoriesAmount";
-import { mockCategoryData, mockExpensesData } from "../../types/mockData";
+import { mockExpensesPercentageByCategory } from "../../types/mockData";
 import { PieChart } from "./PieChart";
 
 export default {
@@ -15,6 +14,5 @@ const Template: ComponentStory<typeof PieChart> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  dataList: getCategoriesPercentage(mockExpensesData),
-  categoryList: mockCategoryData,
+  dataList: mockExpensesPercentageByCategory,
 };

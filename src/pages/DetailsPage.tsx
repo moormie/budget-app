@@ -4,15 +4,21 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
 import { DetailsScreen } from "../components/Screens/Details/Details";
+import { convertToExpensesWithCategory } from "../converters/convertToSimpleExpenses";
 import { getCategoriesAmount } from "../helpers/getCategoriesAmount";
-import { SimpleExpenses } from "../types/Expenses";
+import { ExpensesCategory } from "../types/Expenses";
 
 const DetailsPage: FC = () => {
   const navigate = useNavigate();
-  const { dataList, loading } = useAppSelector((state) => state.expenses);
+  const { dataList, loading: expensesLoading } = useAppSelector(
+    (state) => state.expenses
+  );
+  const { categoryList, loading: categoryLoading } = useAppSelector(
+    (state) => state.category
+  );
 
   const [expensesByCategories, setExpensesByCategories] = useState<
-    SimpleExpenses[]
+    ExpensesCategory[]
   >([]);
 
   useEffect(() => {
@@ -20,15 +26,21 @@ const DetailsPage: FC = () => {
       (e) =>
         e.date.month() === moment().month() && e.date.year() === moment().year()
     );
-    setExpensesByCategories(getCategoriesAmount(actualMonth));
-  }, [dataList]);
+
+    const convertedList = convertToExpensesWithCategory(
+      actualMonth,
+      categoryList
+    );
+    const categoriesAmount = getCategoriesAmount(convertedList);
+    setExpensesByCategories(categoriesAmount);
+  }, [dataList, categoryList]);
 
   const onClickBack = () => {
     navigate("/");
   };
   return (
     <>
-      {loading && <Loading />}
+      {(expensesLoading || categoryLoading) && <Loading />}
       <DetailsScreen
         expensesByCategories={expensesByCategories}
         onClickBack={onClickBack}

@@ -3,6 +3,11 @@ import { Category } from "./Category";
 import { Expenses } from "./Expenses";
 import { Income } from "./Income";
 import { myTheme } from "../theme";
+import { convertToExpensesWithCategory } from "../converters/convertToSimpleExpenses";
+import {
+  getCategoriesAmount,
+  getCategoriesPercentage,
+} from "../helpers/getCategoriesAmount";
 
 const { green, grape, yellow, yellowGreen, red, brown, orange, dark } =
   myTheme.colors;
@@ -191,6 +196,19 @@ export const mockExpensesData: Expenses[] = [
     note: "Some note...",
   },
 ];
+
+export const mockExpensesWithCategory = convertToExpensesWithCategory(
+  mockExpensesData,
+  mockCategoryData
+);
+
+export const mockExpensesPercentageByCategory = getCategoriesPercentage(
+  mockExpensesWithCategory
+);
+
+export const mockExpensesAmountByCategory = getCategoriesAmount(
+  mockExpensesWithCategory
+);
 
 export const mockIncomesData: Income[] = [
   {

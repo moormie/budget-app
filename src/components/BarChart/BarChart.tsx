@@ -1,15 +1,13 @@
 import { FC } from "react";
 import StyledChart from ".";
-import { Category } from "../../types/Category";
-import { SimpleExpenses } from "../../types/Expenses";
+import { ExpensesCategory } from "../../types/Expenses";
 import { BarLine } from "../ChartBarLine/BarLine";
 
 interface Props {
-  dataList: SimpleExpenses[];
-  categoryList: Category[];
+  dataList: ExpensesCategory[];
 }
 
-export const BarChart: FC<Props> = ({ dataList = [], categoryList }) => {
+export const BarChart: FC<Props> = ({ dataList = [] }) => {
   const max = Math.max(...dataList.map((data) => data.amount));
 
   return (
@@ -24,7 +22,7 @@ export const BarChart: FC<Props> = ({ dataList = [], categoryList }) => {
       )}
       <StyledChart.BarItems>
         {dataList.map((data, index) => {
-          const category = categoryList.find((c) => c.name === data.category);
+          const { category } = data;
           const primary = category?.color.primary;
           return (
             <BarLine

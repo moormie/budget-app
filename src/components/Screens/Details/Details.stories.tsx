@@ -3,8 +3,7 @@ import {
   mockInitialState,
   Mockstore,
 } from "../../../features/MockStore/MockStore";
-import { getCategoriesAmount } from "../../../helpers/getCategoriesAmount";
-import { mockExpensesData } from "../../../types/mockData";
+import { mockExpensesAmountByCategory } from "../../../types/mockData";
 import { DetailsScreen } from "./Details";
 
 export default {
@@ -18,7 +17,7 @@ export default {
     ),
   ],
   args: {
-    expensesByCategories: getCategoriesAmount(mockExpensesData),
+    expensesByCategories: mockExpensesAmountByCategory,
   },
 } as ComponentMeta<typeof DetailsScreen>;
 

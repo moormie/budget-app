@@ -1,33 +1,25 @@
-import moment from "moment";
+import { ExpensesCategory } from "../../types/Expenses";
 import {
   getCategoriesAmount,
   getCategoriesPercentage,
 } from "../getCategoriesAmount";
 
-const dataList = [
+const dataList: ExpensesCategory[] = [
   {
-    id: "001",
-    category: "Food",
+    category: { name: "Food", color: { primary: "blue" } },
     amount: 15,
-    date: moment("2022-09-01"),
   },
   {
-    id: "002",
-    category: "Car",
+    category: { name: "Car", color: { primary: "blue" } },
     amount: 20,
-    date: moment("2022-09-03"),
   },
   {
-    id: "003",
-    category: "Food",
+    category: { name: "Food", color: { primary: "blue" } },
     amount: 45,
-    date: moment("2022-09-10"),
   },
   {
-    id: "004",
-    category: "Car",
+    category: { name: "Car", color: { primary: "blue" } },
     amount: 20,
-    date: moment("2022-09-14"),
   },
 ];
 
@@ -35,13 +27,17 @@ describe("convert expenses list", () => {
   it("gets categories and amount", () => {
     const categoryList = getCategoriesAmount(dataList);
     expect(categoryList.length).toBe(2);
-    expect(categoryList[0]).toStrictEqual({ category: "Food", amount: 60 });
-    expect(categoryList[1]).toStrictEqual({ category: "Car", amount: 40 });
+    expect(categoryList[0].category.name).toBe("Food");
+    expect(categoryList[0].amount).toBe(60);
+    expect(categoryList[1].category.name).toBe("Car");
+    expect(categoryList[1].amount).toBe(40);
   });
   it("gets categories and percentage", () => {
-    const categoryList = getCategoriesPercentage(dataList)
+    const categoryList = getCategoriesPercentage(dataList);
     expect(categoryList.length).toBe(2);
-    expect(categoryList[0]).toStrictEqual({category: "Food", percentage: 60});
-    expect(categoryList[1]).toStrictEqual({category: "Car", percentage: 40});
+    expect(categoryList[0].category.name).toBe("Food");
+    expect(categoryList[0].percentage).toBe(60);
+    expect(categoryList[1].category.name).toBe("Car");
+    expect(categoryList[1].percentage).toBe(40);
   });
 });

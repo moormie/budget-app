@@ -1,10 +1,10 @@
-import { Expenses, SimpleExpenses } from "../types/Expenses";
+import { Expenses } from "../types/Expenses";
 import { SortType } from "../types/SortType";
 
 export const getSortedExpensesList = (
-  expensesList: Expenses[] | SimpleExpenses[],
+  expensesList: Expenses[],
   sortValue?: string
-): Expenses[] | SimpleExpenses[] => {
+): Expenses[] => {
   switch (sortValue) {
     case SortType.CATEGORY:
       return [...expensesList].sort((a, b) =>

@@ -3,11 +3,10 @@ import { Chart } from "../../../Chart/Chart";
 import styled from "styled-components";
 import { ListCard } from "../../../ListCard/ListCard";
 import { ItemIcon } from "../../../ItemIcon";
-import { SimpleExpenses } from "../../../../types/Expenses";
 import { AmountHeader } from "../../../AmountHeader/AmountHeader";
 import { RoundedFlexContainer } from "../../../RoundedFlexContainer";
 import { Header } from "../../../Header/Header";
-import { useAppSelector } from "../../../../app/hooks";
+import { ExpensesCategory } from "../../../../types/Expenses";
 
 const Spacing = styled.div`
   height: 18px;
@@ -15,12 +14,10 @@ const Spacing = styled.div`
 
 interface Props {
   isBarChart: boolean;
-  expensesByCategories: SimpleExpenses[];
+  expensesByCategories: ExpensesCategory[];
 }
 
 export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
-  const { categoryList } = useAppSelector((state) => state.category);
-
   return (
     <>
       <RoundedFlexContainer
@@ -44,14 +41,10 @@ export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
       <Spacing />
 
       {expensesByCategories.map((data) => (
-        <React.Fragment key={data.category}>
+        <React.Fragment key={data.category.name}>
           <ListCard
-            icon={
-              <ItemIcon
-                category={categoryList.find((c) => c.name === data.category)}
-              />
-            }
-            mainLabel={data.category}
+            icon={<ItemIcon category={data.category} />}
+            mainLabel={data.category.name}
             endLabel={`€ ${data.amount.toFixed(2)}`}
             endSublabel=""
           />

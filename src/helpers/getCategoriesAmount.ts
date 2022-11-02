@@ -1,10 +1,12 @@
-import { SimpleExpenses } from "../types/Expenses";
+import { ExpensesCategory } from "../types/Expenses";
 
-export const getCategoriesAmount = (dataList: SimpleExpenses[]) => {
-  const categoryList: SimpleExpenses[] = [];
+export const getCategoriesAmount = (dataList: ExpensesCategory[]) => {
+  const categoryList: ExpensesCategory[] = [];
 
   dataList.forEach((data) => {
-    const exist = categoryList.find((r) => r.category === data.category);
+    const exist = categoryList.find(
+      (r) => r.category.name === data.category.name
+    );
     if (exist) {
       exist.amount = exist.amount + data.amount;
     } else {
@@ -17,7 +19,7 @@ export const getCategoriesAmount = (dataList: SimpleExpenses[]) => {
   return categoryList;
 };
 
-export const getCategoriesPercentage = (dataList: SimpleExpenses[]) => {
+export const getCategoriesPercentage = (dataList: ExpensesCategory[]) => {
   const sum = dataList.map((data) => data.amount).reduce((a, b) => a + b, 0);
 
   const amountList = getCategoriesAmount(dataList);

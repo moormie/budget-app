@@ -1,4 +1,3 @@
-import { Category } from "../types/Category";
 import { ExpensesPercentage } from "../types/Expenses";
 
 export interface PieChartColors {
@@ -16,12 +15,9 @@ export interface PieChartColors {
     #778C62 50.00% 75.00%,
     #71533d 75.00%
 */
-export const getPieChartBackgroundColor = (
-  dataList: ExpensesPercentage[],
-  categoryList: Category[]
-) => {
+export const getPieChartBackgroundColor = (dataList: ExpensesPercentage[]) => {
   return dataList.map((data, index) => {
-    const category = categoryList.find((c) => c.name === data.category);
+    const category = data.category;
     const primary = category?.color.primary;
 
     const start =

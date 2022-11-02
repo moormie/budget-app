@@ -5,7 +5,6 @@ import { BarChart as BarChartIcon, CaretLeft, PieChart } from "../../../assets";
 import styled from "styled-components";
 import { myTheme } from "../../../theme";
 import { NavBar } from "../../NavBar/NavBar";
-import { SimpleExpenses } from "../../../types/Expenses";
 import { Expenses } from "./Expenses";
 import { Incomes } from "./Incomes";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
@@ -15,6 +14,7 @@ import {
   setChart,
   setType,
 } from "../../../features/details/detailsSlice";
+import { ExpensesCategory } from "../../../types/Expenses";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -26,7 +26,7 @@ const Spacing = styled.div`
 `;
 
 interface Props {
-  expensesByCategories: SimpleExpenses[];
+  expensesByCategories: ExpensesCategory[];
   onClickBack: () => void;
 }
 
