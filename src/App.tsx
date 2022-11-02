@@ -6,12 +6,14 @@ import { useAppDispatch } from "./app/hooks";
 import { getExpensesData } from "./features/expenses/expensesSlice";
 import { useEffect } from "react";
 import ExpensesPage from "./pages/ExpensesPage";
+import { getCategoryData } from "./features/category/categorySlice";
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getExpensesData());
+    dispatch(getCategoryData());
   }, [dispatch]);
 
   return (

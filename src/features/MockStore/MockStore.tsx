@@ -7,8 +7,10 @@ import { SortType } from "../../types/SortType";
 import { FilterState } from "../filters/filterSlice";
 import { Category } from "../../types/Category";
 import { Moment } from "moment";
+import { CategoryState } from "../category/categorySlice";
+import { mockCategoryData } from "../../types/mockData";
 
-export const mockInitialState: ExpensesState & DetailsState & FilterState = {
+export const mockInitialState: ExpensesState & DetailsState & FilterState & CategoryState = {
   dataList: [],
   status: "idle",
   loading: false,
@@ -19,6 +21,7 @@ export const mockInitialState: ExpensesState & DetailsState & FilterState = {
   dateFrom: null,
   dateTo: null,
   amountFrom: 0,
+  categoryList: mockCategoryData
 };
 
 export const Mockstore = (props: {
