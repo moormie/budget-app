@@ -4,7 +4,7 @@ import { Header } from "../../Header/Header";
 import { MainCard } from "../../MainCard/MainCard";
 import { ListCard } from "../../ListCard/ListCard";
 import { BottomNavBar } from "../../BottomNavBar/BottomNavBar";
-import { mockCategoryData, mockIncomesData } from "../../../types/mockData";
+import { mockIncomesData } from "../../../types/mockData";
 import { myTheme } from "../../../theme";
 import { ItemIcon } from "../../ItemIcon";
 import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
@@ -15,7 +15,7 @@ import fox from "../../../fox.png";
 import { AddExpenses } from "../../AddExpenses/AddExpenses";
 import { Delayed } from "../../Delayed";
 import { Expenses } from "../../../types/Expenses";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { addNew, remove } from "../../../features/expenses/expensesSlice";
 import moment from "moment";
 import { Alert } from "../../Alert/Alert";
@@ -36,6 +36,7 @@ interface Props {
 
 export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const dispatch = useAppDispatch();
+  const { categoryList } = useAppSelector((state) => state.category);
 
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
@@ -101,7 +102,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
               <ListCard
                 icon={
                   <ItemIcon
-                    category={mockCategoryData.find(
+                    category={categoryList.find(
                       (c) => c.name === data.category
                     )}
                   />
@@ -124,7 +125,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
       </Delayed>
       <Delayed visible={isAddNewOpen}>
         <SlideUpModal onClose={() => setIsAddNewOpen(false)}>
-          <AddExpenses onSave={onAddNew} />
+          <AddExpenses categoryList={categoryList} onSave={onAddNew} />
         </SlideUpModal>
       </Delayed>
       <Delayed visible={isDeleteOpen}>

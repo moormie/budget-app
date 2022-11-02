@@ -5,7 +5,6 @@ import { useAppSelector } from "../../../app/hooks";
 import { ArrowUpDown, CaretLeft, Sliders } from "../../../assets";
 import { Expenses } from "../../../types/Expenses";
 import { FilterValues } from "../../../types/FilterValues";
-import { mockCategoryData } from "../../../types/mockData";
 import { Alert } from "../../Alert/Alert";
 import { Delayed } from "../../Delayed/Delayed";
 import { FilterExpenses } from "../../FilterExpenses/FilterExpenses";
@@ -36,6 +35,7 @@ export const ExpensesList: FC<Props> = ({
   deleteExpense,
 }) => {
   const { dataList: allExpenses } = useAppSelector((state) => state.expenses);
+  const { categoryList } = useAppSelector((state) => state.category);
   const {
     sortValue,
     categories,
@@ -110,7 +110,7 @@ export const ExpensesList: FC<Props> = ({
               <ListCard
                 icon={
                   <ItemIcon
-                    category={mockCategoryData.find(
+                    category={categoryList.find(
                       (c) => c.name === data.category
                     )}
                   />
@@ -140,6 +140,7 @@ export const ExpensesList: FC<Props> = ({
       <Delayed visible={isFilterOpen}>
         <SlideUpModal onClose={() => setIsFilterOpen(false)}>
           <FilterExpenses
+            categoryList={categoryList}
             onSubmit={onSubmitFilter}
             onReset={resetFilter}
             maxAmount={Math.max(...allExpenses.map((data) => data.amount))}

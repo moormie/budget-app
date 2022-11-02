@@ -1,18 +1,18 @@
 import { FC } from "react";
 import StyledLegend from ".";
+import { Category } from "../../types/Category";
 import { ExpensesPercentage } from "../../types/Expenses";
-import { mockCategoryData } from "../../types/mockData";
 
 interface Props {
   dataList: ExpensesPercentage[];
+  categoryList: Category[];
 }
 
-export const Legend: FC<Props> = ({ dataList }) => {
+export const Legend: FC<Props> = ({ dataList, categoryList }) => {
   return (
     <StyledLegend.Container>
       {dataList.map((data) => {
-        const category = mockCategoryData.find((c) => c.name === data.category);
-        
+        const category = categoryList.find((c) => c.name === data.category);
         return (
           <StyledLegend.Item key={data.category}>
             <StyledLegend.Marker

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import StyledSettings from ".";
 import { Add, Trash } from "../../assets";
 import { IconButton } from "../IconButton/IconButton";
@@ -8,18 +8,26 @@ import { Button } from "../Button/Button";
 import { Delayed } from "../Delayed/Delayed";
 import { Alert } from "../Alert/Alert";
 import { AddModal } from "../AddModal/AddModal";
-import { mockCategoryData } from "../../types/mockData";
 import { Category } from "../../types/Category";
+import { useAppSelector } from "../../app/hooks";
+import { Loading } from "../Loading";
 
 interface Props {}
 
 export const Settings: FC<Props> = () => {
+  const { categoryList: dataList, loading } = useAppSelector(
+    (state) => state.category
+  );
+
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("€ EUR");
   const [selectedCategory, setSelectedCategory] = useState<Category>();
-  const [categoryList, setCategoryList] =
-    useState<Category[]>(mockCategoryData);
+  const [categoryList, setCategoryList] = useState<Category[]>([]);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    setCategoryList(dataList);
+  }, [dataList]);
 
   const onDeleteCategory = () => {
     if (selectedCategory) {
@@ -53,7 +61,7 @@ export const Settings: FC<Props> = () => {
 
   const onCancel = () => {
     setSelectedCurrency("€ EUR");
-    setCategoryList(mockCategoryData);
+    setCategoryList(dataList);
   };
 
   const onCancelAdd = () => {
@@ -63,6 +71,7 @@ export const Settings: FC<Props> = () => {
 
   return (
     <>
+      {loading && <Loading />}
       <StyledSettings.Container>
         <StyledSettings.Title>
           <h3>Settings</h3>
@@ -107,7 +116,7 @@ export const Settings: FC<Props> = () => {
       </StyledSettings.Container>
       <Delayed visible={selectedCategory !== undefined}>
         <Alert
-          message={`Delete category ${selectedCategory}`}
+          message={`Delete category ${selectedCategory?.name}`}
           onClose={() => setSelectedCategory(undefined)}
           onSubmit={onDeleteCategory}
         />

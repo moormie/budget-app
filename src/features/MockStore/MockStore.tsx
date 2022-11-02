@@ -10,7 +10,10 @@ import { Moment } from "moment";
 import { CategoryState } from "../category/categorySlice";
 import { mockCategoryData } from "../../types/mockData";
 
-export const mockInitialState: ExpensesState & DetailsState & FilterState & CategoryState = {
+export const mockInitialState: ExpensesState &
+  DetailsState &
+  FilterState &
+  CategoryState = {
   dataList: [],
   status: "idle",
   loading: false,
@@ -21,11 +24,11 @@ export const mockInitialState: ExpensesState & DetailsState & FilterState & Cate
   dateFrom: null,
   dateTo: null,
   amountFrom: 0,
-  categoryList: mockCategoryData
+  categoryList: mockCategoryData,
 };
 
 export const Mockstore = (props: {
-  initialState: ExpensesState & DetailsState & FilterState;
+  initialState: ExpensesState & DetailsState & FilterState & CategoryState;
   children: JSX.Element;
 }) => (
   <Provider
@@ -87,6 +90,11 @@ export const Mockstore = (props: {
               state.note = action.payload;
             },
           },
+        }).reducer,
+        category: createSlice({
+          name: "category",
+          initialState: props.initialState,
+          reducers: {},
         }).reducer,
       },
     })}

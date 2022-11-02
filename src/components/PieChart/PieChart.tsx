@@ -1,17 +1,19 @@
 import { FC, useMemo } from "react";
 import StyledPieChart from ".";
 import { getPieChartBackgroundColor } from "../../helpers/getPieChartBackgroundColor";
+import { Category } from "../../types/Category";
 import { ExpensesPercentage } from "../../types/Expenses";
 import { Legend } from "../Legend/Legend";
 
 interface Props {
   dataList: ExpensesPercentage[];
+  categoryList: Category[];
 }
 
-export const PieChart: FC<Props> = ({ dataList }) => {
+export const PieChart: FC<Props> = ({ dataList, categoryList }) => {
   const colors = useMemo(
-    () => getPieChartBackgroundColor(dataList),
-    [dataList]
+    () => getPieChartBackgroundColor(dataList, categoryList),
+    [dataList, categoryList]
   );
 
   return (
@@ -23,7 +25,7 @@ export const PieChart: FC<Props> = ({ dataList }) => {
       </StyledPieChart.Item>
       <StyledPieChart.Spacing />
       <StyledPieChart.Item>
-        <Legend dataList={dataList} />
+        <Legend dataList={dataList} categoryList={categoryList} />
       </StyledPieChart.Item>
     </StyledPieChart.Container>
   );

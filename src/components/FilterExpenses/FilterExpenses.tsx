@@ -4,7 +4,6 @@ import StyledFilter from ".";
 import { myTheme } from "../../theme";
 import { Category } from "../../types/Category";
 import { FilterValues } from "../../types/FilterValues";
-import { mockCategoryData } from "../../types/mockData";
 import { Button } from "../Button/Button";
 import { Checkbox } from "../Checkbox/Checkbox";
 import { DatePicker } from "../DatePicker/DatePicker";
@@ -12,6 +11,7 @@ import { InputField } from "../InputField/InputField";
 import { MultiRangeSlider } from "../MultiRangeSlider";
 
 interface Props {
+  categoryList: Category[];
   onSubmit: (values: FilterValues) => void;
   onReset: () => void;
   maxAmount: number;
@@ -19,6 +19,7 @@ interface Props {
 }
 
 export const FilterExpenses: FC<Props> = ({
+  categoryList,
   onSubmit,
   onReset,
   maxAmount,
@@ -74,7 +75,7 @@ export const FilterExpenses: FC<Props> = ({
         <h3>Filter Expenses</h3>
       </StyledFilter.Title>
       <h4>Category</h4>
-      {mockCategoryData.map((category) => (
+      {categoryList.map((category) => (
         <Checkbox
           key={category.name}
           value={category.name}

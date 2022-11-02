@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { getCategoriesPercentage } from "../../helpers/getCategoriesAmount";
-import { mockExpensesData } from "../../types/mockData";
+import { mockCategoryData, mockExpensesData } from "../../types/mockData";
 import { Legend } from "./Legend";
 
 export default {
@@ -14,4 +14,5 @@ export const Default = Template.bind({});
 
 Default.args = {
   dataList: getCategoriesPercentage(mockExpensesData),
+  categoryList: mockCategoryData,
 };

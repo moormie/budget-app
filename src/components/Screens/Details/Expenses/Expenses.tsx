@@ -7,7 +7,7 @@ import { SimpleExpenses } from "../../../../types/Expenses";
 import { AmountHeader } from "../../../AmountHeader/AmountHeader";
 import { RoundedFlexContainer } from "../../../RoundedFlexContainer";
 import { Header } from "../../../Header/Header";
-import { mockCategoryData } from "../../../../types/mockData";
+import { useAppSelector } from "../../../../app/hooks";
 
 const Spacing = styled.div`
   height: 18px;
@@ -19,6 +19,8 @@ interface Props {
 }
 
 export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
+  const { categoryList } = useAppSelector((state) => state.category);
+
   return (
     <>
       <RoundedFlexContainer
@@ -46,9 +48,7 @@ export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
           <ListCard
             icon={
               <ItemIcon
-                category={mockCategoryData.find(
-                  (c) => c.name === data.category
-                )}
+                category={categoryList.find((c) => c.name === data.category)}
               />
             }
             mainLabel={data.category}

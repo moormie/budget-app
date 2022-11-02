@@ -8,13 +8,14 @@ import { Button } from "../Button/Button";
 import { DatePicker } from "../DatePicker/DatePicker";
 import { InputField } from "../InputField/InputField";
 import { Select } from "../Select/Select";
-import { mockCategoryData } from "../../types/mockData";
+import { Category } from "../../types/Category";
 
 interface Props {
+  categoryList: Category[];
   onSave: (newExpense: Expenses) => void;
 }
 
-export const AddExpenses: FC<Props> = ({ onSave }) => {
+export const AddExpenses: FC<Props> = ({ categoryList, onSave }) => {
   const [amount, setAmount] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [note, setNote] = useState("");
@@ -47,7 +48,7 @@ export const AddExpenses: FC<Props> = ({ onSave }) => {
       <StyledModal.Spacing />
       <Select
         value={category}
-        options={mockCategoryData.map((e) => e.name)}
+        options={categoryList.map((e) => e.name)}
         setValue={setCategory}
         placeholder="Select Category"
       />

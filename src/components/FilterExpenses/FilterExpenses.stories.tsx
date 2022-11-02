@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { mockCategoryData } from "../../types/mockData";
 import { FilterExpenses } from "./FilterExpenses";
 
 export default {
@@ -13,6 +14,7 @@ const Template: ComponentStory<typeof FilterExpenses> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
+  categoryList: mockCategoryData,
   onSubmit: () => {},
   onReset: () => {},
   maxAmount: 200,
