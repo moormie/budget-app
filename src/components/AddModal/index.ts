@@ -48,6 +48,12 @@ const ErrorText = styled.span`
   margin-left: 12px;
 `;
 
+const ColorPicker = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 12px;
+`;
+
 const ButtonContainer = styled.div`
   margin-top: 8px;
   display: flex;
@@ -61,6 +67,7 @@ const StyledModal = {
   Modal,
   InputContainer,
   ErrorText,
+  ColorPicker,
   ButtonContainer,
 };
 

@@ -9,16 +9,16 @@ import { Delayed } from "../Delayed/Delayed";
 import { Alert } from "../Alert/Alert";
 import { AddModal } from "../AddModal/AddModal";
 import { mockCategoryData } from "../../types/mockData";
+import { Category } from "../../types/Category";
 
 interface Props {}
 
 export const Settings: FC<Props> = () => {
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("€ EUR");
-  const [selectedCategory, setSelectedCategory] = useState<string>();
-  const [categoryList, setCategoryList] = useState<string[]>(
-    mockCategoryData.map((c) => c.name)
-  );
+  const [selectedCategory, setSelectedCategory] = useState<Category>();
+  const [categoryList, setCategoryList] =
+    useState<Category[]>(mockCategoryData);
   const [error, setError] = useState("");
 
   const onDeleteCategory = () => {
@@ -30,12 +30,16 @@ export const Settings: FC<Props> = () => {
     }
   };
 
-  const onAddCategory = (category: string) => {
-    if (categoryList.includes(category)) {
+  const onAddCategory = (
+    category: string,
+    primary: string,
+    secondary?: string
+  ) => {
+    if (categoryList.find((c) => c.name === category)) {
       setError("Category already exists");
     } else {
       const updatedList = [...categoryList];
-      updatedList.push(category);
+      updatedList.push({ name: category, color: { primary, secondary } });
       setCategoryList(updatedList);
       setIsAddNewOpen(false);
       setError("");
@@ -49,7 +53,7 @@ export const Settings: FC<Props> = () => {
 
   const onCancel = () => {
     setSelectedCurrency("€ EUR");
-    setCategoryList(mockCategoryData.map((c) => c.name));
+    setCategoryList(mockCategoryData);
   };
 
   const onCancelAdd = () => {
@@ -72,17 +76,12 @@ export const Settings: FC<Props> = () => {
         <StyledSettings.Line />
         <h4>Category</h4>
         {categoryList.map((category) => (
-          <StyledSettings.Item key={category}>
+          <StyledSettings.Item key={category.name}>
             <StyledSettings.Tag
-              colorPrimary={
-                mockCategoryData.find((c) => c.name === category)?.color.primary
-              }
-              colorSecondary={
-                mockCategoryData.find((c) => c.name === category)?.color
-                  .secondary
-              }
+              colorPrimary={category.color.primary}
+              colorSecondary={category.color.secondary}
             />
-            <div style={{ flexGrow: 1 }}>{category}</div>
+            <div style={{ flexGrow: 1 }}>{category.name}</div>
             <div>
               <IconButton onClick={() => setSelectedCategory(category)}>
                 <Trash color={myTheme.colors.dark.red} />
