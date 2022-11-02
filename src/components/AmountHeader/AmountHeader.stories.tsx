@@ -18,4 +18,5 @@ export const Default = Template.bind({});
 
 Default.args = {
   amount: "1200",
+  date: "October",
 };

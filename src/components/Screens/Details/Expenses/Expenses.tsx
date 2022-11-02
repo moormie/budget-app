@@ -7,6 +7,7 @@ import { AmountHeader } from "../../../AmountHeader/AmountHeader";
 import { RoundedFlexContainer } from "../../../RoundedFlexContainer";
 import { Header } from "../../../Header/Header";
 import { ExpensesCategory } from "../../../../types/Expenses";
+import moment from "moment";
 
 const Spacing = styled.div`
   height: 18px;
@@ -15,9 +16,14 @@ const Spacing = styled.div`
 interface Props {
   isBarChart: boolean;
   expensesByCategories: ExpensesCategory[];
+  date: string;
 }
 
-export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
+export const Expenses: FC<Props> = ({
+  isBarChart,
+  expensesByCategories,
+  date,
+}) => {
   return (
     <>
       <RoundedFlexContainer
@@ -30,6 +36,7 @@ export const Expenses: FC<Props> = ({ isBarChart, expensesByCategories }) => {
             .map((data) => data.amount)
             .reduce((a, b) => a + b, 0)
             .toFixed(2)}
+          date={`${date} ${moment().year()}`}
         />
         <Chart
           type={isBarChart ? "bar" : "pie"}

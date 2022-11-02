@@ -16,10 +16,15 @@ import { AddExpenses } from "../../AddExpenses/AddExpenses";
 import { Delayed } from "../../Delayed";
 import { Expenses } from "../../../types/Expenses";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { addNew, remove } from "../../../features/expenses/expensesSlice";
+import {
+  addNew,
+  remove,
+  selectMonth,
+} from "../../../features/expenses/expensesSlice";
 import moment from "moment";
 import { Alert } from "../../Alert/Alert";
 import { SlideUpModal } from "../../SlideUpModal/SlideUpModal";
+import { Select } from "../../Select/Select";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -37,6 +42,7 @@ interface Props {
 export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const dispatch = useAppDispatch();
   const { categoryList } = useAppSelector((state) => state.category);
+  const { selectedMonth } = useAppSelector((state) => state.expenses);
 
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
@@ -62,6 +68,10 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
       setSelectedExpense(undefined);
       setIsDeleteOpen(false);
     }
+  };
+
+  const onSelectMonth = (month: string) => {
+    dispatch(selectMonth(month));
   };
 
   return (
@@ -94,7 +104,30 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
             .reduce((a, b) => a + b, 0)}
         />
         <Spacing />
-        <Header title={`Transactions In ${moment().format("MMMM")} 🍂`} />
+        <Header
+          title={`Transactions 🍂`}
+          endElement={
+            <Select
+              style={{ width: 150 }}
+              value={selectedMonth ?? ""}
+              setValue={onSelectMonth}
+              options={[
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ]}
+            />
+          }
+        />
         <Spacing />
         {expensesList.map((data) => (
           <React.Fragment key={data.id}>

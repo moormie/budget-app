@@ -35,6 +35,7 @@ export const DetailsScreen: FC<Props> = ({
   onClickBack,
 }) => {
   const { type, chart } = useAppSelector((state) => state.details);
+  const { selectedMonth } = useAppSelector((state) => state.expenses);
   const dispatch = useAppDispatch();
 
   const selectTab = (tab: string) => {
@@ -81,6 +82,7 @@ export const DetailsScreen: FC<Props> = ({
         <Expenses
           isBarChart={chart === ChartType.BAR}
           expensesByCategories={expensesByCategories}
+          date={selectedMonth}
         />
       )}
       {type === DetailType.INCOME && <Incomes />}

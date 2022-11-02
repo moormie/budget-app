@@ -1,17 +1,15 @@
-import moment from "moment";
 import { FC } from "react";
 import StyledAmountHeader from ".";
 
 interface Props {
+  date: string;
   amount: string;
 }
 
-export const AmountHeader: FC<Props> = ({ amount }) => {
+export const AmountHeader: FC<Props> = ({ date, amount }) => {
   return (
     <StyledAmountHeader.Header>
-      <StyledAmountHeader.HeaderText>
-        {moment().format("DD MMMM YYYY")}
-      </StyledAmountHeader.HeaderText>
+      <StyledAmountHeader.HeaderText>{date}</StyledAmountHeader.HeaderText>
       <StyledAmountHeader.HeaderTitle>
         € {amount}
       </StyledAmountHeader.HeaderTitle>

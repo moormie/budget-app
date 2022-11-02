@@ -23,6 +23,7 @@ export const Incomes: FC<Props> = () => {
             .map((data) => data.amount)
             .reduce((a, b) => a + b, 0)
             .toFixed(2)}
+          date="November"
         />
       </RoundedFlexContainer>
       <Spacing />
