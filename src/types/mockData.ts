@@ -9,30 +9,29 @@ const { green, grape, yellow, yellowGreen, red, brown, orange, dark } =
 
 export const mockCategoryData: Category[] = [
   {
+    id: "001",
     name: "Food",
     color: { primary: green, secondary: dark.green },
   },
   {
+    id: "002",
     name: "Car",
     color: { primary: grape, secondary: dark.grape },
   },
+  { id: "003", name: "Home", color: { primary: brown, secondary: dark.brown } },
   {
-    name: "Home",
-    color: { primary: brown, secondary: dark.brown },
-  },
-  {
+    id: "004",
     name: "Entertainment",
     color: { primary: yellowGreen, secondary: dark.yellowGreen },
   },
+  { id: "005", name: "Medical", color: { primary: red, secondary: dark.red } },
   {
-    name: "Medical",
-    color: { primary: red, secondary: dark.red },
-  },
-  {
+    id: "006",
     name: "Personal",
     color: { primary: yellow, secondary: dark.yellow },
   },
   {
+    id: "007",
     name: "Travel",
     color: { primary: orange, secondary: dark.orange },
   },
