@@ -10,9 +10,11 @@ import { ExpensesCategory } from "../types/Expenses";
 
 const DetailsPage: FC = () => {
   const navigate = useNavigate();
-  const { dataList, loading: expensesLoading } = useAppSelector(
-    (state) => state.expenses
-  );
+  const {
+    dataList,
+    selectedMonth,
+    loading: expensesLoading,
+  } = useAppSelector((state) => state.expenses);
   const { categoryList, loading: categoryLoading } = useAppSelector(
     (state) => state.category
   );
@@ -24,9 +26,9 @@ const DetailsPage: FC = () => {
   useEffect(() => {
     const actualMonth = dataList.filter(
       (e) =>
-        e.date.month() === moment().month() && e.date.year() === moment().year()
+        e.date.year() === moment().year() &&
+        e.date.format("MMMM") === selectedMonth
     );
-
     const convertedList = convertToExpensesWithCategory(
       actualMonth,
       categoryList

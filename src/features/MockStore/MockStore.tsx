@@ -25,6 +25,7 @@ export const mockInitialState: ExpensesState &
   dateTo: null,
   amountFrom: 0,
   categoryList: mockCategoryData,
+  selectedMonth: "October",
 };
 
 export const Mockstore = (props: {
