@@ -28,7 +28,20 @@ export const getCategoryData = createAsyncThunk("category/get", async () => {
 const categorySlice = createSlice({
   name: "category",
   initialState,
-  reducers: {},
+  reducers: {
+    addNew: (state, action: PayloadAction<Category>) => {
+      state.categoryList.push(action.payload);
+    },
+    remove: (state, action: PayloadAction<string>) => {
+      const itemIndex = state.categoryList.findIndex(
+        (i) => i.id === action.payload
+      );
+      state.categoryList.splice(itemIndex, 1);
+    },
+    updateList: (state, action: PayloadAction<Category[]>) => {
+      state.categoryList = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCategoryData.pending, (state) => {
@@ -46,6 +59,8 @@ const categorySlice = createSlice({
       });
   },
 });
+
+export const { addNew, remove, updateList } = categorySlice.actions;
 
 export const selectCategory = (state: RootState) => state.category.categoryList;
 
