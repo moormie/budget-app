@@ -23,12 +23,13 @@ export const BarChart: FC<Props> = ({ dataList = [] }) => {
       <StyledChart.BarItems>
         {dataList.map((data, index) => {
           const { category } = data;
-          const primary = category?.color.primary;
+          const { primary, secondary } = category?.color;
           return (
             <BarLine
               key={index}
               height={(data.amount / max) * 100}
-              color={primary}
+              colorPrimary={primary}
+              colorSecondary={secondary}
             />
           );
         })}
