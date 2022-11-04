@@ -22,4 +22,5 @@ export const Default = Template.bind({});
 
 Default.args = {
   height: 78,
+  colorPrimary: "blue",
 };

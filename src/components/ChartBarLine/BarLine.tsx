@@ -21,23 +21,39 @@ const grow = (height: number) => keyframes`
   }
 `;
 
-const Line = styled.div<{ height: number; color?: string }>`
+const Line = styled.div<{
+  height: number;
+  colorPrimary?: string;
+  colorSecondary?: string;
+}>`
   height: ${(props) => props.height}%;
   width: 100%;
-  background-color: ${(props) => props?.color ?? props.theme.colors.gray};
+  background: linear-gradient(
+    ${(props) => props.colorPrimary ?? props.theme.colors.gray},
+    ${(props) => props.colorSecondary ?? props.theme.colors.gray}
+  );
   border-radius: 6px;
   animation: ${(props) => grow(props.height)} 1s ease-out;
 `;
 
 interface Props {
   height: number;
-  color?: string;
+  colorPrimary?: string;
+  colorSecondary?: string;
 }
 
-export const BarLine: FC<Props> = ({ height, color }) => {
+export const BarLine: FC<Props> = ({
+  height,
+  colorPrimary,
+  colorSecondary,
+}) => {
   return (
     <Container>
-      <Line height={height} color={color} />
+      <Line
+        height={height}
+        colorPrimary={colorPrimary}
+        colorSecondary={colorSecondary}
+      />
     </Container>
   );
 };
