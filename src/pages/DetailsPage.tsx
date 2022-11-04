@@ -35,7 +35,7 @@ const DetailsPage: FC = () => {
     );
     const categoriesAmount = getCategoriesAmount(convertedList);
     setExpensesByCategories(categoriesAmount);
-  }, [dataList, categoryList]);
+  }, [dataList, categoryList, selectedMonth]);
 
   const onClickBack = () => {
     navigate("/");
