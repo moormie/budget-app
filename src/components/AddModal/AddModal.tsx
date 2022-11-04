@@ -4,11 +4,12 @@ import { Button } from "../Button/Button";
 import { InputField } from "../InputField/InputField";
 import { ModalBackground } from "../ModalBackground";
 import { HexColorPicker } from "react-colorful";
+import { hexToHSL } from "../../converters/hexHSLconverter";
 
 interface Props {
   visible?: boolean;
   onClose: () => void;
-  onSubmit: (name: string, primary: string, secondary?: string) => void;
+  onSubmit: (name: string, primary: string) => void;
   errorMessage?: string;
 }
 
@@ -19,8 +20,7 @@ export const AddModal: FC<Props> = ({
   errorMessage,
 }) => {
   const [category, setCategory] = useState("");
-  const [colorPrimary, setColorPrimary] = useState("#aabbcc");
-  const [colorSecondary, setColorSecondary] = useState("#aabbcc");
+  const [color, setColor] = useState("#aabbcc");
 
   return (
     <ModalBackground visible={visible}>
@@ -35,27 +35,19 @@ export const AddModal: FC<Props> = ({
         </StyledModal.InputContainer>
         <StyledModal.ErrorText>{errorMessage}</StyledModal.ErrorText>
         <p>Pick a color</p>
-        <StyledModal.ColorPicker>
-          <div>
-            <HexColorPicker
-              color={colorPrimary}
-              onChange={setColorPrimary}
-              style={{ maxWidth: 160 }}
-            />
-          </div>
-          <div>
-            <HexColorPicker
-              color={colorSecondary}
-              onChange={setColorSecondary}
-              style={{ maxWidth: 160 }}
-            />
-          </div>
-        </StyledModal.ColorPicker>
+
+        <div>
+          <HexColorPicker
+            color={color}
+            onChange={setColor}
+            style={{ minWidth: 280 }}
+          />
+        </div>
         <StyledModal.ButtonContainer>
           <Button label="Cancel" onClick={onClose} />
           <Button
             label="Save"
-            onClick={() => onSubmit(category, colorPrimary, colorSecondary)}
+            onClick={() => onSubmit(category, color)}
             variant="success"
             disabled={!category}
           />

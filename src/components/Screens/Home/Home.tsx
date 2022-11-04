@@ -25,6 +25,8 @@ import moment from "moment";
 import { Alert } from "../../Alert/Alert";
 import { SlideUpModal } from "../../SlideUpModal/SlideUpModal";
 import { Select } from "../../Select/Select";
+import { updateList } from "../../../features/category/categorySlice";
+import { Category } from "../../../types/Category";
 
 const MainContainer = styled.div`
   padding: 40px 24px 60px 24px;
@@ -57,12 +59,12 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
     }
   };
 
-  const onAddNew = (newExpense: Expenses) => {
+  const onAddNewExpense = (newExpense: Expenses) => {
     dispatch(addNew(newExpense));
     setIsAddNewOpen(false);
   };
 
-  const onDelete = () => {
+  const onDeleteExpense = () => {
     if (selectedExpense?.id) {
       dispatch(remove(selectedExpense.id));
       setSelectedExpense(undefined);
@@ -72,6 +74,11 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
 
   const onSelectMonth = (month: string) => {
     dispatch(selectMonth(month));
+  };
+
+  const onUpdateCategories = (categories: Category[]) => {
+    dispatch(updateList(categories));
+    setIsSettingsOpen(false);
   };
 
   return (
@@ -158,7 +165,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
       </Delayed>
       <Delayed visible={isAddNewOpen}>
         <SlideUpModal onClose={() => setIsAddNewOpen(false)}>
-          <AddExpenses categoryList={categoryList} onSave={onAddNew} />
+          <AddExpenses categoryList={categoryList} onSave={onAddNewExpense} />
         </SlideUpModal>
       </Delayed>
       <Delayed visible={isDeleteOpen}>
@@ -166,12 +173,12 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
           message={`Delete transaction: ${selectedExpense?.category} - € ${selectedExpense?.amount}`}
           note={selectedExpense?.note}
           onClose={() => setIsDeleteOpen(false)}
-          onSubmit={onDelete}
+          onSubmit={onDeleteExpense}
         />
       </Delayed>
       <Delayed visible={isSettingsOpen}>
         <SlideUpModal onClose={() => setIsSettingsOpen(false)}>
-          <Settings />
+          <Settings onSave={onUpdateCategories} />
         </SlideUpModal>
       </Delayed>
     </React.Fragment>

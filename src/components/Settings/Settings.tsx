@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import StyledSettings from ".";
 import { Add, Trash } from "../../assets";
 import { IconButton } from "../IconButton/IconButton";
@@ -11,10 +11,14 @@ import { AddModal } from "../AddModal/AddModal";
 import { Category } from "../../types/Category";
 import { useAppSelector } from "../../app/hooks";
 import { Loading } from "../Loading";
+import { v4 as uuidv4 } from "uuid";
+import { hexToHSL, HSLToHex } from "../../converters/hexHSLconverter";
 
-interface Props {}
+interface Props {
+  onSave: (categoryList: Category[]) => void;
+}
 
-export const Settings: FC<Props> = () => {
+export const Settings: FC<Props> = ({ onSave }) => {
   const { categoryList: dataList, loading } = useAppSelector(
     (state) => state.category
   );
@@ -22,15 +26,11 @@ export const Settings: FC<Props> = () => {
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState("€ EUR");
   const [selectedCategory, setSelectedCategory] = useState<Category>();
-  const [categoryList, setCategoryList] = useState<Category[]>([]);
+  const [categoryList, setCategoryList] = useState<Category[]>(dataList);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    setCategoryList(dataList);
-  }, [dataList]);
-
   const onDeleteCategory = () => {
-    if (selectedCategory) {
+    if (selectedCategory?.id) {
       const updatedList = [...categoryList];
       updatedList.splice(updatedList.indexOf(selectedCategory), 1);
       setCategoryList(updatedList);
@@ -38,25 +38,26 @@ export const Settings: FC<Props> = () => {
     }
   };
 
-  const onAddCategory = (
-    category: string,
-    primary: string,
-    secondary?: string
-  ) => {
-    if (categoryList.find((c) => c.name === category)) {
+  const onAddCategory = (category: string, primary: string) => {
+    if (dataList.find((c) => c.name === category)) {
       setError("Category already exists");
     } else {
+      const { h, s, l } = hexToHSL(primary);
+      const secondary = HSLToHex({ h: h, s: s, l: l > 20 ? l - 20 : 0 });
       const updatedList = [...categoryList];
-      updatedList.push({ name: category, color: { primary, secondary } });
+      updatedList.push({
+        id: uuidv4(),
+        name: category,
+        color: { primary, secondary },
+      });
       setCategoryList(updatedList);
       setIsAddNewOpen(false);
       setError("");
     }
   };
 
-  const onSave = () => {
-    console.log(selectedCurrency);
-    console.log(categoryList);
+  const onSaveChanges = () => {
+    onSave(categoryList);
   };
 
   const onCancel = () => {
@@ -109,7 +110,7 @@ export const Settings: FC<Props> = () => {
           <Button
             variant="success"
             label="Save"
-            onClick={onSave}
+            onClick={onSaveChanges}
             disabled={categoryList.length === 0}
           />
         </StyledSettings.ButtonContainer>
