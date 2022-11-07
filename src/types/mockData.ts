@@ -195,6 +195,58 @@ export const mockExpensesData: Expenses[] = [
     date: moment("2022-10-22"),
     note: "Some note...",
   },
+  {
+    id: "025",
+    category: "Home",
+    amount: 500,
+    date: moment("2022-11-01"),
+    note: "Some note...",
+  },
+  {
+    id: "026",
+    category: "Travel",
+    amount: 62,
+    date: moment("2022-11-02"),
+  },
+  {
+    id: "027",
+    category: "Entertainment",
+    amount: 45,
+    date: moment("2022-11-03"),
+  },
+  {
+    id: "028",
+    category: "Personal",
+    amount: 160,
+    date: moment("2022-11-04"),
+  },
+  {
+    id: "029",
+    category: "Car",
+    amount: 60,
+    date: moment("2022-11-04"),
+  },
+  {
+    id: "030",
+    category: "Medical",
+    amount: 20,
+    date: moment("2022-11-07"),
+    note: "Some note...",
+  },
+  {
+    id: "031",
+    category: "Food",
+    amount: 20,
+    date: moment("2022-11-03"),
+    note: "Some note...",
+  },
+  {
+    id: "032",
+    category: "Food",
+    amount: 20,
+    date: moment("2022-11-07"),
+    note: "Some note...",
+  },
 ];
 
 export const mockExpensesWithCategory = convertToExpensesWithCategory(
