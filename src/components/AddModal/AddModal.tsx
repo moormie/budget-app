@@ -4,7 +4,6 @@ import { Button } from "../Button/Button";
 import { InputField } from "../InputField/InputField";
 import { ModalBackground } from "../ModalBackground";
 import { HexColorPicker } from "react-colorful";
-import { hexToHSL } from "../../converters/hexHSLconverter";
 
 interface Props {
   visible?: boolean;
