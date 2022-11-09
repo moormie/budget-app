@@ -9,6 +9,12 @@ Please note that the app has a Mobile First design 📱
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
 
+### Future improvements:
+ * Dashboard design
+ * Multiple theme
+ * Login screen
+ * Save data in locale storage 
+
 ## Available Scripts
 
 In the project directory, you can run:
