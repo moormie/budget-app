@@ -8,7 +8,7 @@ describe("convert hsl and hex", () => {
     expect(hexToHSL("#006600")).toStrictEqual({ h: 120, s: 100, l: 20 });
     expect(hexToHSL("#003399")).toStrictEqual({ h: 220, s: 100, l: 30 });
     expect(hexToHSL("#ff00ff")).toStrictEqual({ h: 300, s: 100, l: 50 });
-    expect(hexToHSL("#ff")).toStrictEqual({ h: 0, s: 0, l: 50 });
+    expect(hexToHSL("#ff")).toStrictEqual({ h: 0, s: 0, l: 0 });
   });
   it("converts hsl to hex", () => {
     expect(HSLToHex({ h: 0, s: 0, l: 100 })).toBe("#ffffff");
@@ -18,6 +18,6 @@ describe("convert hsl and hex", () => {
     expect(HSLToHex({ h: 220, s: 100, l: 30 })).toBe("#003399");
     expect(HSLToHex({ h: 250, s: 100, l: 30 })).toBe("#1a0099");
     expect(HSLToHex({ h: 330, s: 100, l: 30 })).toBe("#99004d");
-    expect(HSLToHex({ h: -1, s: 100, l: 30 })).toBe("#808080");
+    expect(HSLToHex({ h: -1, s: 100, l: 30 })).toBe("#000000");
   });
 });
