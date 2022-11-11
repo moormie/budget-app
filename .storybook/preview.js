@@ -1,11 +1,17 @@
 import { ThemeProvider } from "styled-components";
 import { myTheme } from "../src/theme";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import {
+  mockInitialState,
+  Mockstore,
+} from "../src/features/MockStore/MockStore";
 
 export const decorators = [
   (Story) => (
     <ThemeProvider theme={myTheme}>
-      <Story />
+      <Mockstore initialState={mockInitialState} theme={myTheme}>
+        <Story />
+      </Mockstore>
     </ThemeProvider>
   ),
 ];

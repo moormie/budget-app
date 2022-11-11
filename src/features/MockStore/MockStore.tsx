@@ -6,15 +6,15 @@ import { Expenses } from "../../types/Expenses";
 import { SortType } from "../../types/SortType";
 import { FilterState } from "../filters/filterSlice";
 import { Category } from "../../types/Category";
-import { Moment } from "moment";
+import moment, { Moment } from "moment";
 import { CategoryState } from "../category/categorySlice";
-import { mockCategoryData } from "../../types/mockData";
+import { mockCategoryData, mockExpensesData } from "../../types/mockData";
 
 export const mockInitialState: ExpensesState &
   DetailsState &
   FilterState &
   CategoryState = {
-  dataList: [],
+  dataList: mockExpensesData,
   status: "idle",
   loading: false,
   type: DetailType.EXPENSES,
@@ -25,7 +25,7 @@ export const mockInitialState: ExpensesState &
   dateTo: null,
   amountFrom: 0,
   categoryList: mockCategoryData,
-  selectedMonth: "October",
+  selectedMonth: moment().format("MMMM"),
 };
 
 export const Mockstore = (props: {

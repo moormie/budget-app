@@ -2,10 +2,6 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { mockExpensesData } from "../../../types/mockData";
 import { HomeScreen } from "./Home";
 import { MemoryRouter } from "react-router-dom";
-import {
-  mockInitialState,
-  Mockstore,
-} from "../../../features/MockStore/MockStore";
 
 export default {
   title: "Screens/Home",
@@ -13,9 +9,7 @@ export default {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <Mockstore initialState={mockInitialState}>
-          <Story />
-        </Mockstore>
+        <Story />
       </MemoryRouter>
     ),
   ],
