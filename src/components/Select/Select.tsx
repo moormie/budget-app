@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from "react";
 import StyledSelect from ".";
 import { CaretDown, CaretUp } from "../../assets";
-import useOnClickOutside from "../../useOnClickOutside";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { InputField } from "../InputField/InputField";
 import { MenuList } from "../MenuList/MenuList";
 import { Delayed } from "../Delayed";

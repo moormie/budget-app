@@ -5,7 +5,7 @@ import { Calendar as CalendarIcon } from "../../assets/CalendarIcon";
 import { InputField } from "../InputField/InputField";
 import { Moment } from "moment";
 import moment from "moment";
-import useOnClickOutside from "../../useOnClickOutside";
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { Delayed } from "../Delayed";
 import { myTheme } from "../../theme";
 import { IconButton } from "../IconButton/IconButton";
