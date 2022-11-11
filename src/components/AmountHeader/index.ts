@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 const Header = styled.div`
   text-align: center;
+  width: 100%;
+  position: relative;
 `;
 
 const HeaderText = styled.p`
@@ -14,10 +16,17 @@ const HeaderTitle = styled.p`
   font-weight: 500;
 `;
 
+const IconContainer = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+`;
+
 const StyledAmountHeader = {
   Header,
   HeaderText,
   HeaderTitle,
+  IconContainer,
 };
 
 export default StyledAmountHeader;

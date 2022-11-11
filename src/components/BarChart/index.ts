@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  min-height: 230px;
+`;
 const AmountContainer = styled.div`
   width: 60px;
   text-align: center;
@@ -19,6 +24,7 @@ const BarItems = styled.div`
 `;
 
 const StyledChart = {
+  Container,
   AmountContainer,
   BarItems,
 };

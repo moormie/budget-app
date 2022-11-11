@@ -11,7 +11,7 @@ export const BarChart: FC<Props> = ({ dataList = [] }) => {
   const max = Math.max(...dataList.map((data) => data.amount));
 
   return (
-    <>
+    <StyledChart.Container>
       {max > 0 && (
         <StyledChart.AmountContainer>
           {[0, 1, 2, 3].map((e) => (
@@ -34,6 +34,6 @@ export const BarChart: FC<Props> = ({ dataList = [] }) => {
           );
         })}
       </StyledChart.BarItems>
-    </>
+    </StyledChart.Container>
   );
 };
