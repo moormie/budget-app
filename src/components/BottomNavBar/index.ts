@@ -9,7 +9,7 @@ const MainContainer = styled.div`
   border-radius: 24px 24px 0 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   box-shadow: rgb(17 17 17 / 18%) 0px -12px 20px 10px;
 `;
 
@@ -20,12 +20,12 @@ const ButtonContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  left: calc(50% - 25px);
+  left: calc(50% - 29px);
   box-shadow: rgb(17 17 17 / 28%) 0px 0px 20px 0px;
 `;
 
 const IconContainer = styled.div`
-  padding: 28px;
+  padding: 20px 0px;
   cursor: pointer;
 `;
 

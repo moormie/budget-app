@@ -1,6 +1,6 @@
 import { FC } from "react";
 import StyledNavBar from ".";
-import { Add, BarChart, Menu } from "../../assets";
+import { Add, BarChart, Home, Menu, Person } from "../../assets";
 import { IconButton } from "../IconButton/IconButton";
 import { myTheme } from "../../theme";
 import { Link } from "react-router-dom";
@@ -13,10 +13,16 @@ export const BottomNavBar: FC<Props> = ({ onClickButton }) => {
   return (
     <StyledNavBar.MainContainer>
       <StyledNavBar.IconContainer>
+        <Link to="/">
+          <Home color={myTheme.colors.dark.grape} width="24" height="24" />
+        </Link>
+      </StyledNavBar.IconContainer>
+      <StyledNavBar.IconContainer>
         <Link to="details">
           <BarChart color={myTheme.colors.dark.grape} width="24" height="24" />
         </Link>
       </StyledNavBar.IconContainer>
+      <StyledNavBar.IconContainer></StyledNavBar.IconContainer>
       <StyledNavBar.ButtonContainer>
         <IconButton
           size="large"
@@ -30,6 +36,11 @@ export const BottomNavBar: FC<Props> = ({ onClickButton }) => {
       <StyledNavBar.IconContainer>
         <Link to="expenses">
           <Menu color={myTheme.colors.dark.grape} width="24" height="24" />
+        </Link>
+      </StyledNavBar.IconContainer>
+      <StyledNavBar.IconContainer>
+        <Link to="profile">
+          <Person color={myTheme.colors.dark.grape} width="24" height="24" />
         </Link>
       </StyledNavBar.IconContainer>
     </StyledNavBar.MainContainer>
