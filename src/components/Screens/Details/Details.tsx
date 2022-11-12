@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { Header } from "../../Header/Header";
 import { IconButton } from "../../IconButton/IconButton";
-import { BarChart as BarChartIcon, CaretLeft, PieChart } from "../../../assets";
+import { CaretLeft } from "../../../assets";
 import styled from "styled-components";
-import { myTheme } from "../../../theme";
 import { NavBar } from "../../NavBar/NavBar";
 import { Expenses } from "./Expenses";
 import { Incomes } from "./Incomes";
@@ -11,14 +10,16 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import {
   ChartType,
   DetailType,
-  setChart,
   setType,
 } from "../../../features/details/detailsSlice";
-import { ExpensesCategory } from "../../../types/Expenses";
+import useMediaQuery from "../../../hooks/useMediaQuery";
+import { useExpensesByCategories } from "../../../hooks/useExpensesByCategories";
 
 const MainContainer = styled.div`
-  padding: 40px 24px 60px 24px;
-  background-color: ${myTheme.colors.lightGray};
+  padding: 24px;
+  @media (max-width: 1120px) {
+    padding-bottom: 60px;
+  }
 `;
 
 const Spacing = styled.div`
@@ -26,14 +27,14 @@ const Spacing = styled.div`
 `;
 
 interface Props {
-  expensesByCategories: ExpensesCategory[];
   onClickBack: () => void;
 }
 
-export const DetailsScreen: FC<Props> = ({
-  expensesByCategories,
-  onClickBack,
-}) => {
+export const DetailsScreen: FC<Props> = ({ onClickBack }) => {
+  const isSmallScreen = useMediaQuery("(max-width: 1120px)");
+
+  const { expensesByCategories } = useExpensesByCategories();
+
   const { type, chart } = useAppSelector((state) => state.details);
   const { selectedMonth } = useAppSelector((state) => state.expenses);
   const dispatch = useAppDispatch();
@@ -42,35 +43,18 @@ export const DetailsScreen: FC<Props> = ({
     dispatch(setType(tab as DetailType));
   };
 
-  const selectChart = (type: ChartType) => {
-    dispatch(setChart(type));
-  };
-
   return (
     <MainContainer>
-      <Header
-        title="Transactions"
-        startElement={
-          <IconButton onClick={onClickBack}>
-            <CaretLeft />
-          </IconButton>
-        }
-        endElement={
-          type === DetailType.EXPENSES ? (
-            chart === ChartType.BAR ? (
-              <IconButton onClick={() => selectChart(ChartType.PIE)}>
-                <PieChart />
-              </IconButton>
-            ) : (
-              <IconButton onClick={() => selectChart(ChartType.BAR)}>
-                <BarChartIcon />
-              </IconButton>
-            )
-          ) : (
-            <></>
-          )
-        }
-      />
+      {isSmallScreen && (
+        <Header
+          title="Transactions"
+          startElement={
+            <IconButton onClick={onClickBack}>
+              <CaretLeft />
+            </IconButton>
+          }
+        />
+      )}
       <Spacing />
       <NavBar
         elements={Object.values(DetailType)}
