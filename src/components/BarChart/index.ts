@@ -3,8 +3,11 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   width: 100%;
-  min-height: 230px;
+  @media (min-width: 1120px) {
+    min-height: 230px;
+  }
 `;
+
 const AmountContainer = styled.div`
   width: 60px;
   text-align: center;

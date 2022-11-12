@@ -26,7 +26,7 @@ export const ListCard: FC<ListCardProps> = ({
   onClickDelete,
 }) => {
   return (
-    <RoundedFlexContainer align="center">
+    <RoundedFlexContainer align="center" style={{ minWidth: 315 }}>
       <StyledListCard.Container onClick={onSelect}>
         {icon}
         <StyledListCard.TitleContainer>

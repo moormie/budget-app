@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const Container = styled.div`
+  height: 185px;
+  box-sizing: border-box;
   background: linear-gradient(
     to bottom left,
     ${(props) => props.theme.colors.yellow},
@@ -15,11 +17,16 @@ const HeaderText = styled.div`
   font-size: 14px;
   margin: 4px;
   text-align: center;
+  @media (min-width: 1140px) {
+    font-size: 16px;
+    font-weight: bold;
+  }
 `;
+
 const MainText = styled.div`
   font-size: 32px;
   font-weight: 500;
-  margin: 8px;
+  margin: 16px;
   text-align: center;
 `;
 

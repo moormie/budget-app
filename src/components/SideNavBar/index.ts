@@ -7,11 +7,12 @@ const Container = styled.div`
     ${(props) => props.theme.colors.yellowGreen},
     ${(props) => props.theme.colors.dark.yellowGreen}
   );
-  width: 200px;
+  width: 220px;
   display: flex;
   height: 100vh;
   padding: 8px;
-  box-shadow: 2px 0px 20px #888888; ;
+  box-shadow: 2px 0px 20px #888888;
+  box-sizing: border-box;
 `;
 
 const HeaderContainer = styled.div`
