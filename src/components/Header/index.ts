@@ -4,7 +4,11 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: 50px;
+  min-height: 55px;
+`;
+
+const StartElement = styled.div`
+  min-width: 50px;
 `;
 
 const MiddleContainer = styled.div`
@@ -16,16 +20,19 @@ const MiddleContainer = styled.div`
 const Subtitle = styled.p`
   margin: 4px 8px;
   font-size: 14px;
+  white-space: nowrap;
 `;
 
 const Title = styled.p`
   margin: 0 8px;
   font-size: 18px;
   font-weight: 500;
+  white-space: nowrap;
 `;
 
 const StyledHeader = {
   Container,
+  StartElement,
   MiddleContainer,
   Subtitle,
   Title,

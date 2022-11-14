@@ -16,7 +16,9 @@ export const Header: FC<Props> = ({
 }) => {
   return (
     <StyledHeader.Container>
-      {startElement}
+      {startElement && (
+        <StyledHeader.StartElement>{startElement}</StyledHeader.StartElement>
+      )}
       <StyledHeader.MiddleContainer>
         {subtitle && <StyledHeader.Subtitle>{subtitle}</StyledHeader.Subtitle>}
         {title && <StyledHeader.Title>{title}</StyledHeader.Title>}
