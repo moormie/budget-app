@@ -2,7 +2,7 @@ import moment from "moment";
 import React, { FC, useState } from "react";
 import StyledExpenses from ".";
 import { useAppSelector } from "../../../app/hooks";
-import { ArrowUpDown, CaretLeft, Sliders } from "../../../assets";
+import { ArrowUpDown, Sliders } from "../../../assets";
 import { Expenses } from "../../../types/Expenses";
 import { FilterValues } from "../../../types/FilterValues";
 import { Alert } from "../../Alert/Alert";
@@ -17,7 +17,6 @@ import { SortExpenses } from "../../SortExpenses/SortExpenses";
 
 interface Props {
   dataList: Expenses[];
-  onClickBack: () => void;
   submitSort: (value: string) => void;
   resetSort: () => void;
   submitFilter: (values: FilterValues) => void;
@@ -27,7 +26,6 @@ interface Props {
 
 export const ExpensesList: FC<Props> = ({
   dataList,
-  onClickBack,
   submitSort,
   resetSort,
   submitFilter,
@@ -87,11 +85,6 @@ export const ExpensesList: FC<Props> = ({
       <StyledExpenses.Container>
         <Header
           title="All Expenses"
-          startElement={
-            <IconButton onClick={onClickBack}>
-              <CaretLeft />
-            </IconButton>
-          }
           endElement={
             <>
               <IconButton onClick={() => setIsSortOpen(true)}>

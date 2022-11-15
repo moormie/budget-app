@@ -13,6 +13,24 @@ const Spacing = styled.div`
   height: 18px;
 `;
 
+const ListCardContainer = styled.div`
+  @media (min-width: 1120px) {
+    height: calc(100vh - 604px);
+    overflow: auto;
+    ::-webkit-scrollbar {
+      width: 5px;
+      margin-left: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: ${(props) => props.theme.colors.lightGray};
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: ${(props) => props.theme.colors.dark.gray};
+      border-radius: 3px;
+    }
+  }
+`;
 interface Props {
   isBarChart: boolean;
   expensesByCategories: ExpensesCategory[];
@@ -46,18 +64,19 @@ export const Expenses: FC<Props> = ({
       <Spacing />
       <Header title="Summary by Category" />
       <Spacing />
-
-      {expensesByCategories.map((data) => (
-        <React.Fragment key={data.category.name}>
-          <ListCard
-            icon={<ItemIcon category={data.category} />}
-            mainLabel={data.category.name}
-            endLabel={`€ ${data.amount.toFixed(2)}`}
-            endSublabel=""
-          />
-          <Spacing />
-        </React.Fragment>
-      ))}
+      <ListCardContainer>
+        {expensesByCategories.map((data) => (
+          <React.Fragment key={data.category.name}>
+            <ListCard
+              icon={<ItemIcon category={data.category} />}
+              mainLabel={data.category.name}
+              endLabel={`€ ${data.amount.toFixed(2)}`}
+              endSublabel=""
+            />
+            <Spacing />
+          </React.Fragment>
+        ))}
+      </ListCardContainer>
     </>
   );
 };

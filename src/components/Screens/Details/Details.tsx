@@ -1,7 +1,4 @@
 import { FC } from "react";
-import { Header } from "../../Header/Header";
-import { IconButton } from "../../IconButton/IconButton";
-import { CaretLeft } from "../../../assets";
 import styled from "styled-components";
 import { NavBar } from "../../NavBar/NavBar";
 import { Expenses } from "./Expenses";
@@ -45,17 +42,6 @@ export const DetailsScreen: FC<Props> = ({ onClickBack }) => {
 
   return (
     <MainContainer>
-      {isSmallScreen && (
-        <Header
-          title="Transactions"
-          startElement={
-            <IconButton onClick={onClickBack}>
-              <CaretLeft />
-            </IconButton>
-          }
-        />
-      )}
-      <Spacing />
       <NavBar
         elements={Object.values(DetailType)}
         selectedElement={type}

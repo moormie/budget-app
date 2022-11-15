@@ -64,10 +64,6 @@ const ExpensesPage: FC = () => {
     note,
   ]);
 
-  const onClickBack = () => {
-    navigate("/");
-  };
-
   const onSubmitSort = (value: string) => {
     dispatch(setSortValue(value as SortType));
   };
@@ -106,7 +102,6 @@ const ExpensesPage: FC = () => {
       {loading && <Loading />}
       <ExpensesList
         dataList={sortedExpensesList}
-        onClickBack={onClickBack}
         submitSort={onSubmitSort}
         resetSort={onResetSort}
         submitFilter={onSubmitFilter}

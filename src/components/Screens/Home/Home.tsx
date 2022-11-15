@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Header } from "../../Header/Header";
 import { MainCard } from "../../MainCard/MainCard";
 import { ListCard } from "../../ListCard/ListCard";
-import { BottomNavBar } from "../../BottomNavBar/BottomNavBar";
 import { mockIncomesData } from "../../../types/mockData";
 import { myTheme } from "../../../theme";
 import { ItemIcon } from "../../ItemIcon";
@@ -12,15 +11,10 @@ import { IconButton } from "../../IconButton/IconButton";
 import { Settings as SettingsIcon } from "../../../assets";
 import { Settings } from "../../Settings/Settings";
 import fox from "../../../fox.png";
-import { AddExpenses } from "../../AddExpenses/AddExpenses";
 import { Delayed } from "../../Delayed";
 import { Expenses } from "../../../types/Expenses";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import {
-  addNew,
-  remove,
-  selectMonth,
-} from "../../../features/expenses/expensesSlice";
+import { remove, selectMonth } from "../../../features/expenses/expensesSlice";
 import moment from "moment";
 import { Alert } from "../../Alert/Alert";
 import { SlideUpModal } from "../../SlideUpModal/SlideUpModal";
@@ -29,12 +23,33 @@ import { updateList } from "../../../features/category/categorySlice";
 import { Category } from "../../../types/Category";
 
 const MainContainer = styled.div`
-  padding: 40px 24px 60px 24px;
-  background-color: ${myTheme.colors.lightGray};
+  padding: 24px;
+  @media (max-width: 1120px) {
+    padding-bottom: 60px;
+  }
 `;
 
 const Spacing = styled.div`
   height: 18px;
+`;
+
+const ListCardContainer = styled.div`
+  @media (min-width: 1120px) {
+    height: calc(100vh - 360px);
+    overflow: auto;
+    ::-webkit-scrollbar {
+      width: 5px;
+      margin-left: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: ${(props) => props.theme.colors.lightGray};
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: ${(props) => props.theme.colors.gray};
+      border-radius: 3px;
+    }
+  }
 `;
 
 interface Props {
@@ -47,7 +62,6 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const { selectedMonth } = useAppSelector((state) => state.expenses);
 
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
-  const [isAddNewOpen, setIsAddNewOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -57,11 +71,6 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
     } else {
       setSelectedExpense(expense);
     }
-  };
-
-  const onAddNewExpense = (newExpense: Expenses) => {
-    dispatch(addNew(newExpense));
-    setIsAddNewOpen(false);
   };
 
   const onDeleteExpense = () => {
@@ -118,56 +127,38 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
               style={{ width: 150 }}
               value={selectedMonth ?? ""}
               setValue={onSelectMonth}
-              options={[
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-              ]}
+              options={moment.months()}
             />
           }
         />
         <Spacing />
-        {expensesList.map((data) => (
-          <React.Fragment key={data.id}>
-            <Delayed visible={!isAddNewOpen && !isSettingsOpen}>
-              <ListCard
-                icon={
-                  <ItemIcon
-                    category={categoryList.find(
-                      (c) => c.name === data.category
-                    )}
-                  />
-                }
-                mainLabel={data.category}
-                sublabel={data.note}
-                endLabel={`€ ${data.amount}`}
-                endSublabel={moment(data.date).format("DD/MM/YYYY")}
-                selected={selectedExpense?.id === data.id}
-                onSelect={() => onSelect(data)}
-                onClickDelete={() => setIsDeleteOpen(true)}
-              />
-            </Delayed>
-            <Spacing />
-          </React.Fragment>
-        ))}
+        <ListCardContainer>
+          {expensesList.map((data) => (
+            <React.Fragment key={data.id}>
+              <Delayed visible={!isSettingsOpen}>
+                <ListCard
+                  icon={
+                    <ItemIcon
+                      category={categoryList.find(
+                        (c) => c.name === data.category
+                      )}
+                    />
+                  }
+                  mainLabel={data.category}
+                  sublabel={data.note}
+                  endLabel={`€ ${data.amount}`}
+                  endSublabel={moment(data.date).format("DD/MM/YYYY")}
+                  selected={selectedExpense?.id === data.id}
+                  onSelect={() => onSelect(data)}
+                  onClickDelete={() => setIsDeleteOpen(true)}
+                />
+              </Delayed>
+              <Spacing />
+            </React.Fragment>
+          ))}
+        </ListCardContainer>
       </MainContainer>
-      <Delayed visible={!isAddNewOpen}>
-        <BottomNavBar onClickButton={() => setIsAddNewOpen(true)} />
-      </Delayed>
-      <Delayed visible={isAddNewOpen}>
-        <SlideUpModal onClose={() => setIsAddNewOpen(false)}>
-          <AddExpenses categoryList={categoryList} onSave={onAddNewExpense} />
-        </SlideUpModal>
-      </Delayed>
+
       <Delayed visible={isDeleteOpen}>
         <Alert
           message={`Delete transaction: ${selectedExpense?.category} - € ${selectedExpense?.amount}`}
