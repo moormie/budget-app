@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
 import { ExpensesList } from "../components/Screens/Expenses/Expenses";
@@ -20,7 +19,6 @@ import { FilterValues } from "../types/FilterValues";
 import { SortType } from "../types/SortType";
 
 const ExpensesPage: FC = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const { dataList: allExpenses, loading } = useAppSelector(

@@ -45,7 +45,7 @@ export const useExpensesByCategories = (): Data => {
     } else {
       setExpensesByCategories({ expensesByCategories: [], loading: true });
     }
-  }, [dataList, categoryList, selectedMonth]);
+  }, [dataList, categoryList, selectedMonth, expensesLoading, categoryLoading]);
 
   return expensesByCategories;
 };
