@@ -9,7 +9,6 @@ import {
   DetailType,
   setType,
 } from "../../../features/details/detailsSlice";
-import useMediaQuery from "../../../hooks/useMediaQuery";
 import { useExpensesByCategories } from "../../../hooks/useExpensesByCategories";
 
 const MainContainer = styled.div`
@@ -28,7 +27,6 @@ interface Props {
 }
 
 export const DetailsScreen: FC<Props> = ({ onClickBack }) => {
-  const isSmallScreen = useMediaQuery("(max-width: 1120px)");
 
   const { expensesByCategories } = useExpensesByCategories();
 
