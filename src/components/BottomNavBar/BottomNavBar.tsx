@@ -3,23 +3,31 @@ import StyledNavBar from ".";
 import { Add, BarChart, Home, Menu, Person } from "../../assets";
 import { IconButton } from "../IconButton/IconButton";
 import { myTheme } from "../../theme";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface Props {
   onClickButton: () => void;
 }
 
 export const BottomNavBar: FC<Props> = ({ onClickButton }) => {
+  const location = useLocation();
+
+  const getIconColor = (path: string) => {
+    return path === location.pathname
+      ? myTheme.colors.dark.grape
+      : myTheme.colors.dark.green;
+  };
+
   return (
     <StyledNavBar.MainContainer>
       <StyledNavBar.IconContainer>
         <Link to="/">
-          <Home color={myTheme.colors.dark.grape} width="24" height="24" />
+          <Home color={getIconColor("/")} width="24" height="24" />
         </Link>
       </StyledNavBar.IconContainer>
       <StyledNavBar.IconContainer>
         <Link to="details">
-          <BarChart color={myTheme.colors.dark.grape} width="24" height="24" />
+          <BarChart color={getIconColor("/details")} width="24" height="24" />
         </Link>
       </StyledNavBar.IconContainer>
       <StyledNavBar.IconContainer></StyledNavBar.IconContainer>
@@ -35,12 +43,12 @@ export const BottomNavBar: FC<Props> = ({ onClickButton }) => {
       </StyledNavBar.ButtonContainer>
       <StyledNavBar.IconContainer>
         <Link to="expenses">
-          <Menu color={myTheme.colors.dark.grape} width="24" height="24" />
+          <Menu color={getIconColor("/expenses")} width="24" height="24" />
         </Link>
       </StyledNavBar.IconContainer>
       <StyledNavBar.IconContainer>
         <Link to="profile">
-          <Person color={myTheme.colors.dark.grape} width="24" height="24" />
+          <Person color={getIconColor("/profile")} width="24" height="24" />
         </Link>
       </StyledNavBar.IconContainer>
     </StyledNavBar.MainContainer>
