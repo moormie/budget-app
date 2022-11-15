@@ -2,7 +2,11 @@ import { FC } from "react";
 import StyledAmountHeader from ".";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { BarChart, PieChart } from "../../assets";
-import { ChartType, setChart } from "../../features/details/detailsSlice";
+import {
+  ChartType,
+  DetailType,
+  setChart,
+} from "../../features/details/detailsSlice";
 import { IconButton } from "../IconButton/IconButton";
 
 interface Props {
@@ -12,7 +16,7 @@ interface Props {
 
 export const AmountHeader: FC<Props> = ({ date, amount }) => {
   const dispatch = useAppDispatch();
-  const { chart } = useAppSelector((state) => state.details);
+  const { type, chart } = useAppSelector((state) => state.details);
   const selectChart = (type: ChartType) => {
     dispatch(setChart(type));
   };
@@ -23,15 +27,17 @@ export const AmountHeader: FC<Props> = ({ date, amount }) => {
         € {amount}
       </StyledAmountHeader.HeaderTitle>
       <StyledAmountHeader.IconContainer>
-        {chart === ChartType.BAR ? (
-          <IconButton onClick={() => selectChart(ChartType.PIE)}>
-            <PieChart />
-          </IconButton>
-        ) : (
-          <IconButton onClick={() => selectChart(ChartType.BAR)}>
-            <BarChart />
-          </IconButton>
-        )}
+        {type === DetailType.EXPENSES ? (
+          chart === ChartType.BAR ? (
+            <IconButton onClick={() => selectChart(ChartType.PIE)}>
+              <PieChart />
+            </IconButton>
+          ) : (
+            <IconButton onClick={() => selectChart(ChartType.BAR)}>
+              <BarChart />
+            </IconButton>
+          )
+        ) : null}
       </StyledAmountHeader.IconContainer>
     </StyledAmountHeader.Header>
   );
