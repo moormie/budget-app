@@ -1,22 +1,37 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+const NavBar = styled.div<{ close?: boolean }>`
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
   flex-direction: column;
   background: linear-gradient(
     ${(props) => props.theme.colors.yellowGreen},
     ${(props) => props.theme.colors.dark.yellowGreen}
   );
-  width: 220px;
+  width: ${(props) => (props.close ? "98px" : "220px")};
   display: flex;
-  height: 100vh;
+  height: 100%;
   padding: 8px;
   box-shadow: 2px 0px 20px #888888;
   box-sizing: border-box;
+  transition: 0.4s ease-in;
+`;
+
+const Container = styled.div``;
+
+const ButtonContainer = styled.div<{ open: boolean }>`
+  position: absolute;
+  left: ${(props) => (props.open ? "200px" : "80px")};
+  transition: 0.4s ease-in;
+  top: 60px;
 `;
 
 const HeaderContainer = styled.div`
   margin: 40px 16px;
+  height: 55px;
+  overflow: hidden;
 `;
 
 const List = styled.ul`
@@ -26,7 +41,9 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  padding: 4px 16px;
+  margin: 4px 16px;
+  height: 50px;
+  overflow: hidden;
 `;
 
 const Link = styled.a<{ active?: boolean }>`
@@ -48,8 +65,14 @@ const Link = styled.a<{ active?: boolean }>`
   cursor: pointer;
 `;
 
-const LinkText = styled.div`
+const Icon = styled.div`
+  min-width: 50px;
+  text-align: center;
+`;
+
+const LinkText = styled.div<{ visible?: boolean }>`
   margin: 8px;
+  white-space: nowrap;
 `;
 
 const Line = styled.hr`
@@ -58,11 +81,14 @@ const Line = styled.hr`
 `;
 
 const StyledNavBar = {
+  NavBar,
   Container,
+  ButtonContainer,
   HeaderContainer,
   List,
   ListItem,
   Link,
+  Icon,
   LinkText,
   Line,
 };
