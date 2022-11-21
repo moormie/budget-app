@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Header } from "../../Header/Header";
 import { MainCard } from "../../MainCard/MainCard";
 import { ListCard } from "../../ListCard/ListCard";
-import { mockIncomesData } from "../../../types/mockData";
 import { myTheme } from "../../../theme";
 import { ItemIcon } from "../../ItemIcon";
 import { ColoredIcon } from "../../ColoredIcon/ColoredIcon";
@@ -60,6 +59,7 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
   const dispatch = useAppDispatch();
   const { categoryList } = useAppSelector((state) => state.category);
   const { selectedMonth } = useAppSelector((state) => state.expenses);
+  const { allIncomes } = useAppSelector((state) => state.incomes);
 
   const [selectedExpense, setSelectedExpense] = useState<Expenses>();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -112,7 +112,12 @@ export const HomeScreen: FC<Props> = ({ expensesList }) => {
         />
         <Spacing />
         <MainCard
-          totalIncome={mockIncomesData
+          totalIncome={allIncomes
+            .filter(
+              (income) =>
+                income.date.year() === moment().year() &&
+                income.date.format("MMMM") === selectedMonth
+            )
             .map((data) => data.amount)
             .reduce((a, b) => a + b, 0)}
           totalExpenses={expensesList

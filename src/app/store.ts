@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { fetchExpensesData } from "../features/expenses/expensesAPI";
+import incomesReducer from "../features/incomes/incomesSlice";
 import expensesReducer from "../features/expenses/expensesSlice";
 import detailsReducer from "../features/details/detailsSlice";
 import filterReducer from "../features/filters/filterSlice";
@@ -8,6 +9,7 @@ import categoryReducer from "../features/category/categorySlice";
 export const store = configureStore({
   reducer: {
     expenses: expensesReducer,
+    incomes: incomesReducer,
     details: detailsReducer,
     filter: filterReducer,
     category: categoryReducer,

@@ -10,6 +10,7 @@ import {
   setType,
 } from "../../../features/details/detailsSlice";
 import { useExpensesByCategories } from "../../../hooks/useExpensesByCategories";
+import moment from "moment";
 
 const MainContainer = styled.div`
   padding: 24px;
@@ -26,10 +27,9 @@ interface Props {
   onClickBack: () => void;
 }
 
-export const DetailsScreen: FC<Props> = ({ onClickBack }) => {
-
+export const DetailsScreen: FC<Props> = () => {
   const { expensesByCategories } = useExpensesByCategories();
-
+  const { allIncomes } = useAppSelector((state) => state.incomes);
   const { type, chart } = useAppSelector((state) => state.details);
   const { selectedMonth } = useAppSelector((state) => state.expenses);
   const dispatch = useAppDispatch();
@@ -53,7 +53,13 @@ export const DetailsScreen: FC<Props> = ({ onClickBack }) => {
           date={selectedMonth}
         />
       )}
-      {type === DetailType.INCOME && <Incomes />}
+      {type === DetailType.INCOME && (
+        <Incomes
+          dataList={[...allIncomes].sort((a, b) =>
+            moment(b.date).format("X").localeCompare(moment(a.date).format("X"))
+          )}
+        />
+      )}
     </MainContainer>
   );
 };

@@ -12,12 +12,14 @@ import { Expenses } from "./types/Expenses";
 import { Delayed } from "./components/Delayed/Delayed";
 import { SlideUpModal } from "./components/SlideUpModal/SlideUpModal";
 import { AddExpenses } from "./components/AddExpenses/AddExpenses";
+import { getIncomesData } from "./features/incomes/incomesSlice";
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getExpensesData());
+    dispatch(getIncomesData());
     dispatch(getCategoryData());
   }, [dispatch]);
 
