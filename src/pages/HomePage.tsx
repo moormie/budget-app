@@ -7,20 +7,20 @@ import { getSortedExpensesList } from "../helpers/getSortedExpensesList";
 import { Expenses } from "../types/Expenses";
 
 const HomePage: FC = () => {
-  const { dataList, selectedMonth, loading } = useAppSelector(
+  const { allExpenses, selectedMonth, loading } = useAppSelector(
     (state) => state.expenses
   );
 
   const [sortedExpensesList, setSortedExpensesList] = useState<Expenses[]>([]);
 
   useEffect(() => {
-    const actualMonth = dataList.filter(
+    const actualMonth = allExpenses.filter(
       (e) =>
         e.date.year() === moment().year() &&
         e.date.format("MMMM") === selectedMonth
     );
     setSortedExpensesList(getSortedExpensesList(actualMonth) as Expenses[]);
-  }, [dataList, selectedMonth]);
+  }, [allExpenses, selectedMonth]);
 
   return (
     <>

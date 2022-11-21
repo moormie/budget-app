@@ -5,14 +5,14 @@ import { Expenses } from "../../types/Expenses";
 import { fetchExpensesData } from "./expensesAPI";
 
 export interface ExpensesState {
-  dataList: Expenses[];
+  allExpenses: Expenses[];
   selectedMonth: string;
   status: "idle" | "loading" | "failed";
   loading: boolean;
 }
 
 const initialState: ExpensesState = {
-  dataList: [],
+  allExpenses: [],
   status: "idle",
   selectedMonth: moment().format("MMMM"),
   loading: true,
@@ -21,7 +21,7 @@ const initialState: ExpensesState = {
 export const getExpensesData = createAsyncThunk("expenses/get", async () => {
   try {
     const response = await fetchExpensesData();
-    return response.data;
+    return response;
   } catch (error) {
     console.log(error);
     return [];
@@ -33,13 +33,13 @@ const expensesSlice = createSlice({
   initialState,
   reducers: {
     addNew: (state, action: PayloadAction<Expenses>) => {
-      state.dataList.push(action.payload);
+      state.allExpenses.push(action.payload);
     },
     remove: (state, action: PayloadAction<string>) => {
-      const itemIndex = state.dataList.findIndex(
+      const itemIndex = state.allExpenses.findIndex(
         (i) => i.id === action.payload
       );
-      state.dataList.splice(itemIndex, 1);
+      state.allExpenses.splice(itemIndex, 1);
     },
     selectMonth: (state, action: PayloadAction<string>) => {
       state.selectedMonth = action.payload;
@@ -53,7 +53,7 @@ const expensesSlice = createSlice({
       })
       .addCase(getExpensesData.fulfilled, (state, action) => {
         state.status = "idle";
-        state.dataList = action.payload;
+        state.allExpenses = action.payload;
         state.loading = false;
       })
       .addCase(getExpensesData.rejected, (state) => {
@@ -65,6 +65,6 @@ const expensesSlice = createSlice({
 
 export const { addNew, remove, selectMonth } = expensesSlice.actions;
 
-export const selectExpenses = (state: RootState) => state.expenses.dataList;
+export const selectExpenses = (state: RootState) => state.expenses.allExpenses;
 
 export default expensesSlice.reducer;

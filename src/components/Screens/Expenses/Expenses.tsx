@@ -32,7 +32,7 @@ export const ExpensesList: FC<Props> = ({
   resetFilter,
   deleteExpense,
 }) => {
-  const { dataList: allExpenses } = useAppSelector((state) => state.expenses);
+  const { allExpenses } = useAppSelector((state) => state.expenses);
   const { categoryList } = useAppSelector((state) => state.category);
   const {
     sortValue,

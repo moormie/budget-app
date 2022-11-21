@@ -21,9 +21,7 @@ import { SortType } from "../types/SortType";
 const ExpensesPage: FC = () => {
   const dispatch = useAppDispatch();
 
-  const { dataList: allExpenses, loading } = useAppSelector(
-    (state) => state.expenses
-  );
+  const { allExpenses, loading } = useAppSelector((state) => state.expenses);
   const {
     sortValue,
     categories,

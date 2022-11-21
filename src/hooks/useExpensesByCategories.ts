@@ -12,7 +12,7 @@ interface Data {
 
 export const useExpensesByCategories = (): Data => {
   const {
-    dataList,
+    allExpenses,
     selectedMonth,
     loading: expensesLoading,
   } = useAppSelector((state) => state.expenses);
@@ -28,7 +28,7 @@ export const useExpensesByCategories = (): Data => {
 
   useEffect(() => {
     if (!expensesLoading && !categoryLoading) {
-      const actualMonth = dataList.filter(
+      const actualMonth = allExpenses.filter(
         (e) =>
           e.date.year() === moment().year() &&
           e.date.format("MMMM") === selectedMonth
@@ -45,7 +45,13 @@ export const useExpensesByCategories = (): Data => {
     } else {
       setExpensesByCategories({ expensesByCategories: [], loading: true });
     }
-  }, [dataList, categoryList, selectedMonth, expensesLoading, categoryLoading]);
+  }, [
+    allExpenses,
+    categoryList,
+    selectedMonth,
+    expensesLoading,
+    categoryLoading,
+  ]);
 
   return expensesByCategories;
 };

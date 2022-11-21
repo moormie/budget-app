@@ -14,7 +14,7 @@ export const mockInitialState: ExpensesState &
   DetailsState &
   FilterState &
   CategoryState = {
-  dataList: mockExpensesData,
+  allExpenses: mockExpensesData,
   status: "idle",
   loading: false,
   type: DetailType.EXPENSES,
@@ -43,10 +43,10 @@ export const Mockstore = (props: {
               alert(JSON.stringify(action.payload));
             },
             remove: (state, action: PayloadAction<string>) => {
-              const itemIndex = state.dataList.findIndex(
+              const itemIndex = state.allExpenses.findIndex(
                 (i) => i.id === action.payload
               );
-              state.dataList.splice(itemIndex, 1);
+              state.allExpenses.splice(itemIndex, 1);
             },
           },
         }).reducer,
