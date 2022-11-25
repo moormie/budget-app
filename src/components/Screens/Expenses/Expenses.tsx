@@ -17,6 +17,7 @@ import { SortExpenses } from "../../SortExpenses/SortExpenses";
 
 interface Props {
   dataList: Expenses[];
+  maxAmount: number;
   submitSort: (value: string) => void;
   resetSort: () => void;
   submitFilter: (values: FilterValues) => void;
@@ -26,13 +27,13 @@ interface Props {
 
 export const ExpensesList: FC<Props> = ({
   dataList,
+  maxAmount,
   submitSort,
   resetSort,
   submitFilter,
   resetFilter,
   deleteExpense,
 }) => {
-  const { allExpenses } = useAppSelector((state) => state.expenses);
   const { categoryList } = useAppSelector((state) => state.category);
   const {
     sortValue,
@@ -136,14 +137,13 @@ export const ExpensesList: FC<Props> = ({
             categoryList={categoryList}
             onSubmit={onSubmitFilter}
             onReset={resetFilter}
-            maxAmount={Math.max(...allExpenses.map((data) => data.amount))}
+            maxAmount={maxAmount}
             filterValues={{
               categories,
               dateFrom,
               dateTo,
               amountFrom,
-              amountTo:
-                amountTo ?? Math.max(...allExpenses.map((data) => data.amount)),
+              amountTo: amountTo ?? maxAmount,
               note: note ?? "",
             }}
           />

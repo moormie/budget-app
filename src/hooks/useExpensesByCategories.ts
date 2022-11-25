@@ -1,6 +1,7 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../app/hooks";
+import { useAllExpenses } from "../contexts/expensesContext";
 import { convertToExpensesWithCategory } from "../converters/convertToSimpleExpenses";
 import { getCategoriesAmount } from "../helpers/getCategoriesAmount";
 import { ExpensesCategory } from "../types/Expenses";
@@ -11,11 +12,9 @@ interface Data {
 }
 
 export const useExpensesByCategories = (): Data => {
-  const {
-    allExpenses,
-    selectedMonth,
-    loading: expensesLoading,
-  } = useAppSelector((state) => state.expenses);
+  const { allExpenses, loading: expensesLoading } = useAllExpenses();
+
+  const { selectedMonth } = useAppSelector((state) => state.expenses);
 
   const { categoryList, loading: categoryLoading } = useAppSelector(
     (state) => state.category

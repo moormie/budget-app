@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { Loading } from "../components/Loading";
 import { ExpensesList } from "../components/Screens/Expenses/Expenses";
+import { useAllExpenses } from "../contexts/expensesContext";
 import { remove } from "../features/expenses/expensesSlice";
 import {
   setAmountFrom,
@@ -19,9 +20,10 @@ import { FilterValues } from "../types/FilterValues";
 import { SortType } from "../types/SortType";
 
 const ExpensesPage: FC = () => {
+  const { allExpenses, loading } = useAllExpenses();
+
   const dispatch = useAppDispatch();
 
-  const { allExpenses, loading } = useAppSelector((state) => state.expenses);
   const {
     sortValue,
     categories,
@@ -103,6 +105,7 @@ const ExpensesPage: FC = () => {
         submitFilter={onSubmitFilter}
         resetFilter={onResetFilter}
         deleteExpense={onDeleteExpense}
+        maxAmount={Math.max(...allExpenses.map((data) => data.amount))}
       />
     </>
   );

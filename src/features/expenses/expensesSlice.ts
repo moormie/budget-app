@@ -1,32 +1,19 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 import { RootState } from "../../app/store";
 import { Expenses } from "../../types/Expenses";
-import { fetchExpensesData } from "./expensesAPI";
 
 export interface ExpensesState {
   allExpenses: Expenses[];
   selectedMonth: string;
   status: "idle" | "loading" | "failed";
-  loading: boolean;
 }
 
 const initialState: ExpensesState = {
   allExpenses: [],
   status: "idle",
   selectedMonth: moment().format("MMMM"),
-  loading: true,
 };
-
-export const getExpensesData = createAsyncThunk("expenses/get", async () => {
-  try {
-    const response = await fetchExpensesData();
-    return response;
-  } catch (error) {
-    console.log(error);
-    return [];
-  }
-});
 
 const expensesSlice = createSlice({
   name: "expenses",
@@ -44,22 +31,6 @@ const expensesSlice = createSlice({
     selectMonth: (state, action: PayloadAction<string>) => {
       state.selectedMonth = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getExpensesData.pending, (state) => {
-        state.status = "loading";
-        state.loading = true;
-      })
-      .addCase(getExpensesData.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.allExpenses = action.payload;
-        state.loading = false;
-      })
-      .addCase(getExpensesData.rejected, (state) => {
-        state.status = "failed";
-        state.loading = false;
-      });
   },
 });
 

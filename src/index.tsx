@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { ThemeProvider } from "styled-components";
 import { myTheme } from "./theme";
+import { ExpensesProvider } from "./contexts/expensesContext";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -15,7 +16,9 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={myTheme}>
       <Provider store={store}>
-        <App />
+        <ExpensesProvider>
+          <App />
+        </ExpensesProvider>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>

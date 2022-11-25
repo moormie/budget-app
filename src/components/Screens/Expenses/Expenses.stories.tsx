@@ -18,4 +18,5 @@ export const Default = Template.bind({});
 
 Default.args = {
   dataList: mockExpensesData,
+  maxAmount: Math.max(...mockExpensesData.map((data) => data.amount)),
 };

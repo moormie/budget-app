@@ -1,5 +1,4 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import { fetchExpensesData } from "../features/expenses/expensesAPI";
 import incomesReducer from "../features/incomes/incomesSlice";
 import expensesReducer from "../features/expenses/expensesSlice";
 import detailsReducer from "../features/details/detailsSlice";
@@ -16,9 +15,6 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      thunk: {
-        extraArgument: fetchExpensesData,
-      },
       serializableCheck: false,
     }),
 });
