@@ -5,20 +5,20 @@ import { fetchIncomesData } from "./incomesAPI";
 
 export interface IncomesState {
   allIncomes: Income[];
-  status: "idle" | "loading" | "failed";
-  loading: boolean;
+  incomesStatus: "idle" | "loading" | "failed";
+  incomesLoading: boolean;
 }
 
 const initialState: IncomesState = {
   allIncomes: [],
-  status: "idle",
-  loading: true,
+  incomesStatus: "idle",
+  incomesLoading: true,
 };
 
 export const getIncomesData = createAsyncThunk("incomes/get", async () => {
   try {
     const response = await fetchIncomesData();
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
     return [];
@@ -42,17 +42,17 @@ const incomesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getIncomesData.pending, (state) => {
-        state.status = "loading";
-        state.loading = true;
+        state.incomesStatus = "loading";
+        state.incomesLoading = true;
       })
       .addCase(getIncomesData.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.incomesStatus = "idle";
         state.allIncomes = action.payload;
-        state.loading = false;
+        state.incomesLoading = false;
       })
       .addCase(getIncomesData.rejected, (state) => {
-        state.status = "failed";
-        state.loading = false;
+        state.incomesStatus = "failed";
+        state.incomesLoading = false;
       });
   },
 });

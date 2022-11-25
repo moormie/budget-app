@@ -1,10 +1,12 @@
-import { GET_CATEGORY } from "./../endpoints";
 import { Category } from "../../types/Category";
+import { mockCategoryData } from "../../types/mockData";
 
-export async function fetchCategoryData() {
-  const response: Category[] = await fetch(GET_CATEGORY).then((data) =>
-    data.json()
+interface Data {
+  data: Category[];
+}
+
+export function fetchCategoryData() {
+  return new Promise<Data>((resolve) =>
+    setTimeout(() => resolve({ data: mockCategoryData }), 500)
   );
-
-  return response;
 }

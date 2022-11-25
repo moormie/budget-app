@@ -1,25 +1,12 @@
-import { GET_INCOMES } from "./../endpoints";
-import moment from "moment";
-import { Income } from "../../types/Income";
+import { Income } from "./../../types/Income";
+import { mockIncomesData } from "../../types/mockData";
 
-interface IncomesResponse {
-  id?: string;
-  name: string;
-  date: string;
-  amount: number;
-  note?: string;
+interface Data {
+  data: Income[];
 }
 
-export async function fetchIncomesData() {
-  const res: IncomesResponse[] = await fetch(GET_INCOMES).then((data) =>
-    data.json()
+export function fetchIncomesData() {
+  return new Promise<Data>((resolve) =>
+    setTimeout(() => resolve({ data: mockIncomesData }), 500)
   );
-
-  return res.map((d) => {
-    const result: Income = {
-      ...d,
-      date: moment(d.date),
-    };
-    return result;
-  });
 }

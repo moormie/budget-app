@@ -282,4 +282,10 @@ export const mockIncomesData: Income[] = [
     amount: 3000,
     date: moment("2022-10-10"),
   },
+  {
+    id: "003",
+    name: "Salary",
+    amount: 3000,
+    date: moment("2022-11-10"),
+  },
 ];

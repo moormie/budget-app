@@ -8,15 +8,25 @@ import { FilterState } from "../filters/filterSlice";
 import { Category } from "../../types/Category";
 import moment, { Moment } from "moment";
 import { CategoryState } from "../category/categorySlice";
-import { mockCategoryData, mockExpensesData } from "../../types/mockData";
+import {
+  mockCategoryData,
+  mockExpensesData,
+  mockIncomesData,
+} from "../../types/mockData";
+import { IncomesState } from "../incomes/incomesSlice";
+import { Income } from "../../types/Income";
 
 export const mockInitialState: ExpensesState &
+  IncomesState &
   DetailsState &
   FilterState &
   CategoryState = {
   allExpenses: mockExpensesData,
+  allIncomes: mockIncomesData,
   status: "idle",
   loading: false,
+  incomesStatus: "idle",
+  incomesLoading: false,
   type: DetailType.EXPENSES,
   chart: ChartType.BAR,
   sortValue: SortType.DATE_DESC,
@@ -29,7 +39,11 @@ export const mockInitialState: ExpensesState &
 };
 
 export const Mockstore = (props: {
-  initialState: ExpensesState & DetailsState & FilterState & CategoryState;
+  initialState: ExpensesState &
+    IncomesState &
+    DetailsState &
+    FilterState &
+    CategoryState;
   children: JSX.Element;
 }) => (
   <Provider
@@ -47,6 +61,21 @@ export const Mockstore = (props: {
                 (i) => i.id === action.payload
               );
               state.allExpenses.splice(itemIndex, 1);
+            },
+          },
+        }).reducer,
+        incomes: createSlice({
+          name: "incomes",
+          initialState: props.initialState,
+          reducers: {
+            addNew: (state, action: PayloadAction<Income>) => {
+              alert(JSON.stringify(action.payload));
+            },
+            remove: (state, action: PayloadAction<string>) => {
+              const itemIndex = state.allIncomes.findIndex(
+                (i) => i.id === action.payload
+              );
+              state.allIncomes.splice(itemIndex, 1);
             },
           },
         }).reducer,

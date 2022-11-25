@@ -18,7 +18,7 @@ const initialState: CategoryState = {
 export const getCategoryData = createAsyncThunk("category/get", async () => {
   try {
     const response = await fetchCategoryData();
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
     return [];
