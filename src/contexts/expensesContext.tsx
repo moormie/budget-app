@@ -1,7 +1,9 @@
 import { createContext, FC, useContext, useEffect, useState } from "react";
-import { getAllExpenses } from "../firebase/expenses";
+import {
+  getAllExpensesListener,
+  getAllExpensesOnce,
+} from "../firebase/expenses";
 import { Expenses } from "../types/Expenses";
-
 interface ContextData {
   allExpenses: Expenses[];
   loading: boolean;
@@ -22,23 +24,23 @@ export const ExpensesProvider: FC<Props> = ({ children }) => {
     loading: true,
   });
 
+  const updateState = (expenses: Expenses[]) => {
+    setState({
+      allExpenses: expenses,
+      loading: false,
+    });
+  };
+
   useEffect(() => {
-    const load = async () => {
-      try {
-        const expensesList = await getAllExpenses();
-        setState({
-          loading: false,
-          allExpenses: expensesList,
-        });
-      } catch (error) {
+    const unsubscribe = getAllExpensesListener(updateState);
+
+    getAllExpensesOnce()
+      .then((data) => setState({ allExpenses: data, loading: false }))
+      .catch((error) => {
         console.log(error);
-        setState({
-          loading: false,
-          allExpenses: [],
-        });
-      }
-    };
-    load();
+        setState({ allExpenses: [], loading: false });
+      });
+    return unsubscribe;
   }, []);
 
   return (
