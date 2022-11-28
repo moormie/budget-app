@@ -1,7 +1,5 @@
 import { FC, useState } from "react";
 import StyledModal from ".";
-import moment from "moment";
-import { v4 as uuidv4 } from "uuid";
 import { Moment } from "moment";
 import { Expenses } from "../../types/Expenses";
 import { Button } from "../Button/Button";
@@ -24,11 +22,10 @@ export const AddExpenses: FC<Props> = ({ categoryList, onSave }) => {
   const onSubmit = () => {
     if (!!amount && category && date) {
       const newExpense: Expenses = {
-        id: uuidv4(),
         amount: Number(amount),
         category: category,
         note,
-        date: moment(date),
+        date: date,
       };
       onSave(newExpense);
     }

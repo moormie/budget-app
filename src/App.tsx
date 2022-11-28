@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import DetailsPage from "./pages/DetailsPage";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
-import { addNew, getExpensesData } from "./features/expenses/expensesSlice";
+import { addNew } from "./features/expenses/expensesSlice";
 import { useEffect, useState } from "react";
 import ExpensesPage from "./pages/ExpensesPage";
 import { getCategoryData } from "./features/category/categorySlice";
@@ -13,12 +13,13 @@ import { Delayed } from "./components/Delayed/Delayed";
 import { SlideUpModal } from "./components/SlideUpModal/SlideUpModal";
 import { AddExpenses } from "./components/AddExpenses/AddExpenses";
 import { getIncomesData } from "./features/incomes/incomesSlice";
+import { saveExpensesData } from "./firebase/expenses";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getExpensesData());
     dispatch(getIncomesData());
     dispatch(getCategoryData());
   }, [dispatch]);
@@ -26,8 +27,18 @@ function App() {
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
 
   const onAddNewExpense = (newExpense: Expenses) => {
-    dispatch(addNew(newExpense));
-    setIsAddNewOpen(false);
+    try {
+      const id = uuidv4();
+      const data = {
+        ...newExpense,
+        id,
+      };
+      saveExpensesData(data);
+      dispatch(addNew(data));
+      setIsAddNewOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const { categoryList } = useAppSelector((state) => state.category);
