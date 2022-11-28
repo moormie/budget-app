@@ -25,19 +25,21 @@ function App() {
   }, [dispatch]);
 
   const [isAddNewOpen, setIsAddNewOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const onAddNewExpense = (newExpense: Expenses) => {
+  const onAddNewExpense = async (newExpense: Expenses) => {
     try {
       const id = uuidv4();
       const data = {
         ...newExpense,
         id,
       };
-      saveExpensesData(data);
+      await saveExpensesData(data);
       dispatch(addNew(data));
       setIsAddNewOpen(false);
     } catch (error) {
       console.log(error);
+      setErrorMessage("Something went wrong, please try again later!");
     }
   };
 
@@ -53,7 +55,11 @@ function App() {
       </Routes>
       <Delayed visible={isAddNewOpen}>
         <SlideUpModal onClose={() => setIsAddNewOpen(false)}>
-          <AddExpenses categoryList={categoryList} onSave={onAddNewExpense} />
+          <AddExpenses
+            categoryList={categoryList}
+            onSave={onAddNewExpense}
+            error={errorMessage}
+          />
         </SlideUpModal>
       </Delayed>
     </BrowserRouter>

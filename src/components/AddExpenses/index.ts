@@ -13,10 +13,17 @@ const ButtonContainer = styled.div`
   padding: 48px 0;
 `;
 
+const ErrorText = styled.div`
+  font-size: 1em;
+  color: ${(props) => props.theme.colors.red};
+  text-align: center;
+`;
+
 const StyledModal = {
   Title,
   Spacing,
   ButtonContainer,
+  ErrorText,
 };
 
 export default StyledModal;

@@ -11,9 +11,10 @@ import { Category } from "../../types/Category";
 interface Props {
   categoryList: Category[];
   onSave: (newExpense: Expenses) => void;
+  error?: string;
 }
 
-export const AddExpenses: FC<Props> = ({ categoryList, onSave }) => {
+export const AddExpenses: FC<Props> = ({ categoryList, onSave, error }) => {
   const [amount, setAmount] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [note, setNote] = useState("");
@@ -62,6 +63,7 @@ export const AddExpenses: FC<Props> = ({ categoryList, onSave }) => {
           disabled={!amount || !category || !date}
         />
       </StyledModal.ButtonContainer>
+      <StyledModal.ErrorText>{error}</StyledModal.ErrorText>
     </>
   );
 };

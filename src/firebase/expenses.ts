@@ -3,14 +3,18 @@ import { set, ref, get, child, onValue } from "firebase/database";
 import { database } from "./realtime_db";
 import moment from "moment";
 
-export const saveExpensesData = (newData: Expenses) => {
+export const saveExpensesData = async (newData: Expenses) => {
   const { id, date, category, amount, note } = newData;
-  set(ref(database, "expenses/" + id), {
-    date: date.format("YYYY-MM-DDTHH:mm"),
-    category,
-    amount,
-    note,
-  });
+  try {
+    await set(ref(database, "expenses/" + id), {
+      date: date.format("YYYY-MM-DDTHH:mm"),
+      category,
+      amount,
+      note,
+    });
+  } catch (error) {
+    throw new Error(error as string);
+  }
 };
 
 export const getAllExpensesOnce = async () => {
